@@ -1,0 +1,253 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0DCD507719EB687700EF27F7 /* Cookie.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DCD507619EB687700EF27F7 /* Cookie.h */; };
+		0DCD507919EB687700EF27F7 /* CookiePriv.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DCD507819EB687700EF27F7 /* CookiePriv.h */; };
+		0DCD507B19EB687700EF27F7 /* Cookie.cp in Sources */ = {isa = PBXBuildFile; fileRef = 0DCD507A19EB687700EF27F7 /* Cookie.cp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0DCD507319EB687700EF27F7 /* libCookie.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCookie.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		0DCD507619EB687700EF27F7 /* Cookie.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cookie.h; sourceTree = "<group>"; };
+		0DCD507819EB687700EF27F7 /* CookiePriv.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CookiePriv.h; sourceTree = "<group>"; };
+		0DCD507A19EB687700EF27F7 /* Cookie.cp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Cookie.cp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0DCD507019EB687700EF27F7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0DCD506A19EB687700EF27F7 = {
+			isa = PBXGroup;
+			children = (
+				0DCD507519EB687700EF27F7 /* Cookie */,
+				0DCD507419EB687700EF27F7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0DCD507419EB687700EF27F7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0DCD507319EB687700EF27F7 /* libCookie.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0DCD507519EB687700EF27F7 /* Cookie */ = {
+			isa = PBXGroup;
+			children = (
+				0DCD507619EB687700EF27F7 /* Cookie.h */,
+				0DCD507819EB687700EF27F7 /* CookiePriv.h */,
+				0DCD507A19EB687700EF27F7 /* Cookie.cp */,
+			);
+			path = Cookie;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		0DCD507119EB687700EF27F7 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0DCD507719EB687700EF27F7 /* Cookie.h in Headers */,
+				0DCD507919EB687700EF27F7 /* CookiePriv.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		0DCD507219EB687700EF27F7 /* Cookie */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0DCD507E19EB687700EF27F7 /* Build configuration list for PBXNativeTarget "Cookie" */;
+			buildPhases = (
+				0DCD506F19EB687700EF27F7 /* Sources */,
+				0DCD507019EB687700EF27F7 /* Frameworks */,
+				0DCD507119EB687700EF27F7 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Cookie;
+			productName = Cookie;
+			productReference = 0DCD507319EB687700EF27F7 /* libCookie.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0DCD506B19EB687700EF27F7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = "Gabriel Lumbi";
+				TargetAttributes = {
+					0DCD507219EB687700EF27F7 = {
+						CreatedOnToolsVersion = 6.0.1;
+					};
+				};
+			};
+			buildConfigurationList = 0DCD506E19EB687700EF27F7 /* Build configuration list for PBXProject "Cookie" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 0DCD506A19EB687700EF27F7;
+			productRefGroup = 0DCD507419EB687700EF27F7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0DCD507219EB687700EF27F7 /* Cookie */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0DCD506F19EB687700EF27F7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0DCD507B19EB687700EF27F7 /* Cookie.cp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		0DCD507C19EB687700EF27F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		0DCD507D19EB687700EF27F7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		0DCD507F19EB687700EF27F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		0DCD508019EB687700EF27F7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0DCD506E19EB687700EF27F7 /* Build configuration list for PBXProject "Cookie" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0DCD507C19EB687700EF27F7 /* Debug */,
+				0DCD507D19EB687700EF27F7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0DCD507E19EB687700EF27F7 /* Build configuration list for PBXNativeTarget "Cookie" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0DCD507F19EB687700EF27F7 /* Debug */,
+				0DCD508019EB687700EF27F7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0DCD506B19EB687700EF27F7 /* Project object */;
+}
