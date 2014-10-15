@@ -10,14 +10,22 @@
 #ifndef Cookie_
 #define Cookie_
 
+#include "Point.h"
+#include "Int.h"
+#include "Bool.h"
+#include "Float.h"
+#include "Rect.h"
+
+#include "Block.h"
+
+#include "Node.h"
+#include "World.h"
+#include "Renderer.h"
+#include "RenderTask.h"
+#include "Game.h"
+
 /* The classes below are exported */
 #pragma GCC visibility push(default)
-
-class Cookie
-{
-	public:
-		void HelloWorld(const char *);
-};
 
 #pragma GCC visibility pop
 #endif
