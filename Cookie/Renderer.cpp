@@ -23,6 +23,8 @@ void Cookie::Renderer::addToBatch(Cookie::Sprite& spr, Cookie::Point pos, Cookie
 
 void Cookie::Renderer::renderBatch()
 {
+    SDL_FillRect(sdl_surface_, NULL, 0x000000);
+    
     while(!sprite_batch_.empty())
     {
         const RenderTask& task = sprite_batch_.top();

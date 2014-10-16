@@ -24,7 +24,7 @@ namespace Cookie
         
         void set_sprite(Sprite*) {};
         
-        void update(const Cookie::Node& node, const Cookie::Game& game) override;
+        void update(Cookie::Node& node, Cookie::Game& game);
         
     protected:
         Renderer* renderer_;

@@ -178,6 +178,12 @@
 		0DC42AA219EE2C140049C151 /* SDL_Conversion.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DC42AA019EE2C140049C151 /* SDL_Conversion.h */; };
 		0DC42AA519EEBE610049C151 /* RenderTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DC42AA319EEBE610049C151 /* RenderTask.cpp */; };
 		0DC42AA619EEBE610049C151 /* RenderTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DC42AA419EEBE610049C151 /* RenderTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0DC42AB119EF394D0049C151 /* PhysicsBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DC42AAF19EF394D0049C151 /* PhysicsBlock.cpp */; };
+		0DC42AB219EF394D0049C151 /* PhysicsBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DC42AB019EF394D0049C151 /* PhysicsBlock.h */; };
+		0DC42AB519EF3AEE0049C151 /* Vector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DC42AB319EF3AED0049C151 /* Vector.cpp */; };
+		0DC42AB619EF3AEE0049C151 /* Vector.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DC42AB419EF3AED0049C151 /* Vector.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0DC42AC219F00DC40049C151 /* Physics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DC42AC019F00DC40049C151 /* Physics.cpp */; };
+		0DC42AC319F00DC40049C151 /* Physics.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DC42AC119F00DC40049C151 /* Physics.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0DCD507719EB687700EF27F7 /* Cookie.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DCD507619EB687700EF27F7 /* Cookie.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0DCD507919EB687700EF27F7 /* CookiePriv.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DCD507819EB687700EF27F7 /* CookiePriv.h */; };
 		0DCD508319EB691C00EF27F7 /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DCD508119EB691C00EF27F7 /* Node.cpp */; };
@@ -474,6 +480,12 @@
 		0DC42AA019EE2C140049C151 /* SDL_Conversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDL_Conversion.h; sourceTree = "<group>"; };
 		0DC42AA319EEBE610049C151 /* RenderTask.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RenderTask.cpp; sourceTree = "<group>"; };
 		0DC42AA419EEBE610049C151 /* RenderTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderTask.h; sourceTree = "<group>"; };
+		0DC42AAF19EF394D0049C151 /* PhysicsBlock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PhysicsBlock.cpp; sourceTree = "<group>"; };
+		0DC42AB019EF394D0049C151 /* PhysicsBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsBlock.h; sourceTree = "<group>"; };
+		0DC42AB319EF3AED0049C151 /* Vector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector.cpp; sourceTree = "<group>"; };
+		0DC42AB419EF3AED0049C151 /* Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector.h; sourceTree = "<group>"; };
+		0DC42AC019F00DC40049C151 /* Physics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Physics.cpp; sourceTree = "<group>"; };
+		0DC42AC119F00DC40049C151 /* Physics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Physics.h; sourceTree = "<group>"; };
 		0DCD507319EB687700EF27F7 /* libCookie.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCookie.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DCD507619EB687700EF27F7 /* Cookie.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cookie.h; sourceTree = "<group>"; };
 		0DCD507819EB687700EF27F7 /* CookiePriv.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CookiePriv.h; sourceTree = "<group>"; };
@@ -519,6 +531,8 @@
 				0DC42A8319ED94330049C151 /* Rotation.h */,
 				0DC42A9F19EE2C140049C151 /* SDL_Conversion.cpp */,
 				0DC42AA019EE2C140049C151 /* SDL_Conversion.h */,
+				0DC42AB319EF3AED0049C151 /* Vector.cpp */,
+				0DC42AB419EF3AED0049C151 /* Vector.h */,
 			);
 			name = Geometry;
 			sourceTree = "<group>";
@@ -556,6 +570,8 @@
 				0D0DF7E819EC73DC0054980E /* Block.h */,
 				0DC42A9719EE224D0049C151 /* DrawBlock.cpp */,
 				0DC42A9819EE224D0049C151 /* DrawBlock.h */,
+				0DC42AAF19EF394D0049C151 /* PhysicsBlock.cpp */,
+				0DC42AB019EF394D0049C151 /* PhysicsBlock.h */,
 			);
 			name = Blocks;
 			sourceTree = "<group>";
@@ -860,6 +876,15 @@
 			name = Graphics;
 			sourceTree = "<group>";
 		};
+		0DC42AB719F00CC10049C151 /* Physics */ = {
+			isa = PBXGroup;
+			children = (
+				0DC42AC019F00DC40049C151 /* Physics.cpp */,
+				0DC42AC119F00DC40049C151 /* Physics.h */,
+			);
+			name = Physics;
+			sourceTree = "<group>";
+		};
 		0DCD506A19EB687700EF27F7 = {
 			isa = PBXGroup;
 			children = (
@@ -885,6 +910,7 @@
 				0DCD507819EB687700EF27F7 /* CookiePriv.h */,
 				0DCD509319EB75A300EF27F7 /* Game.cpp */,
 				0DCD509419EB75A300EF27F7 /* Game.h */,
+				0DC42AB719F00CC10049C151 /* Physics */,
 				0DC42A7919ECBFD00049C151 /* Graphics */,
 				0D0DF7E619EC73CC0054980E /* Blocks */,
 				0D0DF7E019EC6D250054980E /* SceneGraph */,
@@ -922,6 +948,7 @@
 				0DC42A3319ECA4E90049C151 /* euler_angles.hpp in Headers */,
 				0DC42A3B19ECA4E90049C151 /* inertia.hpp in Headers */,
 				0DC42A2819ECA4E90049C151 /* ulp.hpp in Headers */,
+				0DC42AC319F00DC40049C151 /* Physics.h in Headers */,
 				0DC42A0C19ECA4E90049C151 /* type_mat3x3.hpp in Headers */,
 				0DC42A1619ECA4E90049C151 /* exponential.hpp in Headers */,
 				0DC42A7319ECA4E90049C151 /* packing.hpp in Headers */,
@@ -952,6 +979,7 @@
 				0DC42A1319ECA4E90049C151 /* type_vec2.hpp in Headers */,
 				0DC429FB19ECA4E90049C151 /* intrinsic_exponential.hpp in Headers */,
 				0DC42A5019ECA4E90049C151 /* perpendicular.hpp in Headers */,
+				0DC42AB619EF3AEE0049C151 /* Vector.h in Headers */,
 				0DC42A4019ECA4E90049C151 /* log_base.hpp in Headers */,
 				0DC42A4C19ECA4E90049C151 /* normalize_dot.hpp in Headers */,
 				0DC42A7119ECA4E90049C151 /* mat4x4.hpp in Headers */,
@@ -983,6 +1011,7 @@
 				0DC42A1D19ECA4E90049C151 /* matrix_access.hpp in Headers */,
 				0DC42A2519ECA4E90049C151 /* reciprocal.hpp in Headers */,
 				0DC42A6219ECA4E90049C151 /* ulp.hpp in Headers */,
+				0DC42AB219EF394D0049C151 /* PhysicsBlock.h in Headers */,
 				0DC42A7519ECA4E90049C151 /* vec2.hpp in Headers */,
 				0DC42A2719ECA4E90049C151 /* type_ptr.hpp in Headers */,
 				0DC42A3019ECA4E90049C151 /* constants.hpp in Headers */,
@@ -1127,6 +1156,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0DC429F819ECA4E90049C151 /* glm.cpp in Sources */,
+				0DC42AC219F00DC40049C151 /* Physics.cpp in Sources */,
 				0DC42A8019ECC1170049C151 /* Texture.cpp in Sources */,
 				0DCD509D19EB799C00EF27F7 /* Float.cpp in Sources */,
 				0DCD508719EB6ACA00EF27F7 /* Point.cpp in Sources */,
@@ -1139,6 +1169,7 @@
 				0DC42A9519EE22040049C151 /* Sprite.cpp in Sources */,
 				0DC42A9919EE224D0049C151 /* DrawBlock.cpp in Sources */,
 				0DC42A8819EDB8960049C151 /* Color.cpp in Sources */,
+				0DC42AB519EF3AEE0049C151 /* Vector.cpp in Sources */,
 				0DCD509519EB75A300EF27F7 /* Game.cpp in Sources */,
 				0DC429EE19ECA4E90049C151 /* dummy.cpp in Sources */,
 				0D0DF7E919EC73DC0054980E /* Block.cpp in Sources */,
@@ -1146,6 +1177,7 @@
 				0DCD508D19EB6D2C00EF27F7 /* Rect.cpp in Sources */,
 				0DC42AA119EE2C140049C151 /* SDL_Conversion.cpp in Sources */,
 				0DC42A8419ED94330049C151 /* Rotation.cpp in Sources */,
+				0DC42AB119EF394D0049C151 /* PhysicsBlock.cpp in Sources */,
 				0DC42A8C19EDBAF40049C151 /* World.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

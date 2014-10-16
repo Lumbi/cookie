@@ -9,10 +9,11 @@
 #include "Game.h"
 #include <SDL2/SDL.h>
 #include "DrawBlock.h"
+#include "PhysicsBlock.h"
 
 Cookie::Game::Game()
 {
-    fps_ = 30;
+    fps_ = 60;
     window_size_ = {0,0,800, 600};
     window_ = NULL;
     surface_ = NULL;
@@ -68,6 +69,9 @@ void Cookie::Game::begin()
     Sprite* sprite = new Sprite(surface);
     DrawBlock* block = new DrawBlock(renderer_, sprite);
     test->add_block(block);
+    const Physics& p = world_.physics();
+    PhysicsBlock* gblock = new PhysicsBlock(&p);
+    test->add_block(gblock);
     world_.add_child(test);
 #pragma TEST
     
@@ -80,12 +84,13 @@ void Cookie::Game::loop()
 {
     Cookie::Int t_elapsed;
     Cookie::Int t_per_frame;
+    last_frame_tick = SDL_GetTicks();
     while (1) {
-        last_frame_tick = SDL_GetTicks();
         update();
         render();
         t_elapsed = time_elapsed();
         t_per_frame = time_per_frame();
+        last_frame_tick = SDL_GetTicks();
         if(t_elapsed < t_per_frame)
         {
             SDL_Delay(t_per_frame-t_elapsed);

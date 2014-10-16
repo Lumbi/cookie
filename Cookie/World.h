@@ -11,12 +11,17 @@
 
 #include <stdio.h>
 #include "Node.h"
+#include "Physics.h"
 
 namespace Cookie
 {
     class World : public Node
     {
-        
+    public:
+        World();
+        const Cookie::Physics& physics() const;
+    private:
+        Cookie::Physics physics_;
     };
 }
 

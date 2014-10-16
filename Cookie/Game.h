@@ -41,6 +41,7 @@ namespace Cookie {
         Cookie::Int last_frame_tick;
         Cookie::Rect window_size_;
         Cookie::Renderer* renderer_;
+        
         SDL_Window* window_;
         SDL_Surface* surface_;
     };

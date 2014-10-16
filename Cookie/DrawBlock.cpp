@@ -14,7 +14,7 @@ Cookie::DrawBlock::DrawBlock(Renderer* renderer, Sprite* sprite)
     sprite_ = sprite;
 }
 
-void Cookie::DrawBlock::update(const Cookie::Node& node, const Cookie::Game& game)
+void Cookie::DrawBlock::update(Cookie::Node& node, Cookie::Game& game)
 {
     renderer_->addToBatch(*sprite_, node.position(), node.depth());
 }
