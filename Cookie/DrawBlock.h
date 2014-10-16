@@ -13,22 +13,25 @@
 #include "Game.h"
 #include "Renderer.h"
 #include "Sprite.h"
+#include "Point.h"
 
 namespace Cookie
 {
-    class DrawBlock : public Block
+    class DrawBlock : public Cookie::Block
     {
     public:
-        DrawBlock(Renderer*,Sprite*);
+        DrawBlock(Cookie::Renderer*,Cookie::Sprite*);
         virtual const char* name() const {return "DrawBlock"; };
         
-        void set_sprite(Sprite*) {};
+        void set_sprite(Cookie::Sprite*) {};
+        void set_draw_point(Cookie::Point);
         
         void update(Cookie::Node& node, Cookie::Game& game);
         
     protected:
-        Renderer* renderer_;
-        Sprite* sprite_;
+        Cookie::Renderer* renderer_;
+        Cookie::Sprite* sprite_;
+        Cookie::Point draw_point_;
     };
 }
 

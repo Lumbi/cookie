@@ -184,6 +184,8 @@
 		0DC42AB619EF3AEE0049C151 /* Vector.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DC42AB419EF3AED0049C151 /* Vector.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0DC42AC219F00DC40049C151 /* Physics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DC42AC019F00DC40049C151 /* Physics.cpp */; };
 		0DC42AC319F00DC40049C151 /* Physics.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DC42AC119F00DC40049C151 /* Physics.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0DC42ACA19F016790049C151 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DC42AC819F016790049C151 /* Camera.cpp */; };
+		0DC42ACB19F016790049C151 /* Camera.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DC42AC919F016790049C151 /* Camera.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0DCD507719EB687700EF27F7 /* Cookie.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DCD507619EB687700EF27F7 /* Cookie.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0DCD507919EB687700EF27F7 /* CookiePriv.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DCD507819EB687700EF27F7 /* CookiePriv.h */; };
 		0DCD508319EB691C00EF27F7 /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DCD508119EB691C00EF27F7 /* Node.cpp */; };
@@ -486,6 +488,8 @@
 		0DC42AB419EF3AED0049C151 /* Vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector.h; sourceTree = "<group>"; };
 		0DC42AC019F00DC40049C151 /* Physics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Physics.cpp; sourceTree = "<group>"; };
 		0DC42AC119F00DC40049C151 /* Physics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Physics.h; sourceTree = "<group>"; };
+		0DC42AC819F016790049C151 /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
+		0DC42AC919F016790049C151 /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		0DCD507319EB687700EF27F7 /* libCookie.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCookie.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DCD507619EB687700EF27F7 /* Cookie.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cookie.h; sourceTree = "<group>"; };
 		0DCD507819EB687700EF27F7 /* CookiePriv.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CookiePriv.h; sourceTree = "<group>"; };
@@ -559,6 +563,8 @@
 				0DCD508219EB691C00EF27F7 /* Node.h */,
 				0DC42A8A19EDBAF40049C151 /* World.cpp */,
 				0DC42A8B19EDBAF40049C151 /* World.h */,
+				0DC42AC819F016790049C151 /* Camera.cpp */,
+				0DC42AC919F016790049C151 /* Camera.h */,
 			);
 			name = SceneGraph;
 			sourceTree = "<group>";
@@ -948,6 +954,7 @@
 				0DC42A3319ECA4E90049C151 /* euler_angles.hpp in Headers */,
 				0DC42A3B19ECA4E90049C151 /* inertia.hpp in Headers */,
 				0DC42A2819ECA4E90049C151 /* ulp.hpp in Headers */,
+				0DC42ACB19F016790049C151 /* Camera.h in Headers */,
 				0DC42AC319F00DC40049C151 /* Physics.h in Headers */,
 				0DC42A0C19ECA4E90049C151 /* type_mat3x3.hpp in Headers */,
 				0DC42A1619ECA4E90049C151 /* exponential.hpp in Headers */,
@@ -1157,6 +1164,7 @@
 			files = (
 				0DC429F819ECA4E90049C151 /* glm.cpp in Sources */,
 				0DC42AC219F00DC40049C151 /* Physics.cpp in Sources */,
+				0DC42ACA19F016790049C151 /* Camera.cpp in Sources */,
 				0DC42A8019ECC1170049C151 /* Texture.cpp in Sources */,
 				0DCD509D19EB799C00EF27F7 /* Float.cpp in Sources */,
 				0DCD508719EB6ACA00EF27F7 /* Point.cpp in Sources */,

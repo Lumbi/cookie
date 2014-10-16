@@ -13,7 +13,7 @@
 
 Cookie::Game::Game()
 {
-    fps_ = 60;
+    fps_ = 30;
     window_size_ = {0,0,800, 600};
     window_ = NULL;
     surface_ = NULL;
@@ -60,7 +60,8 @@ void Cookie::Game::begin()
     }
     
     renderer_ = new Renderer(surface_);
-    
+    renderer_->set_camera(world_.camera());
+    world_.camera()->set_viewport({0,0,window_size_.w, window_size_.h});
     
 #pragma TEST
     Node* test = new Node();

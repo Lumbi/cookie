@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include "Node.h"
+#include "Camera.h"
 #include "Physics.h"
 
 namespace Cookie
@@ -20,8 +21,10 @@ namespace Cookie
     public:
         World();
         const Cookie::Physics& physics() const;
+        Cookie::Camera* camera() const;
     private:
         Cookie::Physics physics_;
+        Cookie::Camera* camera_;
     };
 }
 

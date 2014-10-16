@@ -18,6 +18,7 @@
 #include "Point.h"
 #include "Rect.h"
 #include "RenderTask.h"
+#include "Camera.h"
 
 namespace Cookie
 {
@@ -25,6 +26,8 @@ namespace Cookie
     {
     public:
         Renderer(SDL_Surface*);
+        
+        void set_camera(Cookie::Camera*);
         
         void addToBatch(Cookie::Sprite& spr, Cookie::Point pos, Cookie::Float depth=0);
         void addToBatch(Cookie::Sprite& spr, Cookie::Rect srcRect, Cookie::Point pos, Cookie::Float depth=0);
@@ -34,6 +37,7 @@ namespace Cookie
         
     private:
         SDL_Surface* sdl_surface_;
+        Camera* camera_;
         std::priority_queue<Cookie::RenderTask> sprite_batch_;
     };
 }

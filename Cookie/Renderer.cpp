@@ -14,6 +14,12 @@
 Cookie::Renderer::Renderer(SDL_Surface* sdl_surface)
 {
     sdl_surface_ = sdl_surface;
+    camera_ = NULL;
+}
+
+void Cookie::Renderer::set_camera(Cookie::Camera* camera)
+{
+    camera_ = camera;
 }
 
 void Cookie::Renderer::addToBatch(Cookie::Sprite& spr, Cookie::Point pos, Cookie::Float depth)
@@ -25,12 +31,19 @@ void Cookie::Renderer::renderBatch()
 {
     SDL_FillRect(sdl_surface_, NULL, 0x000000);
     
+    Cookie::Point offset = {0,0};
+    if(camera_ != NULL)
+    {
+        offset += { camera_->viewport().w /2.0f, camera_->viewport().h/2.0f };
+        offset -= camera_->position_world();
+    }
+    
     while(!sprite_batch_.empty())
     {
         const RenderTask& task = sprite_batch_.top();
         
         SDL_Rect sdl_src = Cookie::convert(task.src);
-        SDL_Rect sdl_dst = Cookie::convert(task.dst);
+        SDL_Rect sdl_dst = Cookie::convert(task.dst + offset);
         SDL_BlitSurface(task.sprite->sdl_surface(),
                         &sdl_src,
                         sdl_surface_,

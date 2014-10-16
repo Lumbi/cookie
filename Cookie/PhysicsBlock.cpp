@@ -17,7 +17,7 @@ Cookie::PhysicsBlock::PhysicsBlock(const Physics* physics)
 
 void Cookie::PhysicsBlock::update(Cookie::Node& node, Cookie::Game& game)
 {
-    velocity_ += (game.time_elapsed()/1000.0) * physics_->gravity();
+    velocity_ += (game.time_elapsed()/1000.0f) * physics_->gravity();
     node.translate_by(velocity_.x, velocity_.y);
 }
 

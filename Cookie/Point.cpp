@@ -12,7 +12,7 @@
 
 Cookie::Point Cookie::Point::rotate_by(Cookie::Float degrees) const
 {
-    auto rot = glm::rotate(glm::mat3x3(),degrees);
+    auto rot = glm::rotate(glm::mat3x3(),(float)degrees);
     auto result = rot * glm::vec3(x,y,1);
     return { result[0] , result[1] };
 }
