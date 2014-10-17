@@ -16,12 +16,13 @@
 
 namespace Cookie
 {
-    class PhysicsBlock : public Block
+    class PhysicsBlock : public Cookie::Block
     {
     public:
         PhysicsBlock(const Physics*);
         
-        void update(Cookie::Node& node, Cookie::Game& game);
+        virtual void update(Cookie::Node& node, Cookie::Game& game);
+        
         virtual const char* name() const {return "PhysicsBlock"; };
         
         const Cookie::Vector& velocity() const;

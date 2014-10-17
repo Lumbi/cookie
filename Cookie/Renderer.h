@@ -29,6 +29,12 @@ namespace Cookie
         
         void set_camera(Cookie::Camera*);
         
+        // Drawing Primitives
+        
+        void addToBatch(Cookie::Rect rect, Cookie::Color color, Cookie::Float depth=0);
+        
+        // Drawing Sprites
+        
         void addToBatch(Cookie::Sprite& spr, Cookie::Point pos, Cookie::Float depth=0);
         void addToBatch(Cookie::Sprite& spr, Cookie::Rect srcRect, Cookie::Point pos, Cookie::Float depth=0);
         void addToBatch(Cookie::Sprite& spr, Cookie::Rect srcRect, Cookie::Rect dstRect, Cookie::Float depth=0);
@@ -38,7 +44,7 @@ namespace Cookie
     private:
         SDL_Surface* sdl_surface_;
         Camera* camera_;
-        std::priority_queue<Cookie::RenderTask> sprite_batch_;
+        std::priority_queue<Cookie::RenderTask*> sprite_batch_;
     };
 }
 

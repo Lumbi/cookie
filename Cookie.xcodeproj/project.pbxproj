@@ -11,6 +11,10 @@
 		0D0DF7EA19EC73DC0054980E /* Block.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D0DF7E819EC73DC0054980E /* Block.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0D0DF98419EC79CA0054980E /* Matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D0DF98219EC79CA0054980E /* Matrix.cpp */; };
 		0D0DF98519EC79CA0054980E /* Matrix.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D0DF98319EC79CA0054980E /* Matrix.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		0D11B43619F159EC00C2EFD3 /* RectRenderTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D11B43419F159EC00C2EFD3 /* RectRenderTask.cpp */; };
+		0D11B43719F159EC00C2EFD3 /* RectRenderTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D11B43519F159EC00C2EFD3 /* RectRenderTask.h */; };
+		0D11B43E19F1620200C2EFD3 /* SpriteBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D11B43C19F1620200C2EFD3 /* SpriteBlock.cpp */; };
+		0D11B43F19F1620200C2EFD3 /* SpriteBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D11B43D19F1620200C2EFD3 /* SpriteBlock.h */; };
 		0DC429E619ECA4E90049C151 /* common.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0DC428E819ECA4E80049C151 /* common.hpp */; };
 		0DC429E719ECA4E90049C151 /* _features.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0DC428EA19ECA4E80049C151 /* _features.hpp */; };
 		0DC429E819ECA4E90049C151 /* _fixes.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0DC428EB19ECA4E80049C151 /* _fixes.hpp */; };
@@ -210,6 +214,10 @@
 		0D0DF7E819EC73DC0054980E /* Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Block.h; sourceTree = "<group>"; };
 		0D0DF98219EC79CA0054980E /* Matrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Matrix.cpp; sourceTree = "<group>"; };
 		0D0DF98319EC79CA0054980E /* Matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix.h; sourceTree = "<group>"; };
+		0D11B43419F159EC00C2EFD3 /* RectRenderTask.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectRenderTask.cpp; sourceTree = "<group>"; };
+		0D11B43519F159EC00C2EFD3 /* RectRenderTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectRenderTask.h; sourceTree = "<group>"; };
+		0D11B43C19F1620200C2EFD3 /* SpriteBlock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpriteBlock.cpp; sourceTree = "<group>"; };
+		0D11B43D19F1620200C2EFD3 /* SpriteBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteBlock.h; sourceTree = "<group>"; };
 		0DC428E719ECA4E80049C151 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 		0DC428E819ECA4E80049C151 /* common.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = common.hpp; sourceTree = "<group>"; };
 		0DC428EA19ECA4E80049C151 /* _features.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = _features.hpp; sourceTree = "<group>"; };
@@ -578,8 +586,21 @@
 				0DC42A9819EE224D0049C151 /* DrawBlock.h */,
 				0DC42AAF19EF394D0049C151 /* PhysicsBlock.cpp */,
 				0DC42AB019EF394D0049C151 /* PhysicsBlock.h */,
+				0D11B43C19F1620200C2EFD3 /* SpriteBlock.cpp */,
+				0D11B43D19F1620200C2EFD3 /* SpriteBlock.h */,
 			);
 			name = Blocks;
+			sourceTree = "<group>";
+		};
+		0D11B43319F1592700C2EFD3 /* RenderTasks */ = {
+			isa = PBXGroup;
+			children = (
+				0DC42AA319EEBE610049C151 /* RenderTask.cpp */,
+				0DC42AA419EEBE610049C151 /* RenderTask.h */,
+				0D11B43419F159EC00C2EFD3 /* RectRenderTask.cpp */,
+				0D11B43519F159EC00C2EFD3 /* RectRenderTask.h */,
+			);
+			name = RenderTasks;
 			sourceTree = "<group>";
 		};
 		0DC428E619ECA4E80049C151 /* glm */ = {
@@ -868,6 +889,7 @@
 		0DC42A7919ECBFD00049C151 /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
+				0D11B43319F1592700C2EFD3 /* RenderTasks */,
 				0DC42A7A19ECC0050049C151 /* Renderer.cpp */,
 				0DC42A7B19ECC0050049C151 /* Renderer.h */,
 				0DC42A7E19ECC1170049C151 /* Texture.cpp */,
@@ -876,8 +898,6 @@
 				0DC42A8719EDB8960049C151 /* Color.h */,
 				0DC42A9319EE22040049C151 /* Sprite.cpp */,
 				0DC42A9419EE22040049C151 /* Sprite.h */,
-				0DC42AA319EEBE610049C151 /* RenderTask.cpp */,
-				0DC42AA419EEBE610049C151 /* RenderTask.h */,
 			);
 			name = Graphics;
 			sourceTree = "<group>";
@@ -1062,6 +1082,7 @@
 				0DC42A4619ECA4E90049C151 /* matrix_transform_2d.hpp in Headers */,
 				0DC42A5D19ECA4E90049C151 /* spline.hpp in Headers */,
 				0DC429E719ECA4E90049C151 /* _features.hpp in Headers */,
+				0D11B43F19F1620200C2EFD3 /* SpriteBlock.h in Headers */,
 				0D0DF7EA19EC73DC0054980E /* Block.h in Headers */,
 				0DC42A1F19ECA4E90049C151 /* matrix_inverse.hpp in Headers */,
 				0DC42A6919ECA4E90049C151 /* mat2x2.hpp in Headers */,
@@ -1094,6 +1115,7 @@
 				0DC429FF19ECA4E90049C151 /* intrinsic_trigonometric.hpp in Headers */,
 				0DC42A0519ECA4E90049C151 /* type_half.hpp in Headers */,
 				0DC42A4E19ECA4E90049C151 /* optimum_pow.hpp in Headers */,
+				0D11B43719F159EC00C2EFD3 /* RectRenderTask.h in Headers */,
 				0DC42A6519ECA4E90049C151 /* vector_angle.hpp in Headers */,
 				0DC42A2B19ECA4E90049C151 /* closest_point.hpp in Headers */,
 				0DC42A3419ECA4E90049C151 /* extend.hpp in Headers */,
@@ -1162,6 +1184,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0D11B43619F159EC00C2EFD3 /* RectRenderTask.cpp in Sources */,
 				0DC429F819ECA4E90049C151 /* glm.cpp in Sources */,
 				0DC42AC219F00DC40049C151 /* Physics.cpp in Sources */,
 				0DC42ACA19F016790049C151 /* Camera.cpp in Sources */,
@@ -1175,6 +1198,7 @@
 				0DC42A9019EE19FB0049C151 /* Long.cpp in Sources */,
 				0DC42AA519EEBE610049C151 /* RenderTask.cpp in Sources */,
 				0DC42A9519EE22040049C151 /* Sprite.cpp in Sources */,
+				0D11B43E19F1620200C2EFD3 /* SpriteBlock.cpp in Sources */,
 				0DC42A9919EE224D0049C151 /* DrawBlock.cpp in Sources */,
 				0DC42A8819EDB8960049C151 /* Color.cpp in Sources */,
 				0DC42AB519EF3AEE0049C151 /* Vector.cpp in Sources */,

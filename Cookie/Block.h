@@ -20,11 +20,12 @@ namespace Cookie
     class Block
     {
     public:
-        virtual void update(Cookie::Node& node, Cookie::Game& game) = 0;
         virtual const char* name() const {return ""; };
         
-        virtual Cookie::Bool active() const {return true; };
-        virtual void set_activate(Cookie::Bool) {};
+        virtual Cookie::Bool active() const {return active_; };
+        virtual void set_activate(Cookie::Bool active) { active_ = active; };
+        
+        virtual void update(Cookie::Node& node, Cookie::Game& game) = 0;
         
     protected:
         Cookie::Bool active_;

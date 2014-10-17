@@ -10,6 +10,9 @@
 #include "SDL_Conversion.h"
 #include "RenderTask.h"
 #include "Rect.h"
+#include <SDL2/SDL_opengl.h>
+#include "RenderTask.h"
+#include "RectRenderTask.h"
 
 Cookie::Renderer::Renderer(SDL_Surface* sdl_surface)
 {
@@ -22,15 +25,22 @@ void Cookie::Renderer::set_camera(Cookie::Camera* camera)
     camera_ = camera;
 }
 
+void Cookie::Renderer::addToBatch(Cookie::Rect rect, Cookie::Color color, Cookie::Float depth)
+{
+    Cookie::RectRenderTask* renderTask = new Cookie::RectRenderTask();
+    renderTask->rect = rect;
+    renderTask->color = color;
+    renderTask->depth = depth;
+    sprite_batch_.push(renderTask);
+}
+
 void Cookie::Renderer::addToBatch(Cookie::Sprite& spr, Cookie::Point pos, Cookie::Float depth)
 {
-    sprite_batch_.push({depth, &spr, spr.size(), spr.size() + pos});
+//    sprite_batch_.push({depth, &spr, spr.size(), spr.size() + pos});
 }
 
 void Cookie::Renderer::renderBatch()
-{
-    SDL_FillRect(sdl_surface_, NULL, 0x000000);
-    
+{   
     Cookie::Point offset = {0,0};
     if(camera_ != NULL)
     {
@@ -40,16 +50,19 @@ void Cookie::Renderer::renderBatch()
     
     while(!sprite_batch_.empty())
     {
-        const RenderTask& task = sprite_batch_.top();
+        const RenderTask* task = sprite_batch_.top();
         
-        SDL_Rect sdl_src = Cookie::convert(task.src);
-        SDL_Rect sdl_dst = Cookie::convert(task.dst + offset);
-        SDL_BlitSurface(task.sprite->sdl_surface(),
-                        &sdl_src,
-                        sdl_surface_,
-                        &sdl_dst
-                        );
+        task->render(offset);
         
+//        SDL_Rect sdl_src = Cookie::convert(task.src);
+//        SDL_Rect sdl_dst = Cookie::convert(task.dst + offset);
+//        SDL_BlitSurface(task.sprite->sdl_surface(),
+//                        &sdl_src,
+//                        sdl_surface_,
+//                        &sdl_dst
+//                        );
+        
+        delete task;
         sprite_batch_.pop();
     }
 }

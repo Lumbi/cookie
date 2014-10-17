@@ -12,18 +12,23 @@
 #include <stdio.h>
 #include "Sprite.h"
 #include "Float.h"
+#include "Color.h"
 
 namespace Cookie
 {
-    typedef struct
+    class RenderTask
     {
+    public:
+        virtual ~RenderTask() {};
+        
         Cookie::Float depth;
-        Cookie::Sprite* sprite;
-        Cookie::Rect src;
-        Cookie::Rect dst;
-    } RenderTask;
+        Cookie::Color color;
+        
+        virtual void render(Cookie::Point origin) const = 0;
+    };
     
     bool operator<(const Cookie::RenderTask& lhs, const Cookie::RenderTask& rhs);
+    
 }
 
 #endif /* defined(__Cookie__RenderTask__) */

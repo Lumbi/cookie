@@ -24,13 +24,13 @@ namespace Cookie {
         void begin();
         void end();
         void set_fps(Cookie::Float);
+        void tick();
         void set_window_size(Cookie::Rect);
         Cookie::Int time_elapsed() const;
         Cookie::Int time_per_frame() const;
-    protected:
+    private:
         void update();
         void render();
-    private:
         void loop();
         
     protected:
@@ -44,6 +44,8 @@ namespace Cookie {
         
         SDL_Window* window_;
         SDL_Surface* surface_;
+        SDL_GLContext gl_context_;
+        SDL_TimerID main_loop_timer_;
     };
 }
 

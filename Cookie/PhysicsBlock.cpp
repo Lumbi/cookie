@@ -10,15 +10,19 @@
 #include "Vector.h"
 #include "Game.h"
 
-Cookie::PhysicsBlock::PhysicsBlock(const Physics* physics)
+Cookie::PhysicsBlock::PhysicsBlock(const Physics* physics) : Cookie::Block()
 {
     physics_ = physics;
+    active_ = true;
 }
 
 void Cookie::PhysicsBlock::update(Cookie::Node& node, Cookie::Game& game)
 {
-    velocity_ += (game.time_elapsed()/1000.0f) * physics_->gravity();
-    node.translate_by(velocity_.x, velocity_.y);
+    if(active_)
+    {
+        velocity_ += (game.time_elapsed()/1000.0f) * physics_->gravity();
+        node.translate_by(velocity_.x, velocity_.y);
+    }
 }
 
 const Cookie::Vector& Cookie::PhysicsBlock::velocity() const

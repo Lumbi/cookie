@@ -20,17 +20,13 @@ namespace Cookie
     class DrawBlock : public Cookie::Block
     {
     public:
-        DrawBlock(Cookie::Renderer*,Cookie::Sprite*);
+        DrawBlock(Cookie::Renderer*);
         virtual const char* name() const {return "DrawBlock"; };
         
-        void set_sprite(Cookie::Sprite*) {};
         void set_draw_point(Cookie::Point);
-        
-        void update(Cookie::Node& node, Cookie::Game& game);
         
     protected:
         Cookie::Renderer* renderer_;
-        Cookie::Sprite* sprite_;
         Cookie::Point draw_point_;
     };
 }
