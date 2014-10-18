@@ -15,6 +15,7 @@
 #include "Rect.h"
 #include "World.h"
 #include "Renderer.h"
+#include "Keyboard.h"
 
 namespace Cookie {
     class Game
@@ -24,23 +25,25 @@ namespace Cookie {
         void begin();
         void end();
         void set_fps(Cookie::Float);
-        void tick();
         void set_window_size(Cookie::Rect);
+        Cookie::World* const world() const;
         Cookie::Int time_elapsed() const;
         Cookie::Int time_per_frame() const;
+        const Cookie::Keyboard& keyboard() const;
     private:
         void update();
         void render();
         void loop();
         
     protected:
-        Cookie::World world_;
+        Cookie::World* world_;
         
     private:
         Cookie::Float fps_;
         Cookie::Int last_frame_tick;
         Cookie::Rect window_size_;
         Cookie::Renderer* renderer_;
+        Cookie::Keyboard keyboard_;
         
         SDL_Window* window_;
         SDL_Surface* surface_;

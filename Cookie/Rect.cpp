@@ -7,12 +7,61 @@
 //
 
 #include "Rect.h"
+#include <cmath>
 
 Cookie::Rect& Cookie::Rect::operator+=(const Cookie::Point& rhs)
 {
     x += rhs.x;
     y += rhs.y;
     return *this;
+}
+
+Cookie::Bool Cookie::Rect::intersects(const Cookie::Rect& other) const
+{
+    if (x+w <= other.x ||
+        y+h <= other.y ||
+        x >= other.x+other.w ||
+        y >= other.y+other.h)
+    {
+        return false;
+    }
+    return true;
+}
+
+Cookie::Vector Cookie::Rect::penetration(const Cookie::Rect& other) const
+{
+    Cookie::Vector p;
+    Cookie::Float top = other.y - (y+h);
+    Cookie::Float right = (other.x+other.w) - x;
+    Cookie::Float bottom = other.y - (y+h);
+    Cookie::Float left = other.x - (x+w);
+    
+    if(fabsf(left) < right)
+    {
+        p.x = left;
+    }else{
+        p.x = right;
+    }
+    
+    if(fabsf(top) < bottom)
+    {
+        p.y = top;
+    }else{
+        p.y = bottom;
+    }
+    
+    if(fabsf(p.x) < fabsf(p.y))
+    {
+        p.y = 0;
+    }else{
+        p.x = 0;
+    }
+    return p;
+}
+
+Cookie::Rect Cookie::Rect::centered_rect() const
+{
+    return { x-w/2.0f, y-h/2.0f, w, h};
 }
 
 bool Cookie::operator==(const Cookie::Rect& lhs, const Cookie::Rect& rhs)

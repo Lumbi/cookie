@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include "Float.h"
+#include "Bool.h"
 
 namespace Cookie
 {
@@ -26,8 +27,10 @@ namespace Cookie
         Cookie::Vector& operator+=(const Cookie::Vector& rhs);
         Cookie::Vector& operator-=(const Cookie::Vector& rhs);
         
-        Cookie::Float length();
-        Cookie::Vector unit();
+        Cookie::Float length() const;
+        Cookie::Float length_squared() const;
+        Cookie::Vector unit() const;
+        Cookie::Bool is_zero() const;
         
     } Vector;
     

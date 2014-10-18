@@ -14,14 +14,18 @@
 
 namespace Cookie
 {
+    class Game;
     class Physics
     {
     public:
         const Cookie::Vector& gravity() const;
         void set_gravity(Cookie::Vector);
         
+        void update(Cookie::Game& game);
+        
     private:
         Cookie::Vector gravity_;
+        Cookie::Vector velocity_;
     };
 }
 

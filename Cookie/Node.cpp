@@ -19,6 +19,21 @@ Cookie::Node::Node()
     rotation_ = 0;
     parent_ = NULL;
     depth_ = 0;
+    physics_body_ = NULL;
+}
+
+Cookie::Node::~Node()
+{
+}
+
+std::string Cookie::Node::name() const
+{
+    return name_;
+}
+
+void Cookie::Node::set_name(std::string name)
+{
+    name_ = name;
 }
 
 #pragma mark - Position
@@ -148,6 +163,26 @@ std::vector<Cookie::Block*>::iterator Cookie::Node::blocks_begin()
 std::vector<Cookie::Block*>::iterator Cookie::Node::blocks_end()
 {
     return blocks_.end();
+}
+
+#pragma mark - Physics
+
+Cookie::PhysicsBody* const Cookie::Node::physics_body() const
+{
+    return physics_body_;
+}
+
+void Cookie::Node::set_physics_body(Cookie::PhysicsBody* physics_body)
+{
+    if(physics_body_ != physics_body && physics_body_ != NULL)
+    {
+        delete physics_body_;
+    }
+    physics_body_ = physics_body;
+    if(physics_body_->node() != this)
+    {
+        physics_body_->set_node(this);
+    }
 }
 
 #pragma mark - Operator Overloading

@@ -29,6 +29,11 @@ namespace Cookie
 
     Cookie::Point operator+(Cookie::Point lhs, const Cookie::Point& rhs);
     Cookie::Point operator-(Cookie::Point lhs, const Cookie::Point& rhs);
+    
+    Cookie::Point operator*(Cookie::Point lhs, const Cookie::Float& rhs);
+    Cookie::Point operator/(Cookie::Point lhs, const Cookie::Float& rhs);
+    Cookie::Point operator*(Cookie::Float lhs, const Cookie::Point& rhs);
+    Cookie::Point operator/(Cookie::Float lhs, const Cookie::Point& rhs);
 }
 
 #endif /* defined(__Cookie__Point__) */

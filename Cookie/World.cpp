@@ -10,11 +10,12 @@
 
 Cookie::World::World()
 {
-    physics_.set_gravity({0,9.8});
+    physics_ = new Physics();
+    physics_->set_gravity({0,9.8f});
     camera_ = new Camera();
 }
 
-const Cookie::Physics& Cookie::World::physics() const
+Cookie::Physics* const Cookie::World::physics() const
 {
     return physics_;
 }

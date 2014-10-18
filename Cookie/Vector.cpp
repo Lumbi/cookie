@@ -44,15 +44,25 @@ Cookie::Vector& Cookie::Vector::operator-=(const Cookie::Vector& rhs)
     return *this;
 }
 
-Cookie::Float Cookie::Vector::length()
+Cookie::Float Cookie::Vector::length() const
 {
     return sqrt(x*x+y*y);
 }
 
-Cookie::Vector Cookie::Vector::unit()
+Cookie::Float Cookie::Vector::length_squared() const
+{
+    return (x*x+y*y);
+}
+
+Cookie::Vector Cookie::Vector::unit() const
 {
     Cookie::Float l = length();
     return { x/l, y/l };
+}
+
+Cookie::Bool Cookie::Vector::is_zero() const
+{
+    return x == 0 && y == 0;
 }
 
 bool Cookie::operator==(const Cookie::Vector& lhs, const Cookie::Vector& rhs)
@@ -67,12 +77,12 @@ bool Cookie::operator!=(const Cookie::Vector& lhs, const Cookie::Vector& rhs)
 
 Cookie::Vector Cookie::operator+(const Cookie::Vector& lhs, const Cookie::Vector& rhs)
 {
-    return { lhs.x+rhs.x , lhs.x+rhs.y };
+    return { lhs.x+rhs.x , lhs.y+rhs.y };
 }
 
 Cookie::Vector Cookie::operator-(const Cookie::Vector& lhs, const Cookie::Vector& rhs)
 {
-    return { lhs.x-rhs.x , lhs.x-rhs.y };
+    return { lhs.x-rhs.x , lhs.y-rhs.y };
 }
 
 Cookie::Vector Cookie::operator*(const Cookie::Vector& lhs, const Cookie::Float& rhs)

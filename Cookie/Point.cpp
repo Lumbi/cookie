@@ -46,3 +46,23 @@ Cookie::Point Cookie::operator-(Cookie::Point lhs, const Cookie::Point& rhs)
 {
     return { lhs.x-rhs.x , lhs.y-rhs.y };
 }
+
+Cookie::Point operator*(Cookie::Point lhs, const Cookie::Float& rhs)
+{
+    return { lhs.x*rhs, lhs.y*rhs };
+}
+
+Cookie::Point operator/(Cookie::Point lhs, const Cookie::Float& rhs)
+{
+    return { lhs.x/rhs, lhs.y/rhs };
+}
+
+Cookie::Point operator*(Cookie::Float lhs, const Cookie::Point& rhs)
+{
+    return { lhs*rhs.x, lhs*rhs.y };
+}
+
+Cookie::Point operator/(Cookie::Float lhs, const Cookie::Point& rhs)
+{
+    return { lhs/rhs.x, lhs/rhs.y };
+}

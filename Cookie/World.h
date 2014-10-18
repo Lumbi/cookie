@@ -20,10 +20,10 @@ namespace Cookie
     {
     public:
         World();
-        const Cookie::Physics& physics() const;
+        Cookie::Physics* const physics() const;
         Cookie::Camera* camera() const;
     private:
-        Cookie::Physics physics_;
+        Cookie::Physics* physics_;
         Cookie::Camera* camera_;
     };
 }

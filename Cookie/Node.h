@@ -10,12 +10,15 @@
 #define __Cookie__Node__
 
 #include <stdio.h>
+#include <string>
 #include <vector>
 #include "Point.h"
 #include "Int.h"
 #include "Float.h"
 #include "Bool.h"
 #include "Block.h"
+#include "PhysicsBody.h"
+#include "Vector.h"
 
 namespace Cookie
 {
@@ -23,6 +26,10 @@ namespace Cookie
     {
     public:
         Node();
+        virtual ~Node();
+        
+        std::string name() const;
+        void set_name(std::string);
         
         Cookie::Point position() const;
         Cookie::Point position_world() const;
@@ -50,15 +57,20 @@ namespace Cookie
         void remove_all_blocks();
         std::vector<Cookie::Block*>::iterator blocks_begin();
         std::vector<Cookie::Block*>::iterator blocks_end();
+        
+        Cookie::PhysicsBody* const physics_body() const;
+        void set_physics_body(Cookie::PhysicsBody*);
 
     protected:
+        std::string name_;
         Cookie::Node* parent_;
         Cookie::Point position_;
         Cookie::Float rotation_;
         Cookie::Float depth_;
+        Cookie::PhysicsBody* physics_body_;
+
         std::vector<Cookie::Node*> children_;
         std::vector<Cookie::Block*> blocks_;
-        
     };
     
     bool operator==(const Cookie::Node& lhs, const Cookie::Node& rhs);

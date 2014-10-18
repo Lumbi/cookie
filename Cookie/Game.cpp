@@ -10,8 +10,9 @@
 #include <SDL2/SDL.h>
 #include "DrawBlock.h"
 #include "SpriteBlock.h"
-#include "PhysicsBlock.h"
+#include "JumpBlock.h"
 #include <SDL2/SDL_opengl.h>
+#include "RectBody.h"
 
 Cookie::Bool initGL();
 
@@ -21,7 +22,7 @@ Cookie::Game::Game()
     window_size_ = {0,0,800, 600};
     window_ = NULL;
     surface_ = NULL;
-    world_ = Cookie::World();
+    world_ = new Cookie::World();
     renderer_ = NULL;
 }
 
@@ -33,6 +34,16 @@ void Cookie::Game::set_fps(Cookie::Float fps)
 void Cookie::Game::set_window_size(Cookie::Rect size)
 {
     window_size_ = size;
+}
+
+const Cookie::Keyboard& Cookie::Game::keyboard() const
+{
+    return keyboard_;
+}
+
+Cookie::World* const Cookie::Game::world() const
+{
+    return world_;
 }
 
 void Cookie::Game::begin()
@@ -73,8 +84,8 @@ void Cookie::Game::begin()
     }
     
     renderer_ = new Renderer(surface_);
-    renderer_->set_camera(world_.camera());
-    world_.camera()->set_viewport({0,0,window_size_.w, window_size_.h});
+    renderer_->set_camera(world_->camera());
+    world_->camera()->set_viewport({0,0,window_size_.w, window_size_.h});
     
 #pragma TEST
     Node* test = new Node();
@@ -86,9 +97,36 @@ void Cookie::Game::begin()
     draw_block->set_color({ 1,0,1,1 });
     test->add_block(draw_block);
     
-    PhysicsBlock* phys_block = new PhysicsBlock(&(world_.physics()));
-    test->add_block(phys_block);
-    world_.add_child(test);
+    JumpBlock* mov_block = new JumpBlock();
+    test->add_block(mov_block);
+    
+    RectBody* rect_body = new RectBody();
+    rect_body->set_rectangle(sprite->size());
+    rect_body->set_dynamic(true);
+    rect_body->set_mass(10);
+    rect_body->set_restitution(0);
+    test->set_physics_body(rect_body);
+    
+    Node* platform = new Node();
+    platform->translate_by(0, 200);
+    SDL_Surface* plat_surface = SDL_CreateRGBSurface(0, 400, 50, 32, 0,0,0,0);
+    
+    Sprite* plat_sprite = new Sprite(plat_surface);
+    SpriteBlock* plat_draw_block = new SpriteBlock(renderer_, plat_sprite);
+    plat_draw_block->set_color({0,1,1,1});
+    platform->add_block(plat_draw_block);
+    
+    RectBody* plat_body = new RectBody();
+    plat_body->set_rectangle(plat_sprite->size());
+    plat_body->set_mass(100);
+    platform->set_physics_body(plat_body);
+    
+    world_->add_child(test);
+    world_->add_child(platform);
+    
+    world_->set_name(std::string("World"));
+    test->set_name(std::string("test"));
+    platform->set_name(std::string("platform"));
 #pragma TEST
     
     loop();
@@ -97,6 +135,8 @@ void Cookie::Game::begin()
 
 Cookie::Bool initGL()
 {
+    glDisable(GL_DEPTH_TEST);
+    
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     
@@ -119,10 +159,18 @@ void Cookie::Game::loop()
 {
     static Cookie::Int t_per_frame;
     static Cookie::Int t_loop;
+    last_frame_tick = SDL_GetTicks();
     
     while (1)
     {
         t_loop = SDL_GetTicks();
+        
+        SDL_Event e;
+        while(SDL_PollEvent(&e))
+        {
+            keyboard_.process_event(e);
+        }
+        
         update();
         last_frame_tick = SDL_GetTicks();
         render();
@@ -168,7 +216,8 @@ void recursive_update(Cookie::Node& node, Cookie::Game& game)
 
 void Cookie::Game::update()
 {
-    recursive_update(world_, *this);
+    recursive_update(*world_, *this);
+    world_->physics()->update(*this);
 }
 
 void Cookie::Game::render()

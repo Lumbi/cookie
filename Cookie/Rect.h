@@ -14,6 +14,8 @@
 #include "Int.h"
 #include "Float.h"
 #include "Point.h"
+#include "Bool.h"
+#include "Vector.h"
 
 namespace Cookie
 {
@@ -25,6 +27,10 @@ namespace Cookie
         Cookie::Float h;
         
         Cookie::Rect& operator+=(const Cookie::Point& rhs);
+        
+        Cookie::Bool intersects(const Cookie::Rect&) const;
+        Cookie::Vector penetration(const Cookie::Rect&) const;
+        Cookie::Rect centered_rect() const;
         
     } Rect;
     
