@@ -148,34 +148,3 @@ void Cookie::Physics::update(Cookie::Game& game)
         }
     }
 }
-
-Cookie::Vector penetration(const Cookie::Rect& a, const Cookie::Rect& b)
-{
-    Cookie::Vector p;
-    Cookie::Float top = b.y - (a.y+a.h);
-    Cookie::Float right = (b.x+b.w) - a.x;
-    Cookie::Float bottom = b.y - (a.y+a.h);
-    Cookie::Float left = b.x - (a.x+a.w);
-    
-    if(fabsf(left) < right)
-    {
-        p.x = left;
-    }else{
-        p.x = right;
-    }
-    
-    if(fabsf(top) < bottom)
-    {
-        p.y = top;
-    }else{
-        p.y = bottom;
-    }
-    
-    if(fabsf(p.x) < fabsf(p.y))
-    {
-        p.y = 0;
-    }else{
-        p.x = 0;
-    }
-    return p;
-}

@@ -13,6 +13,7 @@
 #include <SDL2/SDL_opengl.h>
 #include "RenderTask.h"
 #include "RectRenderTask.h"
+#include "SpriteRenderTask.h"
 
 Cookie::Renderer::Renderer(SDL_Surface* sdl_surface)
 {
@@ -36,7 +37,13 @@ void Cookie::Renderer::addToBatch(Cookie::Rect rect, Cookie::Color color, Cookie
 
 void Cookie::Renderer::addToBatch(Cookie::Sprite& spr, Cookie::Point pos, Cookie::Float depth)
 {
-//    sprite_batch_.push({depth, &spr, spr.size(), spr.size() + pos});
+    Cookie::SpriteRenderTask* renderTask = new Cookie::SpriteRenderTask();
+    renderTask->depth = depth;
+    renderTask->sprite = &spr;
+    renderTask->dst_surface = sdl_surface_;
+    renderTask->src_rect = spr.size();
+    renderTask->dst_rect = spr.size() + pos;
+    sprite_batch_.push(renderTask);
 }
 
 void Cookie::Renderer::renderBatch()
@@ -53,14 +60,6 @@ void Cookie::Renderer::renderBatch()
         const RenderTask* task = sprite_batch_.top();
         
         task->render(offset);
-        
-//        SDL_Rect sdl_src = Cookie::convert(task.src);
-//        SDL_Rect sdl_dst = Cookie::convert(task.dst + offset);
-//        SDL_BlitSurface(task.sprite->sdl_surface(),
-//                        &sdl_src,
-//                        sdl_surface_,
-//                        &sdl_dst
-//                        );
         
         delete task;
         sprite_batch_.pop();

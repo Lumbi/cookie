@@ -16,6 +16,7 @@ Cookie::RectRenderTask::~RectRenderTask()
 
 void Cookie::RectRenderTask::render(Cookie::Point origin) const
 {
+    //TODO: blit surface
     glColor4f(color.r, color.g, color.b, color.a);
     glRectf(origin.x+rect.x, origin.y+rect.y, origin.x+rect.x+rect.w, origin.y+rect.y+rect.h);
 }

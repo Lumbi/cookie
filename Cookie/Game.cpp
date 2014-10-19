@@ -91,6 +91,7 @@ void Cookie::Game::begin()
     Node* test = new Node();
     test->translate_by(0, -200);
     SDL_Surface* surface = SDL_CreateRGBSurface(0, 100, 100, 32, 0,0,0,0);
+    SDL_FillRect(surface, NULL, SDL_MapRGB(surface->format, 255, 0, 0));
     
     Sprite* sprite = new Sprite(surface);
     SpriteBlock* draw_block = new SpriteBlock(renderer_, sprite);
@@ -110,6 +111,7 @@ void Cookie::Game::begin()
     Node* platform = new Node();
     platform->translate_by(0, 200);
     SDL_Surface* plat_surface = SDL_CreateRGBSurface(0, 400, 50, 32, 0,0,0,0);
+    SDL_FillRect(plat_surface, NULL, SDL_MapRGB(plat_surface->format, 0, 255, 0));
     
     Sprite* plat_sprite = new Sprite(plat_surface);
     SpriteBlock* plat_draw_block = new SpriteBlock(renderer_, plat_sprite);
@@ -222,8 +224,13 @@ void Cookie::Game::update()
 
 void Cookie::Game::render()
 {
-    glClearColor(0, 0, 0, 1);
-    glClear(GL_COLOR_BUFFER_BIT);
+//    glClearColor(0, 0, 0, 1);
+//    glClear(GL_COLOR_BUFFER_BIT);
+    
+    SDL_FillRect( surface_, NULL, SDL_MapRGB( surface_->format, 0, 0, 0 ) );
+    
     renderer_->renderBatch();
-    SDL_GL_SwapWindow(window_);
+    
+    SDL_UpdateWindowSurface(window_);
+//    SDL_GL_SwapWindow(window_);
 }

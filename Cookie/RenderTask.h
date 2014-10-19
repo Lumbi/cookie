@@ -23,6 +23,7 @@ namespace Cookie
         
         Cookie::Float depth;
         Cookie::Color color;
+        //TODO: add surface here
         
         virtual void render(Cookie::Point origin) const = 0;
     };

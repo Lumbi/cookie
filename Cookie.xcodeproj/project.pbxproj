@@ -23,8 +23,6 @@
 		0D11B45519F1993500C2EFD3 /* JumpBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D11B45319F1993500C2EFD3 /* JumpBlock.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0D1A2D8719F1EDDE00BF0333 /* PhysicsBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D1A2D8519F1EDDE00BF0333 /* PhysicsBody.cpp */; };
 		0D1A2D8819F1EDDE00BF0333 /* PhysicsBody.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D1A2D8619F1EDDE00BF0333 /* PhysicsBody.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0D1A2D8B19F1EF7C00BF0333 /* CircleBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D1A2D8919F1EF7C00BF0333 /* CircleBody.cpp */; };
-		0D1A2D8C19F1EF7C00BF0333 /* CircleBody.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D1A2D8A19F1EF7C00BF0333 /* CircleBody.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0D1A2D9019F204BC00BF0333 /* RectBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D1A2D8E19F204BC00BF0333 /* RectBody.cpp */; };
 		0D1A2D9119F204BC00BF0333 /* RectBody.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D1A2D8F19F204BC00BF0333 /* RectBody.h */; };
 		0DC429E619ECA4E90049C151 /* common.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0DC428E819ECA4E80049C151 /* common.hpp */; };
@@ -217,6 +215,8 @@
 		0DCD509A19EB78F000EF27F7 /* Bool.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DCD509819EB78F000EF27F7 /* Bool.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0DCD509D19EB799C00EF27F7 /* Float.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DCD509B19EB799C00EF27F7 /* Float.cpp */; };
 		0DCD509E19EB799C00EF27F7 /* Float.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DCD509C19EB799C00EF27F7 /* Float.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0DD118FA19F3FD4E003D0BF4 /* SpriteRenderTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DD118F819F3FD4E003D0BF4 /* SpriteRenderTask.cpp */; };
+		0DD118FB19F3FD4E003D0BF4 /* SpriteRenderTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DD118F919F3FD4E003D0BF4 /* SpriteRenderTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -236,8 +236,6 @@
 		0D11B45319F1993500C2EFD3 /* JumpBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JumpBlock.h; sourceTree = "<group>"; };
 		0D1A2D8519F1EDDE00BF0333 /* PhysicsBody.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PhysicsBody.cpp; sourceTree = "<group>"; };
 		0D1A2D8619F1EDDE00BF0333 /* PhysicsBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsBody.h; sourceTree = "<group>"; };
-		0D1A2D8919F1EF7C00BF0333 /* CircleBody.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CircleBody.cpp; sourceTree = "<group>"; };
-		0D1A2D8A19F1EF7C00BF0333 /* CircleBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleBody.h; sourceTree = "<group>"; };
 		0D1A2D8E19F204BC00BF0333 /* RectBody.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectBody.cpp; sourceTree = "<group>"; };
 		0D1A2D8F19F204BC00BF0333 /* RectBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectBody.h; sourceTree = "<group>"; };
 		0DC428E719ECA4E80049C151 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
@@ -536,6 +534,8 @@
 		0DCD509819EB78F000EF27F7 /* Bool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bool.h; sourceTree = "<group>"; };
 		0DCD509B19EB799C00EF27F7 /* Float.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Float.cpp; sourceTree = "<group>"; };
 		0DCD509C19EB799C00EF27F7 /* Float.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Float.h; sourceTree = "<group>"; };
+		0DD118F819F3FD4E003D0BF4 /* SpriteRenderTask.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpriteRenderTask.cpp; sourceTree = "<group>"; };
+		0DD118F919F3FD4E003D0BF4 /* SpriteRenderTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteRenderTask.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -619,6 +619,8 @@
 				0DC42AA419EEBE610049C151 /* RenderTask.h */,
 				0D11B43419F159EC00C2EFD3 /* RectRenderTask.cpp */,
 				0D11B43519F159EC00C2EFD3 /* RectRenderTask.h */,
+				0DD118F819F3FD4E003D0BF4 /* SpriteRenderTask.cpp */,
+				0DD118F919F3FD4E003D0BF4 /* SpriteRenderTask.h */,
 			);
 			name = RenderTasks;
 			sourceTree = "<group>";
@@ -940,8 +942,6 @@
 				0DC42AC119F00DC40049C151 /* Physics.h */,
 				0D1A2D8519F1EDDE00BF0333 /* PhysicsBody.cpp */,
 				0D1A2D8619F1EDDE00BF0333 /* PhysicsBody.h */,
-				0D1A2D8919F1EF7C00BF0333 /* CircleBody.cpp */,
-				0D1A2D8A19F1EF7C00BF0333 /* CircleBody.h */,
 				0D1A2D8E19F204BC00BF0333 /* RectBody.cpp */,
 				0D1A2D8F19F204BC00BF0333 /* RectBody.h */,
 			);
@@ -1090,6 +1090,7 @@
 				0DCD508419EB691C00EF27F7 /* Node.h in Headers */,
 				0DC42A5B19ECA4E90049C151 /* simd_quat.hpp in Headers */,
 				0DC429FA19ECA4E90049C151 /* intrinsic_common.hpp in Headers */,
+				0DD118FB19F3FD4E003D0BF4 /* SpriteRenderTask.h in Headers */,
 				0DC42A4A19ECA4E90049C151 /* norm.hpp in Headers */,
 				0DC429F319ECA4E90049C151 /* func_matrix.hpp in Headers */,
 				0DC42A2319ECA4E90049C151 /* quaternion.hpp in Headers */,
@@ -1109,7 +1110,6 @@
 				0DC42A3D19ECA4E90049C151 /* integer.hpp in Headers */,
 				0D1A2D8819F1EDDE00BF0333 /* PhysicsBody.h in Headers */,
 				0DC42A0419ECA4E90049C151 /* type_gentype.hpp in Headers */,
-				0D1A2D8C19F1EF7C00BF0333 /* CircleBody.h in Headers */,
 				0DC42A5419ECA4E90049C151 /* random.hpp in Headers */,
 				0DC429EA19ECA4E90049C151 /* _noise.hpp in Headers */,
 				0DC42A4119ECA4E90049C151 /* matrix_cross_product.hpp in Headers */,
@@ -1242,6 +1242,7 @@
 				0DC42A9019EE19FB0049C151 /* Long.cpp in Sources */,
 				0DC42AA519EEBE610049C151 /* RenderTask.cpp in Sources */,
 				0DC42A9519EE22040049C151 /* Sprite.cpp in Sources */,
+				0DD118FA19F3FD4E003D0BF4 /* SpriteRenderTask.cpp in Sources */,
 				0D11B43E19F1620200C2EFD3 /* SpriteBlock.cpp in Sources */,
 				0DC42A9919EE224D0049C151 /* DrawBlock.cpp in Sources */,
 				0DC42A8819EDB8960049C151 /* Color.cpp in Sources */,
@@ -1258,7 +1259,6 @@
 				0DC42A8419ED94330049C151 /* Rotation.cpp in Sources */,
 				0DC42A8C19EDBAF40049C151 /* World.cpp in Sources */,
 				0D11B44719F17AF800C2EFD3 /* Keyboard.cpp in Sources */,
-				0D1A2D8B19F1EF7C00BF0333 /* CircleBody.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

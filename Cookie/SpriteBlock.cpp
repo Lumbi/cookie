@@ -27,10 +27,11 @@ void Cookie::SpriteBlock::update(Cookie::Node& node, Cookie::Game& game)
     };
 
     Cookie::Rect dst = sprite_->size() + draw_offset + node.position();
-    renderer_->addToBatch(dst, color_, node.depth());
+    
+//    renderer_->addToBatch(dst, color_, node.depth());
     
     //TODO:
-//    renderer_->addToBatch(*sprite_,
-//                          draw_offset + node.position(),
-//                          node.depth());
+    renderer_->addToBatch(*sprite_,
+                          draw_offset + node.position(),
+                          node.depth());
 }
