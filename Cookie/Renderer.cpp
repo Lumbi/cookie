@@ -13,12 +13,36 @@
 #include <SDL2/SDL_opengl.h>
 #include "RenderTask.h"
 #include "RectRenderTask.h"
-#include "SpriteRenderTask.h"
+#include "RenderSurfaceTask.h"
+#include "RenderTextureTask.h"
 
-Cookie::Renderer::Renderer(SDL_Surface* sdl_surface)
+Cookie::Renderer::Renderer(SDL_Window* window)
 {
-    sdl_surface_ = sdl_surface;
+    sdl_surface_ = SDL_GetWindowSurface(window);
+    sdl_renderer_ = SDL_GetRenderer(window);
+    
+    if(sdl_renderer_ == NULL)
+    {
+        printf("Failed to create SDL hardware accelerated renderer: %s\n",SDL_GetError());
+    }
+    
     camera_ = NULL;
+}
+
+Cookie::Renderer::~Renderer()
+{
+    SDL_FreeSurface(sdl_surface_);
+    SDL_DestroyRenderer(sdl_renderer_);
+}
+
+SDL_Renderer* Cookie::Renderer::sdl_renderer() const
+{
+    return sdl_renderer_;
+}
+
+SDL_Surface* Cookie::Renderer::sdl_surface() const
+{
+    return sdl_surface_;
 }
 
 void Cookie::Renderer::set_camera(Cookie::Camera* camera)
@@ -28,7 +52,7 @@ void Cookie::Renderer::set_camera(Cookie::Camera* camera)
 
 void Cookie::Renderer::addToBatch(Cookie::Rect rect, Cookie::Color color, Cookie::Float depth)
 {
-    Cookie::RectRenderTask* renderTask = new Cookie::RectRenderTask();
+    Cookie::RectRenderTask* renderTask = new Cookie::RectRenderTask(this);
     renderTask->rect = rect;
     renderTask->color = color;
     renderTask->depth = depth;
@@ -37,13 +61,24 @@ void Cookie::Renderer::addToBatch(Cookie::Rect rect, Cookie::Color color, Cookie
 
 void Cookie::Renderer::addToBatch(Cookie::Sprite& spr, Cookie::Point pos, Cookie::Float depth)
 {
-    Cookie::SpriteRenderTask* renderTask = new Cookie::SpriteRenderTask();
-    renderTask->depth = depth;
-    renderTask->sprite = &spr;
-    renderTask->dst_surface = sdl_surface_;
-    renderTask->src_rect = spr.size();
-    renderTask->dst_rect = spr.size() + pos;
-    sprite_batch_.push(renderTask);
+#warning please refactor
+    if(spr.texture != NULL)
+    {
+        Cookie::RenderTextureTask* renderTask = new Cookie::RenderTextureTask(this);
+        renderTask->depth = depth;
+        renderTask->texture = spr.texture;
+        renderTask->src_rect = spr.size();
+        renderTask->dst_rect = spr.size() + pos;
+        sprite_batch_.push(renderTask);
+    }else if (spr.sdl_surface() != NULL)
+    {
+        Cookie::RenderSurfaceTask* renderTask = new Cookie::RenderSurfaceTask(this);
+        renderTask->depth = depth;
+        renderTask->surface = spr.sdl_surface();
+        renderTask->src_rect = spr.size();
+        renderTask->dst_rect = spr.size() + pos;
+        sprite_batch_.push(renderTask);
+    }
 }
 
 void Cookie::Renderer::renderBatch()

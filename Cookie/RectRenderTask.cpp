@@ -9,6 +9,10 @@
 #include "RectRenderTask.h"
 #include <SDL2/SDL_opengl.h>
 
+Cookie::RectRenderTask::RectRenderTask(Cookie::Renderer* renderer) : Cookie::RenderTask(renderer)
+{
+}
+
 Cookie::RectRenderTask::~RectRenderTask()
 {
     
@@ -17,6 +21,6 @@ Cookie::RectRenderTask::~RectRenderTask()
 void Cookie::RectRenderTask::render(Cookie::Point origin) const
 {
     //TODO: blit surface
-    glColor4f(color.r, color.g, color.b, color.a);
-    glRectf(origin.x+rect.x, origin.y+rect.y, origin.x+rect.x+rect.w, origin.y+rect.y+rect.h);
+//    glColor4f(color.r, color.g, color.b, color.a);
+//    glRectf(origin.x+rect.x, origin.y+rect.y, origin.x+rect.x+rect.w, origin.y+rect.y+rect.h);
 }

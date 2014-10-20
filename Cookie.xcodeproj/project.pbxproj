@@ -215,8 +215,10 @@
 		0DCD509A19EB78F000EF27F7 /* Bool.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DCD509819EB78F000EF27F7 /* Bool.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0DCD509D19EB799C00EF27F7 /* Float.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DCD509B19EB799C00EF27F7 /* Float.cpp */; };
 		0DCD509E19EB799C00EF27F7 /* Float.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DCD509C19EB799C00EF27F7 /* Float.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0DD118FA19F3FD4E003D0BF4 /* SpriteRenderTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DD118F819F3FD4E003D0BF4 /* SpriteRenderTask.cpp */; };
-		0DD118FB19F3FD4E003D0BF4 /* SpriteRenderTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DD118F919F3FD4E003D0BF4 /* SpriteRenderTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0DD118FE19F42C53003D0BF4 /* RenderTextureTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DD118FC19F42C53003D0BF4 /* RenderTextureTask.cpp */; };
+		0DD118FF19F42C53003D0BF4 /* RenderTextureTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DD118FD19F42C53003D0BF4 /* RenderTextureTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0DD1190619F42F58003D0BF4 /* RenderSurfaceTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DD1190419F42F58003D0BF4 /* RenderSurfaceTask.cpp */; };
+		0DD1190719F42F58003D0BF4 /* RenderSurfaceTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DD1190519F42F58003D0BF4 /* RenderSurfaceTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -534,8 +536,10 @@
 		0DCD509819EB78F000EF27F7 /* Bool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bool.h; sourceTree = "<group>"; };
 		0DCD509B19EB799C00EF27F7 /* Float.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Float.cpp; sourceTree = "<group>"; };
 		0DCD509C19EB799C00EF27F7 /* Float.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Float.h; sourceTree = "<group>"; };
-		0DD118F819F3FD4E003D0BF4 /* SpriteRenderTask.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SpriteRenderTask.cpp; sourceTree = "<group>"; };
-		0DD118F919F3FD4E003D0BF4 /* SpriteRenderTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteRenderTask.h; sourceTree = "<group>"; };
+		0DD118FC19F42C53003D0BF4 /* RenderTextureTask.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RenderTextureTask.cpp; sourceTree = "<group>"; };
+		0DD118FD19F42C53003D0BF4 /* RenderTextureTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderTextureTask.h; sourceTree = "<group>"; };
+		0DD1190419F42F58003D0BF4 /* RenderSurfaceTask.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RenderSurfaceTask.cpp; sourceTree = "<group>"; };
+		0DD1190519F42F58003D0BF4 /* RenderSurfaceTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderSurfaceTask.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -619,8 +623,10 @@
 				0DC42AA419EEBE610049C151 /* RenderTask.h */,
 				0D11B43419F159EC00C2EFD3 /* RectRenderTask.cpp */,
 				0D11B43519F159EC00C2EFD3 /* RectRenderTask.h */,
-				0DD118F819F3FD4E003D0BF4 /* SpriteRenderTask.cpp */,
-				0DD118F919F3FD4E003D0BF4 /* SpriteRenderTask.h */,
+				0DD118FC19F42C53003D0BF4 /* RenderTextureTask.cpp */,
+				0DD118FD19F42C53003D0BF4 /* RenderTextureTask.h */,
+				0DD1190419F42F58003D0BF4 /* RenderSurfaceTask.cpp */,
+				0DD1190519F42F58003D0BF4 /* RenderSurfaceTask.h */,
 			);
 			name = RenderTasks;
 			sourceTree = "<group>";
@@ -1015,6 +1021,7 @@
 				0DC42ACB19F016790049C151 /* Camera.h in Headers */,
 				0DC42AC319F00DC40049C151 /* Physics.h in Headers */,
 				0DC42A0C19ECA4E90049C151 /* type_mat3x3.hpp in Headers */,
+				0DD1190719F42F58003D0BF4 /* RenderSurfaceTask.h in Headers */,
 				0DC42A1619ECA4E90049C151 /* exponential.hpp in Headers */,
 				0DC42A7319ECA4E90049C151 /* packing.hpp in Headers */,
 				0DCD509A19EB78F000EF27F7 /* Bool.h in Headers */,
@@ -1090,7 +1097,6 @@
 				0DCD508419EB691C00EF27F7 /* Node.h in Headers */,
 				0DC42A5B19ECA4E90049C151 /* simd_quat.hpp in Headers */,
 				0DC429FA19ECA4E90049C151 /* intrinsic_common.hpp in Headers */,
-				0DD118FB19F3FD4E003D0BF4 /* SpriteRenderTask.h in Headers */,
 				0DC42A4A19ECA4E90049C151 /* norm.hpp in Headers */,
 				0DC429F319ECA4E90049C151 /* func_matrix.hpp in Headers */,
 				0DC42A2319ECA4E90049C151 /* quaternion.hpp in Headers */,
@@ -1162,6 +1168,7 @@
 				0DC42A6519ECA4E90049C151 /* vector_angle.hpp in Headers */,
 				0DC42A2B19ECA4E90049C151 /* closest_point.hpp in Headers */,
 				0DC42A3419ECA4E90049C151 /* extend.hpp in Headers */,
+				0DD118FF19F42C53003D0BF4 /* RenderTextureTask.h in Headers */,
 				0DC429F219ECA4E90049C151 /* func_integer.hpp in Headers */,
 				0DC429FD19ECA4E90049C151 /* intrinsic_integer.hpp in Headers */,
 				0DC42A2D19ECA4E90049C151 /* color_space_YCoCg.hpp in Headers */,
@@ -1242,7 +1249,6 @@
 				0DC42A9019EE19FB0049C151 /* Long.cpp in Sources */,
 				0DC42AA519EEBE610049C151 /* RenderTask.cpp in Sources */,
 				0DC42A9519EE22040049C151 /* Sprite.cpp in Sources */,
-				0DD118FA19F3FD4E003D0BF4 /* SpriteRenderTask.cpp in Sources */,
 				0D11B43E19F1620200C2EFD3 /* SpriteBlock.cpp in Sources */,
 				0DC42A9919EE224D0049C151 /* DrawBlock.cpp in Sources */,
 				0DC42A8819EDB8960049C151 /* Color.cpp in Sources */,
@@ -1256,8 +1262,10 @@
 				0D1A2D9019F204BC00BF0333 /* RectBody.cpp in Sources */,
 				0D1A2D8719F1EDDE00BF0333 /* PhysicsBody.cpp in Sources */,
 				0D11B45419F1993500C2EFD3 /* JumpBlock.cpp in Sources */,
+				0DD118FE19F42C53003D0BF4 /* RenderTextureTask.cpp in Sources */,
 				0DC42A8419ED94330049C151 /* Rotation.cpp in Sources */,
 				0DC42A8C19EDBAF40049C151 /* World.cpp in Sources */,
+				0DD1190619F42F58003D0BF4 /* RenderSurfaceTask.cpp in Sources */,
 				0D11B44719F17AF800C2EFD3 /* Keyboard.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -25,7 +25,11 @@ namespace Cookie
     class Renderer
     {
     public:
-        Renderer(SDL_Surface*);
+        Renderer(SDL_Window*);
+        virtual ~Renderer();
+        
+        SDL_Renderer* sdl_renderer() const;
+        SDL_Surface* sdl_surface() const;
         
         void set_camera(Cookie::Camera*);
         
@@ -41,7 +45,9 @@ namespace Cookie
         
         void renderBatch();
         
+        
     private:
+        SDL_Renderer* sdl_renderer_;
         SDL_Surface* sdl_surface_;
         Camera* camera_;
         std::priority_queue<Cookie::RenderTask*> sprite_batch_;

@@ -23,6 +23,9 @@ namespace Cookie
         SDL_Surface* sdl_surface() const;
         Cookie::Rect size() const;
         
+#warning TEMPORARY! REMOVE
+        SDL_Texture* texture;
+        
     private:
         SDL_Surface* sdl_surface_;
         

@@ -16,6 +16,7 @@ namespace Cookie {
     class RectRenderTask : public RenderTask
     {
     public:
+        RectRenderTask(Cookie::Renderer*);
         virtual ~RectRenderTask();
         Cookie::Rect rect;
         

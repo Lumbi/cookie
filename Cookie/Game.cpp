@@ -58,42 +58,43 @@ void Cookie::Game::begin()
                                SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
                                window_size_.w, window_size_.h,
                                SDL_WINDOWPOS_CENTERED |
-                               SDL_WINDOW_SHOWN |
-                               SDL_WINDOW_OPENGL);
+                               SDL_WINDOW_SHOWN);
     
     if (window_ == NULL)
     {
-        printf("Could not create game window.\n");
+        printf("Could not create game window: %s\n",SDL_GetError());
         return;
     }
     
-    gl_context_ = SDL_GL_CreateContext(window_);
+//    gl_context_ = SDL_GL_CreateContext(window_);
     
-    if(!initGL())
-    {
-        printf("Could not init OpenGL\n");
-        return;
-    }
+//    if(!initGL())
+//    {
+//        printf("Could not init OpenGL\n");
+//        return;
+//    }
     
     surface_ = SDL_GetWindowSurface(window_);
     
     if(surface_ == NULL)
     {
-        printf("Could not grab window's surface.\n");
+        printf("Could not grab window's surface: %s\n",SDL_GetError());
         return;
     }
     
-    renderer_ = new Renderer(surface_);
+    renderer_ = new Renderer(window_);
     renderer_->set_camera(world_->camera());
     world_->camera()->set_viewport({0,0,window_size_.w, window_size_.h});
     
-#pragma TEST
+#pragma mark - TEST
     Node* test = new Node();
     test->translate_by(0, -200);
     SDL_Surface* surface = SDL_CreateRGBSurface(0, 100, 100, 32, 0,0,0,0);
     SDL_FillRect(surface, NULL, SDL_MapRGB(surface->format, 255, 0, 0));
     
     Sprite* sprite = new Sprite(surface);
+    sprite->texture = SDL_CreateTextureFromSurface(renderer_->sdl_renderer(), surface);
+    
     SpriteBlock* draw_block = new SpriteBlock(renderer_, sprite);
     draw_block->set_color({ 1,0,1,1 });
     test->add_block(draw_block);
@@ -114,6 +115,8 @@ void Cookie::Game::begin()
     SDL_FillRect(plat_surface, NULL, SDL_MapRGB(plat_surface->format, 0, 255, 0));
     
     Sprite* plat_sprite = new Sprite(plat_surface);
+    plat_sprite->texture = SDL_CreateTextureFromSurface(renderer_->sdl_renderer(), plat_surface);
+    
     SpriteBlock* plat_draw_block = new SpriteBlock(renderer_, plat_sprite);
     plat_draw_block->set_color({0,1,1,1});
     platform->add_block(plat_draw_block);
@@ -129,7 +132,7 @@ void Cookie::Game::begin()
     world_->set_name(std::string("World"));
     test->set_name(std::string("test"));
     platform->set_name(std::string("platform"));
-#pragma TEST
+#pragma mark -
     
     loop();
     end();
@@ -198,7 +201,7 @@ Cookie::Int Cookie::Game::time_per_frame() const
 void Cookie::Game::end()
 {
     SDL_RemoveTimer(main_loop_timer_);
-    SDL_GL_DeleteContext(gl_context_);
+//    SDL_GL_DeleteContext(gl_context_);
     SDL_DestroyWindow(window_);
     SDL_Quit();
 }
@@ -227,10 +230,15 @@ void Cookie::Game::render()
 //    glClearColor(0, 0, 0, 1);
 //    glClear(GL_COLOR_BUFFER_BIT);
     
-    SDL_FillRect( surface_, NULL, SDL_MapRGB( surface_->format, 0, 0, 0 ) );
+//    SDL_FillRect( surface_, NULL, SDL_MapRGB( surface_->format, 0, 0, 0 ) );
+    
+    SDL_SetRenderDrawColor(renderer_->sdl_renderer(), 0, 0, 0, 255);
+    SDL_RenderClear(renderer_->sdl_renderer());
     
     renderer_->renderBatch();
     
-    SDL_UpdateWindowSurface(window_);
+//    SDL_UpdateWindowSurface(window_);
+    
+    SDL_RenderPresent(renderer_->sdl_renderer());
 //    SDL_GL_SwapWindow(window_);
 }

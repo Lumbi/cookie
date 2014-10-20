@@ -8,6 +8,11 @@
 
 #include "RenderTask.h"
 
+Cookie::RenderTask::RenderTask(Cookie::Renderer* renderer)
+{
+    renderer_ = renderer;
+}
+
 bool Cookie::operator<(const Cookie::RenderTask& lhs, const Cookie::RenderTask& rhs)
 {
     return lhs.depth > rhs.depth;

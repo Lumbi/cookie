@@ -16,16 +16,21 @@
 
 namespace Cookie
 {
+    class Renderer;
     class RenderTask
     {
     public:
+        RenderTask(Cookie::Renderer*);
         virtual ~RenderTask() {};
-        
         Cookie::Float depth;
         Cookie::Color color;
         //TODO: add surface here
         
         virtual void render(Cookie::Point origin) const = 0;
+        
+    protected:
+        Cookie::Renderer* renderer_;
+        
     };
     
     bool operator<(const Cookie::RenderTask& lhs, const Cookie::RenderTask& rhs);
