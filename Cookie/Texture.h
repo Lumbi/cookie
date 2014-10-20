@@ -45,8 +45,7 @@ namespace Cookie
         virtual ~Texture();
 
         Cookie::Bool open(std::string path, const Cookie::Renderer* renderer = NULL);
-        void free();
-        
+
         Cookie::Int width() const;
         Cookie::Int height() const;
         
@@ -60,6 +59,9 @@ namespace Cookie
                     Cookie::TextureRenderFlip flip = NO_FLIP,
                     Cookie::Float angle = 0,
                     const Cookie::Point* center = NULL);
+        
+    private:
+        void free();
         
     private:
         SDL_Texture* sdl_texture_;

@@ -221,6 +221,11 @@
 		0DD34C7919F57204009AEAF4 /* AnimBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DD34C7719F57204009AEAF4 /* AnimBlock.h */; };
 		0DD34C7E19F574C8009AEAF4 /* RenderAnimTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DD34C7C19F574C8009AEAF4 /* RenderAnimTask.cpp */; };
 		0DD34C7F19F574C8009AEAF4 /* RenderAnimTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DD34C7D19F574C8009AEAF4 /* RenderAnimTask.h */; };
+		0DD34C8419F5AC76009AEAF4 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DD34C8319F5AC76009AEAF4 /* OpenAL.framework */; };
+		0DD34C8919F5AE41009AEAF4 /* Audio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DD34C8719F5AE41009AEAF4 /* Audio.cpp */; };
+		0DD34C8A19F5AE41009AEAF4 /* Audio.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DD34C8819F5AE41009AEAF4 /* Audio.h */; };
+		0DD34C8D19F5AE4B009AEAF4 /* Sound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DD34C8B19F5AE4B009AEAF4 /* Sound.cpp */; };
+		0DD34C8E19F5AE4B009AEAF4 /* Sound.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DD34C8C19F5AE4B009AEAF4 /* Sound.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -544,6 +549,11 @@
 		0DD34C7719F57204009AEAF4 /* AnimBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimBlock.h; sourceTree = "<group>"; };
 		0DD34C7C19F574C8009AEAF4 /* RenderAnimTask.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RenderAnimTask.cpp; sourceTree = "<group>"; };
 		0DD34C7D19F574C8009AEAF4 /* RenderAnimTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderAnimTask.h; sourceTree = "<group>"; };
+		0DD34C8319F5AC76009AEAF4 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		0DD34C8719F5AE41009AEAF4 /* Audio.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Audio.cpp; sourceTree = "<group>"; };
+		0DD34C8819F5AE41009AEAF4 /* Audio.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Audio.h; sourceTree = "<group>"; };
+		0DD34C8B19F5AE4B009AEAF4 /* Sound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sound.cpp; sourceTree = "<group>"; };
+		0DD34C8C19F5AE4B009AEAF4 /* Sound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sound.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -551,6 +561,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DD34C8419F5AC76009AEAF4 /* OpenAL.framework in Frameworks */,
 				0DCD508A19EB6B1100EF27F7 /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -963,6 +974,7 @@
 		0DCD506A19EB687700EF27F7 = {
 			isa = PBXGroup;
 			children = (
+				0DD34C8319F5AC76009AEAF4 /* OpenAL.framework */,
 				0DC428E619ECA4E80049C151 /* glm */,
 				0DCD508919EB6B1100EF27F7 /* SDL2.framework */,
 				0DCD507519EB687700EF27F7 /* Cookie */,
@@ -988,12 +1000,24 @@
 				0DC42AB719F00CC10049C151 /* Physics */,
 				0D11B44019F1746A00C2EFD3 /* Input */,
 				0DC42A7919ECBFD00049C151 /* Graphics */,
+				0DD34C8219F5A8ED009AEAF4 /* Audio */,
 				0D0DF7E619EC73CC0054980E /* Blocks */,
 				0D0DF7E019EC6D250054980E /* SceneGraph */,
 				0D0DF7DE19EC6D070054980E /* Geometry */,
 				0D0DF7DF19EC6D120054980E /* Primitives */,
 			);
 			path = Cookie;
+			sourceTree = "<group>";
+		};
+		0DD34C8219F5A8ED009AEAF4 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				0DD34C8719F5AE41009AEAF4 /* Audio.cpp */,
+				0DD34C8819F5AE41009AEAF4 /* Audio.h */,
+				0DD34C8B19F5AE4B009AEAF4 /* Sound.cpp */,
+				0DD34C8C19F5AE4B009AEAF4 /* Sound.h */,
+			);
+			name = Audio;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1020,6 +1044,7 @@
 				0DC42A0D19ECA4E90049C151 /* type_mat3x4.hpp in Headers */,
 				0DC42A7019ECA4E90049C151 /* mat4x3.hpp in Headers */,
 				0DC42A6419ECA4E90049C151 /* vec1.hpp in Headers */,
+				0DD34C8E19F5AE4B009AEAF4 /* Sound.h in Headers */,
 				0DC42A7219ECA4E90049C151 /* matrix.hpp in Headers */,
 				0DC42A3319ECA4E90049C151 /* euler_angles.hpp in Headers */,
 				0DC42A3B19ECA4E90049C151 /* inertia.hpp in Headers */,
@@ -1114,6 +1139,7 @@
 				0DCD509219EB724E00EF27F7 /* Int.h in Headers */,
 				0DC42A4819ECA4E90049C151 /* multiple.hpp in Headers */,
 				0DC42A5119ECA4E90049C151 /* polar_coordinates.hpp in Headers */,
+				0DD34C8A19F5AE41009AEAF4 /* Audio.h in Headers */,
 				0DC42A4B19ECA4E90049C151 /* normal.hpp in Headers */,
 				0D11B44819F17AF800C2EFD3 /* Keyboard.h in Headers */,
 				0DCD507919EB687700EF27F7 /* CookiePriv.h in Headers */,
@@ -1255,6 +1281,7 @@
 				0D0DF98419EC79CA0054980E /* Matrix.cpp in Sources */,
 				0DC42A9019EE19FB0049C151 /* Long.cpp in Sources */,
 				0DC42AA519EEBE610049C151 /* RenderTask.cpp in Sources */,
+				0DD34C8919F5AE41009AEAF4 /* Audio.cpp in Sources */,
 				0DC42A9919EE224D0049C151 /* DrawBlock.cpp in Sources */,
 				0DC42A8819EDB8960049C151 /* Color.cpp in Sources */,
 				0DC42AB519EF3AEE0049C151 /* Vector.cpp in Sources */,
@@ -1275,6 +1302,7 @@
 				0DD1190619F42F58003D0BF4 /* RenderSurfaceTask.cpp in Sources */,
 				0D11B44719F17AF800C2EFD3 /* Keyboard.cpp in Sources */,
 				0DD34C7319F54EB4009AEAF4 /* Animation.cpp in Sources */,
+				0DD34C8D19F5AE4B009AEAF4 /* Sound.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
