@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include "RenderTask.h"
+#include "Rect.h"
 
 namespace Cookie {
     class RenderSurfaceTask : public Cookie::RenderTask

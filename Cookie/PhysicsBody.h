@@ -19,8 +19,8 @@ namespace Cookie
     
     typedef enum
     {
-        CircleBodyType,
-        RectangleBodyType
+        CIRCLE_BODY,
+        RECTANGLE_BODY
     } PhysicsBodyType;
     
     class PhysicsBody

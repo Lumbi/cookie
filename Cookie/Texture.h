@@ -11,15 +11,61 @@
 
 #include <stdio.h>
 #include <SDL2/SDL.h>
+#include <string>
+#include "Bool.h"
+#include "Color.h"
+#include "Int.h"
+#include "Point.h"
+#include "Rect.h"
 
 namespace Cookie
 {
+    class Renderer;
+    
+    typedef enum
+    {
+        NO_FLIP = SDL_FLIP_NONE,
+        FLIP_HORIZONTAL = SDL_FLIP_HORIZONTAL,
+        FLIP_VERTICAL = SDL_FLIP_VERTICAL
+    } TextureRenderFlip;
+    
+    typedef enum
+    {
+        BLENDMODE_NONE = SDL_BLENDMODE_NONE,
+        BLENDMODE_BLEND = SDL_BLENDMODE_BLEND,
+        BLENDMODE_ADD = SDL_BLENDMODE_ADD,
+        BLENDMODE_MOD = SDL_BLENDMODE_MOD
+    } TextureBlendMode;
+    
     class Texture
     {
     public:
-        Texture(SDL_Texture*);
+        Texture();
+        virtual ~Texture();
+
+        Cookie::Bool open(std::string path, const Cookie::Renderer* renderer = NULL);
+        void free();
+        
+        Cookie::Float width() const;
+        Cookie::Float height() const;
+        
+        void set_color(Cookie::Color);
+        void set_blend_mode(Cookie::TextureBlendMode);
+        void set_alpha(Cookie::Float);
+        
+        void render(Cookie::Renderer* renderer,
+                    const Cookie::Rect* src_rect = NULL,
+                    const Cookie::Rect* dst_rect = NULL,
+                    Cookie::TextureRenderFlip flip = NO_FLIP,
+                    Cookie::Float angle = 0,
+                    const Cookie::Point* center = NULL);
+        
     private:
         SDL_Texture* sdl_texture_;
+//        void* pixels_;
+//        int pitch_;
+        Cookie::Int width_;
+        Cookie::Int height_;
     };
 }
 

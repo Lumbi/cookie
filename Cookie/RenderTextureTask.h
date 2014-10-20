@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include "RenderTask.h"
+#include "Texture.h"
 
 namespace Cookie
 {
@@ -23,7 +24,7 @@ namespace Cookie
         virtual void render(Cookie::Point origin) const;
         
     public:
-        SDL_Texture* texture;
+        Texture* texture;
         Cookie::Rect src_rect;
         Cookie::Rect dst_rect;
     };

@@ -12,10 +12,12 @@
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include "Rect.h"
+#include "Point.h"
 
 namespace Cookie
 {
     SDL_Rect convert(const Cookie::Rect&);
+    SDL_Point convert(const Cookie::Point&);
 }
 
 

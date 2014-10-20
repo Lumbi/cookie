@@ -19,3 +19,12 @@ SDL_Rect Cookie::convert(const Cookie::Rect& rect)
         (int)round(rect.h)
     };
 }
+
+SDL_Point Cookie::convert(const Cookie::Point& p)
+{
+    return
+    {
+        (int)round(p.x),
+        (int)round(p.y)
+    };
+}

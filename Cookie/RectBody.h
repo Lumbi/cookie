@@ -20,7 +20,7 @@ namespace Cookie
     public:
         RectBody();
         virtual ~RectBody();
-        PhysicsBodyType body_type() const {return RectangleBodyType; };
+        PhysicsBodyType body_type() const {return RECTANGLE_BODY; };
         
         Cookie::Rect rectangle() const;
         void set_rectangle(Cookie::Rect);

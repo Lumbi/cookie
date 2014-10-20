@@ -24,7 +24,6 @@ void Cookie::RenderTextureTask::render(Cookie::Point origin) const
 {
     if(texture == NULL) return;
     
-    SDL_Rect sdl_src_rect = Cookie::convert(src_rect);
-    SDL_Rect sdl_dst_rect = Cookie::convert(dst_rect + origin);
-    SDL_RenderCopy(renderer_->sdl_renderer(), texture, &sdl_src_rect, &sdl_dst_rect);
+    Cookie::Rect off_dst_rect = dst_rect + origin;
+    texture->render(renderer_, &src_rect, &off_dst_rect);
 }

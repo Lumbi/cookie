@@ -8,16 +8,16 @@
 
 #include "Game.h"
 #include <SDL2/SDL.h>
+#include <string>
 #include "DrawBlock.h"
-#include "SpriteBlock.h"
+#include "TextureBlock.h"
 #include "JumpBlock.h"
-#include <SDL2/SDL_opengl.h>
 #include "RectBody.h"
-
-Cookie::Bool initGL();
+#include "Texture.h"
 
 Cookie::Game::Game()
 {
+#warning BUG higher FPS increases game speed
     fps_ = 60;
     window_size_ = {0,0,800, 600};
     window_ = NULL;
@@ -66,14 +66,6 @@ void Cookie::Game::begin()
         return;
     }
     
-//    gl_context_ = SDL_GL_CreateContext(window_);
-    
-//    if(!initGL())
-//    {
-//        printf("Could not init OpenGL\n");
-//        return;
-//    }
-    
     surface_ = SDL_GetWindowSurface(window_);
     
     if(surface_ == NULL)
@@ -89,21 +81,18 @@ void Cookie::Game::begin()
 #pragma mark - TEST
     Node* test = new Node();
     test->translate_by(0, -200);
-    SDL_Surface* surface = SDL_CreateRGBSurface(0, 100, 100, 32, 0,0,0,0);
-    SDL_FillRect(surface, NULL, SDL_MapRGB(surface->format, 255, 0, 0));
     
-    Sprite* sprite = new Sprite(surface);
-    sprite->texture = SDL_CreateTextureFromSurface(renderer_->sdl_renderer(), surface);
+    Texture* texture = new Texture();
+    texture->open(std::string("block.bmp"), renderer_);
     
-    SpriteBlock* draw_block = new SpriteBlock(renderer_, sprite);
-    draw_block->set_color({ 1,0,1,1 });
+    TextureBlock* draw_block = new TextureBlock(renderer_, texture);
     test->add_block(draw_block);
     
     JumpBlock* mov_block = new JumpBlock();
     test->add_block(mov_block);
     
     RectBody* rect_body = new RectBody();
-    rect_body->set_rectangle(sprite->size());
+    rect_body->set_rectangle({0,0,texture->width(),texture->height()});
     rect_body->set_dynamic(true);
     rect_body->set_mass(10);
     rect_body->set_restitution(0);
@@ -114,15 +103,14 @@ void Cookie::Game::begin()
     SDL_Surface* plat_surface = SDL_CreateRGBSurface(0, 400, 50, 32, 0,0,0,0);
     SDL_FillRect(plat_surface, NULL, SDL_MapRGB(plat_surface->format, 0, 255, 0));
     
-    Sprite* plat_sprite = new Sprite(plat_surface);
-    plat_sprite->texture = SDL_CreateTextureFromSurface(renderer_->sdl_renderer(), plat_surface);
+    Texture* plat_sprite = new Texture();
+    plat_sprite->open(std::string("plat.bmp"), renderer_);
     
-    SpriteBlock* plat_draw_block = new SpriteBlock(renderer_, plat_sprite);
-    plat_draw_block->set_color({0,1,1,1});
+    TextureBlock* plat_draw_block = new TextureBlock(renderer_, plat_sprite);
     platform->add_block(plat_draw_block);
     
     RectBody* plat_body = new RectBody();
-    plat_body->set_rectangle(plat_sprite->size());
+    plat_body->set_rectangle({0,0,plat_sprite->width(),plat_sprite->height()});
     plat_body->set_mass(100);
     platform->set_physics_body(plat_body);
     
@@ -136,28 +124,6 @@ void Cookie::Game::begin()
     
     loop();
     end();
-}
-
-Cookie::Bool initGL()
-{
-    glDisable(GL_DEPTH_TEST);
-    
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    
-    glClearColor(0, 0, 0, 1);
-    glClear(GL_COLOR_BUFFER_BIT);
-    
-    GLenum err = glGetError();
-    if(err != GL_NO_ERROR)
-    {
-        printf("Error initializing OpenGL\n");
-        return false;
-    }
-    return true;
 }
 
 void Cookie::Game::loop()
@@ -201,7 +167,6 @@ Cookie::Int Cookie::Game::time_per_frame() const
 void Cookie::Game::end()
 {
     SDL_RemoveTimer(main_loop_timer_);
-//    SDL_GL_DeleteContext(gl_context_);
     SDL_DestroyWindow(window_);
     SDL_Quit();
 }

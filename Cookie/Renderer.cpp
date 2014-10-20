@@ -59,26 +59,14 @@ void Cookie::Renderer::addToBatch(Cookie::Rect rect, Cookie::Color color, Cookie
     sprite_batch_.push(renderTask);
 }
 
-void Cookie::Renderer::addToBatch(Cookie::Sprite& spr, Cookie::Point pos, Cookie::Float depth)
+void Cookie::Renderer::addToBatch(Cookie::Texture& tex, Cookie::Point pos, Cookie::Float depth)
 {
-#warning please refactor
-    if(spr.texture != NULL)
-    {
-        Cookie::RenderTextureTask* renderTask = new Cookie::RenderTextureTask(this);
-        renderTask->depth = depth;
-        renderTask->texture = spr.texture;
-        renderTask->src_rect = spr.size();
-        renderTask->dst_rect = spr.size() + pos;
-        sprite_batch_.push(renderTask);
-    }else if (spr.sdl_surface() != NULL)
-    {
-        Cookie::RenderSurfaceTask* renderTask = new Cookie::RenderSurfaceTask(this);
-        renderTask->depth = depth;
-        renderTask->surface = spr.sdl_surface();
-        renderTask->src_rect = spr.size();
-        renderTask->dst_rect = spr.size() + pos;
-        sprite_batch_.push(renderTask);
-    }
+    Cookie::RenderTextureTask* renderTask = new Cookie::RenderTextureTask(this);
+    renderTask->depth = depth;
+    renderTask->texture = &tex;
+    renderTask->src_rect = {0,0, tex.width(), tex.height()};
+    renderTask->dst_rect = renderTask->src_rect + pos;
+    sprite_batch_.push(renderTask);
 }
 
 void Cookie::Renderer::renderBatch()

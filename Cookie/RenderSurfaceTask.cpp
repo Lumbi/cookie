@@ -18,7 +18,6 @@ Cookie::RenderSurfaceTask::RenderSurfaceTask(Cookie::Renderer* renderer) : Cooki
 
 Cookie::RenderSurfaceTask::~RenderSurfaceTask()
 {
-    
 }
 
 void Cookie::RenderSurfaceTask::render(Cookie::Point origin) const

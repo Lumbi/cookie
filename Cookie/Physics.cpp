@@ -82,8 +82,8 @@ void Cookie::Physics::update(Cookie::Game& game)
             if(nodeAPtr != nodeBPtr)
             {
                 //check collision
-                if(nodeAPtr->physics_body()->body_type() == RectangleBodyType &&
-                   nodeBPtr->physics_body()->body_type() == RectangleBodyType)
+                if(nodeAPtr->physics_body()->body_type() == RECTANGLE_BODY &&
+                   nodeBPtr->physics_body()->body_type() == RECTANGLE_BODY)
                 {
                     RectBody* nodeABody = static_cast<RectBody*>(nodeAPtr->physics_body());
                     RectBody* nodeBBody = static_cast<RectBody*>(nodeBPtr->physics_body());

@@ -14,7 +14,6 @@
 #include <queue>
 #include <utility>
 #include "Texture.h"
-#include "Sprite.h"
 #include "Point.h"
 #include "Rect.h"
 #include "RenderTask.h"
@@ -37,11 +36,11 @@ namespace Cookie
         
         void addToBatch(Cookie::Rect rect, Cookie::Color color, Cookie::Float depth=0);
         
-        // Drawing Sprites
+        // Drawing Textures
         
-        void addToBatch(Cookie::Sprite& spr, Cookie::Point pos, Cookie::Float depth=0);
-        void addToBatch(Cookie::Sprite& spr, Cookie::Rect srcRect, Cookie::Point pos, Cookie::Float depth=0);
-        void addToBatch(Cookie::Sprite& spr, Cookie::Rect srcRect, Cookie::Rect dstRect, Cookie::Float depth=0);
+        void addToBatch(Cookie::Texture& tex, Cookie::Point pos, Cookie::Float depth=0);
+        void addToBatch(Cookie::Texture& tex, Cookie::Rect srcRect, Cookie::Point pos, Cookie::Float depth=0);
+        void addToBatch(Cookie::Texture& tex, Cookie::Rect srcRect, Cookie::Rect dstRect, Cookie::Float depth=0);
         
         void renderBatch();
         

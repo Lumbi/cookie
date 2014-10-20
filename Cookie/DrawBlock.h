@@ -12,7 +12,6 @@
 #include <stdio.h>
 #include "Game.h"
 #include "Renderer.h"
-#include "Sprite.h"
 #include "Point.h"
 
 namespace Cookie

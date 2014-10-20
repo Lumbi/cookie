@@ -11,6 +11,9 @@
 
 #include <stdio.h>
 #include "RenderTask.h"
+#include "Rect.h"
+#include "Point.h"
+#include "Color.h"
 
 namespace Cookie {
     class RectRenderTask : public RenderTask
@@ -19,6 +22,7 @@ namespace Cookie {
         RectRenderTask(Cookie::Renderer*);
         virtual ~RectRenderTask();
         Cookie::Rect rect;
+        Cookie::Color color;
         
         virtual void render(Cookie::Point origin) const;
     };
