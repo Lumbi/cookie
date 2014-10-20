@@ -53,12 +53,12 @@ void Cookie::Texture::free()
     }
 }
 
-Cookie::Float Cookie::Texture::width() const
+Cookie::Int Cookie::Texture::width() const
 {
     return width_;
 }
 
-Cookie::Float Cookie::Texture::height() const
+Cookie::Int Cookie::Texture::height() const
 {
     return height_;
 }

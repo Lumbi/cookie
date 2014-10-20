@@ -23,6 +23,9 @@ namespace Cookie
         LOOP_PING_PONG
     } AnimationLoop;
     
+    /*
+     Animation does not take ownership of the texture passed to the constructor.
+     */
     class Animation
     {
     public:
@@ -38,10 +41,7 @@ namespace Cookie
         virtual void pause();
         virtual void reset();
         virtual void render(Cookie::Renderer* renderer,
-                            Cookie::Point pos,
-                            Cookie::TextureRenderFlip flip = NO_FLIP,
-                            Cookie::Float angle = 0,
-                            const Cookie::Point* center = NULL);
+                            Cookie::Point pos);
         
         const Cookie::Int& name() const;
         void set_name(Cookie::Int name);
@@ -54,9 +54,13 @@ namespace Cookie
         
         Cookie::Int frame_count() const;
         
-        void set_fps(Cookie::Int);
+        void set_fps(Cookie::Float);
         
         void set_loop(Cookie::AnimationLoop);
+        
+        void set_flip(Cookie::TextureRenderFlip);
+        void set_angle(Cookie::Float);
+        void set_center(const Cookie::Point& center);
         
     protected:
         Cookie::Texture* sheet_;
@@ -65,9 +69,13 @@ namespace Cookie
         Cookie::Int start_frame_;
         Cookie::Int frame_count_;
         Cookie::Rect frame_;
-        Cookie::Int fps_;
+        Cookie::Float fps_;
         Cookie::AnimationLoop loop_;
         Cookie::Bool playing_;
+        
+        Cookie::TextureRenderFlip flip_;
+        Cookie::Float angle_;
+        Cookie::Point* center_;
     };
 }
 

@@ -25,8 +25,9 @@ namespace Cookie
     typedef enum
     {
         NO_FLIP = SDL_FLIP_NONE,
-        FLIP_HORIZONTAL = SDL_FLIP_HORIZONTAL,
-        FLIP_VERTICAL = SDL_FLIP_VERTICAL
+        FLIP_X = SDL_FLIP_HORIZONTAL,
+        FLIP_Y = SDL_FLIP_VERTICAL,
+        FLIP_BOTH = SDL_FLIP_HORIZONTAL | SDL_FLIP_VERTICAL
     } TextureRenderFlip;
     
     typedef enum
@@ -46,8 +47,8 @@ namespace Cookie
         Cookie::Bool open(std::string path, const Cookie::Renderer* renderer = NULL);
         void free();
         
-        Cookie::Float width() const;
-        Cookie::Float height() const;
+        Cookie::Int width() const;
+        Cookie::Int height() const;
         
         void set_color(Cookie::Color);
         void set_blend_mode(Cookie::TextureBlendMode);

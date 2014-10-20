@@ -8,7 +8,7 @@
 
 #include "Animation.h"
 
-inline Cookie::Int time_per_frame(Cookie::Int fps);
+inline Cookie::Int time_per_frame(Cookie::Float fps);
 
 #pragma mark - Constructors & Destructors
 
@@ -25,17 +25,21 @@ Cookie::Animation::Animation(Cookie::Texture* sheet,
     {
         frame_ = *frame;
     }else{
-        frame_ = {0,0,sheet_->width()/frame_count_,sheet_->height()};
+        frame_ = {0,0,static_cast<Float>(sheet_->width()/frame_count_),static_cast<Float>(sheet_->height())};
     }
     start_frame_ = start_frame;
-    fps_ = 1;
+    fps_ = 1.0f;
     playing_ = false;
     current_frame_ = 0;
+    
+    flip_ = NO_FLIP;
+    angle_ = 0;
+    center_ = NULL;
 }
 
 Cookie::Animation::~Animation()
 {
-    sheet_ = NULL;
+    delete center_;
 }
 
 #pragma Instance Methods
@@ -116,17 +120,15 @@ void Cookie::Animation::reset()
 }
 
 void Cookie::Animation::render(Cookie::Renderer* renderer,
-                               Cookie::Point pos,
-                               Cookie::TextureRenderFlip flip,
-                               Cookie::Float angle,
-                               const Cookie::Point* center)
+                               Cookie::Point pos)
 {
     Cookie::Point offset;
-    offset.x = static_cast<int>((start_frame_+current_frame_)*frame_.w) % static_cast<int>(sheet_->width());
-    offset.y = static_cast<int>((start_frame_+current_frame_)*frame_.w) / static_cast<int>(sheet_->width());
+    Cookie::Int frame_x_offset = static_cast<int>((start_frame_+current_frame_)*frame_.w);
+    offset.x = frame_x_offset % sheet_->width();
+    offset.y = frame_x_offset / sheet_->width();
     Cookie::Rect src = frame_ + offset;
-    Cookie::Rect dst = frame_+pos;
-    sheet_->render(renderer, &src, &dst, flip, angle, center);
+    Cookie::Rect dst = frame_ + pos;
+    sheet_->render(renderer, &src, &dst, flip_, angle_, center_);
 }
 
 #pragma mark - Accessors & Mutators
@@ -161,7 +163,7 @@ Cookie::Int Cookie::Animation::frame_count() const
     return frame_count_;
 }
 
-void Cookie::Animation::set_fps(Cookie::Int fps)
+void Cookie::Animation::set_fps(Cookie::Float fps)
 {
     fps_ = fps;
 }
@@ -171,9 +173,28 @@ void Cookie::Animation::set_loop(Cookie::AnimationLoop loop)
     loop_ = loop;
 }
 
+void Cookie::Animation::set_flip(Cookie::TextureRenderFlip flip)
+{
+    flip_ = flip;
+}
+
+void Cookie::Animation::set_angle(Cookie::Float angle)
+{
+    angle_ = angle;
+}
+
+void Cookie::Animation::set_center(const Cookie::Point& center)
+{
+    if(center_ != NULL)
+    {
+        delete center_;
+    }
+    center_ = new Cookie::Point(center);
+}
+
 #pragma mark - Utility
 
-Cookie::Int time_per_frame(Cookie::Int fps)
+Cookie::Int time_per_frame(Cookie::Float fps)
 {
-    return (1/fps * 1000);
+    return (1.0f/fps * 1000);
 }

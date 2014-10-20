@@ -13,6 +13,11 @@ Cookie::TextureBlock::TextureBlock(Renderer* renderer, Cookie::Texture* texture)
     texture_ = texture;
 }
 
+Cookie::TextureBlock::~TextureBlock()
+{
+    
+}
+
 void Cookie::TextureBlock::update(Cookie::Node& node, Cookie::Game& game)
 {
     Cookie::Point draw_offset =
@@ -21,6 +26,6 @@ void Cookie::TextureBlock::update(Cookie::Node& node, Cookie::Game& game)
         -(draw_point_.y * texture_->height())
     };
     renderer_->addToBatch(*texture_,
-                          draw_offset + node.position(),
+                          draw_offset + node.position_world(),
                           node.depth());
 }

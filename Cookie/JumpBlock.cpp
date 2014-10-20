@@ -10,13 +10,18 @@
 #include "Game.h"
 #include <SDL2/SDL.h>
 
-Cookie::JumpBlock::JumpBlock() : Block()
+Cookie::JumpBlock::JumpBlock() : Cookie::Block()
 {
     max_horizontal_acceleration_ = 200;
     horizontal_acceleration_ = 20;
     ground_friction_ = 0.9f;
     initial_jump_acceleration_ = 100;
     is_resting_ = false;
+}
+
+Cookie::JumpBlock::~JumpBlock()
+{
+    
 }
 
 void Cookie::JumpBlock::update(Cookie::Node& node, Cookie::Game& game)

@@ -14,7 +14,7 @@
 #include "JumpBlock.h"
 #include "RectBody.h"
 #include "Texture.h"
-#include "Animation.h"
+#include "AnimBlock.h"
 
 Cookie::Game::Game()
 {
@@ -84,16 +84,22 @@ void Cookie::Game::begin()
     test->translate_by(0, -200);
     
     Texture* texture = new Texture();
-    texture->open(std::string("block.bmp"), renderer_);
+    texture->open(std::string("anim8.bmp"), renderer_);
     
-    TextureBlock* draw_block = new TextureBlock(renderer_, texture);
-    test->add_block(draw_block);
+    AnimBlock* anim_block = new AnimBlock(renderer_);
+    Rect anim_frame = {0,0,162.5f,220};
+    Animation* anim = new Animation(texture, 8, &anim_frame);
+    anim_block->add_anim(0, anim);
+    anim->set_fps(12);
+    anim->set_loop(LOOP_FORWARD);
+    anim->play();
+    test->add_block(anim_block);
     
     JumpBlock* mov_block = new JumpBlock();
     test->add_block(mov_block);
     
     RectBody* rect_body = new RectBody();
-    rect_body->set_rectangle({0,0,texture->width(),texture->height()});
+    rect_body->set_rectangle(anim->frame());
     rect_body->set_dynamic(true);
     rect_body->set_mass(10);
     rect_body->set_restitution(0);
@@ -109,7 +115,7 @@ void Cookie::Game::begin()
     platform->add_block(plat_draw_block);
     
     RectBody* plat_body = new RectBody();
-    plat_body->set_rectangle({0,0,plat_sprite->width(),plat_sprite->height()});
+    plat_body->set_rectangle({0,0,static_cast<Float>(plat_sprite->width()),static_cast<Float>(plat_sprite->height())});
     plat_body->set_mass(100);
     platform->set_physics_body(plat_body);
     

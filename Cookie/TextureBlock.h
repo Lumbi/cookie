@@ -19,6 +19,7 @@ namespace Cookie
     {
     public:
         TextureBlock(Cookie::Renderer*, Cookie::Texture*);
+        virtual ~TextureBlock();
         
         virtual void update(Cookie::Node& node, Cookie::Game& game);
         

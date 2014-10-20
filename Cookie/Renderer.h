@@ -13,11 +13,12 @@
 #include <SDL2/SDL.h>
 #include <queue>
 #include <utility>
-#include "Texture.h"
 #include "Point.h"
 #include "Rect.h"
 #include "RenderTask.h"
 #include "Camera.h"
+#include "Texture.h"
+#include "Animation.h"
 
 namespace Cookie
 {
@@ -32,18 +33,21 @@ namespace Cookie
         
         void set_camera(Cookie::Camera*);
         
-        // Drawing Primitives
+#pragma mark - Drawing Primitives
         
         void addToBatch(Cookie::Rect rect, Cookie::Color color, Cookie::Float depth=0);
         
-        // Drawing Textures
+#pragma mark - Drawing Textures
         
         void addToBatch(Cookie::Texture& tex, Cookie::Point pos, Cookie::Float depth=0);
-        void addToBatch(Cookie::Texture& tex, Cookie::Rect srcRect, Cookie::Point pos, Cookie::Float depth=0);
-        void addToBatch(Cookie::Texture& tex, Cookie::Rect srcRect, Cookie::Rect dstRect, Cookie::Float depth=0);
+//        void addToBatch(Cookie::Texture& tex, Cookie::Rect srcRect, Cookie::Point pos, Cookie::Float depth=0);
+//        void addToBatch(Cookie::Texture& tex, Cookie::Rect srcRect, Cookie::Rect dstRect, Cookie::Float depth=0);
+        
+#pragma mark - Drawing Animatons
+        
+        void addToBatch(Cookie::Animation& anim, Cookie::Point pos, Cookie::Float depth = 0);
         
         void renderBatch();
-        
         
     private:
         SDL_Renderer* sdl_renderer_;

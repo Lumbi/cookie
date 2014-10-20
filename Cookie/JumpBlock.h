@@ -15,11 +15,11 @@
 
 namespace Cookie
 {
-    class JumpBlock : public Block
+    class JumpBlock : public Cookie::Block
     {
     public:
         JumpBlock();
-        virtual const char* name() const {return "JumpBlock"; };
+        virtual ~JumpBlock();
         
         virtual void update(Cookie::Node& node, Cookie::Game& game);
         

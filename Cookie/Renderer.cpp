@@ -12,9 +12,9 @@
 #include "Rect.h"
 #include <SDL2/SDL_opengl.h>
 #include "RenderTask.h"
-#include "RectRenderTask.h"
 #include "RenderSurfaceTask.h"
 #include "RenderTextureTask.h"
+#include "RenderAnimTask.h"
 
 Cookie::Renderer::Renderer(SDL_Window* window)
 {
@@ -33,6 +33,13 @@ Cookie::Renderer::~Renderer()
 {
     SDL_FreeSurface(sdl_surface_);
     SDL_DestroyRenderer(sdl_renderer_);
+    
+    while(!sprite_batch_.empty())
+    {
+        const RenderTask* task = sprite_batch_.top();
+        delete task;
+        sprite_batch_.pop();
+    }
 }
 
 SDL_Renderer* Cookie::Renderer::sdl_renderer() const
@@ -50,22 +57,36 @@ void Cookie::Renderer::set_camera(Cookie::Camera* camera)
     camera_ = camera;
 }
 
+#pragma mark - Drawing Primitives
+
 void Cookie::Renderer::addToBatch(Cookie::Rect rect, Cookie::Color color, Cookie::Float depth)
 {
-    Cookie::RectRenderTask* renderTask = new Cookie::RectRenderTask(this);
-    renderTask->rect = rect;
-    renderTask->color = color;
-    renderTask->depth = depth;
-    sprite_batch_.push(renderTask);
+//    Cookie::RectRenderTask* renderTask = new Cookie::RectRenderTask(this);
+//    renderTask->rect = rect;
+//    renderTask->color = color;
+//    renderTask->depth = depth;
+//    sprite_batch_.push(renderTask);
 }
+
+#pragma mark - Drawing Textures
 
 void Cookie::Renderer::addToBatch(Cookie::Texture& tex, Cookie::Point pos, Cookie::Float depth)
 {
     Cookie::RenderTextureTask* renderTask = new Cookie::RenderTextureTask(this);
     renderTask->depth = depth;
     renderTask->texture = &tex;
-    renderTask->src_rect = {0,0, tex.width(), tex.height()};
+    renderTask->src_rect = {0,0, static_cast<Float>(tex.width()), static_cast<Float>(tex.height())};
     renderTask->dst_rect = renderTask->src_rect + pos;
+    sprite_batch_.push(renderTask);
+}
+
+#pragma mark - Drawing Animations
+
+void Cookie::Renderer::addToBatch(Cookie::Animation& anim, Cookie::Point pos, Cookie::Float depth)
+{
+    Cookie::RenderAnimTask* renderTask = new Cookie::RenderAnimTask(this, &anim);
+    renderTask->depth = depth;
+    renderTask->position = pos;
     sprite_batch_.push(renderTask);
 }
 

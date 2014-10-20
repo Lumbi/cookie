@@ -11,8 +11,6 @@
 		0D0DF7EA19EC73DC0054980E /* Block.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D0DF7E819EC73DC0054980E /* Block.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0D0DF98419EC79CA0054980E /* Matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D0DF98219EC79CA0054980E /* Matrix.cpp */; };
 		0D0DF98519EC79CA0054980E /* Matrix.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D0DF98319EC79CA0054980E /* Matrix.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		0D11B43619F159EC00C2EFD3 /* RectRenderTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D11B43419F159EC00C2EFD3 /* RectRenderTask.cpp */; };
-		0D11B43719F159EC00C2EFD3 /* RectRenderTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D11B43519F159EC00C2EFD3 /* RectRenderTask.h */; };
 		0D11B44319F17AE700C2EFD3 /* InputMethod.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D11B44119F17AE700C2EFD3 /* InputMethod.cpp */; };
 		0D11B44419F17AE700C2EFD3 /* InputMethod.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D11B44219F17AE700C2EFD3 /* InputMethod.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0D11B44719F17AF800C2EFD3 /* Keyboard.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D11B44519F17AF800C2EFD3 /* Keyboard.cpp */; };
@@ -221,6 +219,8 @@
 		0DD34C7419F54EB4009AEAF4 /* Animation.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DD34C7219F54EB4009AEAF4 /* Animation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0DD34C7819F57204009AEAF4 /* AnimBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DD34C7619F57204009AEAF4 /* AnimBlock.cpp */; };
 		0DD34C7919F57204009AEAF4 /* AnimBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DD34C7719F57204009AEAF4 /* AnimBlock.h */; };
+		0DD34C7E19F574C8009AEAF4 /* RenderAnimTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DD34C7C19F574C8009AEAF4 /* RenderAnimTask.cpp */; };
+		0DD34C7F19F574C8009AEAF4 /* RenderAnimTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DD34C7D19F574C8009AEAF4 /* RenderAnimTask.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -228,8 +228,6 @@
 		0D0DF7E819EC73DC0054980E /* Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Block.h; sourceTree = "<group>"; };
 		0D0DF98219EC79CA0054980E /* Matrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Matrix.cpp; sourceTree = "<group>"; };
 		0D0DF98319EC79CA0054980E /* Matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix.h; sourceTree = "<group>"; };
-		0D11B43419F159EC00C2EFD3 /* RectRenderTask.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectRenderTask.cpp; sourceTree = "<group>"; };
-		0D11B43519F159EC00C2EFD3 /* RectRenderTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectRenderTask.h; sourceTree = "<group>"; };
 		0D11B44119F17AE700C2EFD3 /* InputMethod.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputMethod.cpp; sourceTree = "<group>"; };
 		0D11B44219F17AE700C2EFD3 /* InputMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputMethod.h; sourceTree = "<group>"; };
 		0D11B44519F17AF800C2EFD3 /* Keyboard.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Keyboard.cpp; sourceTree = "<group>"; };
@@ -544,6 +542,8 @@
 		0DD34C7219F54EB4009AEAF4 /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
 		0DD34C7619F57204009AEAF4 /* AnimBlock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnimBlock.cpp; sourceTree = "<group>"; };
 		0DD34C7719F57204009AEAF4 /* AnimBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimBlock.h; sourceTree = "<group>"; };
+		0DD34C7C19F574C8009AEAF4 /* RenderAnimTask.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RenderAnimTask.cpp; sourceTree = "<group>"; };
+		0DD34C7D19F574C8009AEAF4 /* RenderAnimTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderAnimTask.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -627,12 +627,12 @@
 			children = (
 				0DC42AA319EEBE610049C151 /* RenderTask.cpp */,
 				0DC42AA419EEBE610049C151 /* RenderTask.h */,
-				0D11B43419F159EC00C2EFD3 /* RectRenderTask.cpp */,
-				0D11B43519F159EC00C2EFD3 /* RectRenderTask.h */,
 				0DD118FC19F42C53003D0BF4 /* RenderTextureTask.cpp */,
 				0DD118FD19F42C53003D0BF4 /* RenderTextureTask.h */,
 				0DD1190419F42F58003D0BF4 /* RenderSurfaceTask.cpp */,
 				0DD1190519F42F58003D0BF4 /* RenderSurfaceTask.h */,
+				0DD34C7C19F574C8009AEAF4 /* RenderAnimTask.cpp */,
+				0DD34C7D19F574C8009AEAF4 /* RenderAnimTask.h */,
 			);
 			name = RenderTasks;
 			sourceTree = "<group>";
@@ -1169,9 +1169,9 @@
 				0DC42A6719ECA4E90049C151 /* wrap.hpp in Headers */,
 				0DC429FC19ECA4E90049C151 /* intrinsic_geometric.hpp in Headers */,
 				0DC429FF19ECA4E90049C151 /* intrinsic_trigonometric.hpp in Headers */,
+				0DD34C7F19F574C8009AEAF4 /* RenderAnimTask.h in Headers */,
 				0DC42A0519ECA4E90049C151 /* type_half.hpp in Headers */,
 				0DC42A4E19ECA4E90049C151 /* optimum_pow.hpp in Headers */,
-				0D11B43719F159EC00C2EFD3 /* RectRenderTask.h in Headers */,
 				0DC42A6519ECA4E90049C151 /* vector_angle.hpp in Headers */,
 				0DC42A2B19ECA4E90049C151 /* closest_point.hpp in Headers */,
 				0DC42A3419ECA4E90049C151 /* extend.hpp in Headers */,
@@ -1241,13 +1241,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0D11B43619F159EC00C2EFD3 /* RectRenderTask.cpp in Sources */,
 				0D11B44319F17AE700C2EFD3 /* InputMethod.cpp in Sources */,
 				0DC429F819ECA4E90049C151 /* glm.cpp in Sources */,
 				0DC42AC219F00DC40049C151 /* Physics.cpp in Sources */,
 				0DC42ACA19F016790049C151 /* Camera.cpp in Sources */,
 				0DC42A8019ECC1170049C151 /* Texture.cpp in Sources */,
 				0DCD509D19EB799C00EF27F7 /* Float.cpp in Sources */,
+				0DD34C7E19F574C8009AEAF4 /* RenderAnimTask.cpp in Sources */,
 				0DCD508719EB6ACA00EF27F7 /* Point.cpp in Sources */,
 				0DCD509119EB724E00EF27F7 /* Int.cpp in Sources */,
 				0DCD509919EB78F000EF27F7 /* Bool.cpp in Sources */,

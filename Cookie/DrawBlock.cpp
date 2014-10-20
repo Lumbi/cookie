@@ -8,10 +8,14 @@
 
 #include "DrawBlock.h"
 
-Cookie::DrawBlock::DrawBlock(Renderer* renderer)
+Cookie::DrawBlock::DrawBlock(Renderer* renderer) : Cookie::Block()
 {
     renderer_ = renderer;
     draw_point_ = {0.5,0.5};
+}
+
+Cookie::DrawBlock::~DrawBlock()
+{
 }
 
 void Cookie::DrawBlock::set_draw_point(Cookie::Point draw_point)

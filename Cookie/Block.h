@@ -20,8 +20,8 @@ namespace Cookie
     class Block
     {
     public:
-        virtual const char* name() const {return ""; };
-        
+        Block();
+        virtual ~Block();
         virtual Cookie::Bool active() const {return active_; };
         virtual void set_activate(Cookie::Bool active) { active_ = active; };
         
