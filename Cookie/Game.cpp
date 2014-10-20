@@ -100,8 +100,6 @@ void Cookie::Game::begin()
     
     Node* platform = new Node();
     platform->translate_by(0, 200);
-    SDL_Surface* plat_surface = SDL_CreateRGBSurface(0, 400, 50, 32, 0,0,0,0);
-    SDL_FillRect(plat_surface, NULL, SDL_MapRGB(plat_surface->format, 0, 255, 0));
     
     Texture* plat_sprite = new Texture();
     plat_sprite->open(std::string("plat.bmp"), renderer_);
@@ -141,7 +139,6 @@ void Cookie::Game::loop()
         {
             keyboard_.process_event(e);
         }
-        
         update();
         last_frame_tick = SDL_GetTicks();
         render();
@@ -177,6 +174,7 @@ void recursive_update(Cookie::Node& node, Cookie::Game& game)
     {
         (*block)->update(node, game);
     }
+#warning What happends when a block is updated before an other and there are dependencies between blocks?
     
     for(auto child = node.children_begin(); child != node.children_end(); ++child)
     {
@@ -192,18 +190,10 @@ void Cookie::Game::update()
 
 void Cookie::Game::render()
 {
-//    glClearColor(0, 0, 0, 1);
-//    glClear(GL_COLOR_BUFFER_BIT);
-    
-//    SDL_FillRect( surface_, NULL, SDL_MapRGB( surface_->format, 0, 0, 0 ) );
-    
     SDL_SetRenderDrawColor(renderer_->sdl_renderer(), 0, 0, 0, 255);
     SDL_RenderClear(renderer_->sdl_renderer());
     
     renderer_->renderBatch();
     
-//    SDL_UpdateWindowSurface(window_);
-    
     SDL_RenderPresent(renderer_->sdl_renderer());
-//    SDL_GL_SwapWindow(window_);
 }

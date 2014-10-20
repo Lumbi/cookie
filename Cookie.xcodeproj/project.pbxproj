@@ -217,6 +217,8 @@
 		0DD1190719F42F58003D0BF4 /* RenderSurfaceTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DD1190519F42F58003D0BF4 /* RenderSurfaceTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0DD34C6F19F4A71C009AEAF4 /* TextureBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DD34C6D19F4A71C009AEAF4 /* TextureBlock.cpp */; };
 		0DD34C7019F4A71C009AEAF4 /* TextureBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DD34C6E19F4A71C009AEAF4 /* TextureBlock.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0DD34C7319F54EB4009AEAF4 /* Animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DD34C7119F54EB4009AEAF4 /* Animation.cpp */; };
+		0DD34C7419F54EB4009AEAF4 /* Animation.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DD34C7219F54EB4009AEAF4 /* Animation.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -536,6 +538,8 @@
 		0DD1190519F42F58003D0BF4 /* RenderSurfaceTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderSurfaceTask.h; sourceTree = "<group>"; };
 		0DD34C6D19F4A71C009AEAF4 /* TextureBlock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureBlock.cpp; sourceTree = "<group>"; };
 		0DD34C6E19F4A71C009AEAF4 /* TextureBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureBlock.h; sourceTree = "<group>"; };
+		0DD34C7119F54EB4009AEAF4 /* Animation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Animation.cpp; sourceTree = "<group>"; };
+		0DD34C7219F54EB4009AEAF4 /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -931,6 +935,8 @@
 				0DC42A7F19ECC1170049C151 /* Texture.h */,
 				0DC42A8619EDB8960049C151 /* Color.cpp */,
 				0DC42A8719EDB8960049C151 /* Color.h */,
+				0DD34C7119F54EB4009AEAF4 /* Animation.cpp */,
+				0DD34C7219F54EB4009AEAF4 /* Animation.h */,
 			);
 			name = Graphics;
 			sourceTree = "<group>";
@@ -1150,6 +1156,7 @@
 				0DC42A3219ECA4E90049C151 /* epsilon.hpp in Headers */,
 				0DCD508819EB6ACA00EF27F7 /* Point.h in Headers */,
 				0DC42A6319ECA4E90049C151 /* unsigned_int.hpp in Headers */,
+				0DD34C7419F54EB4009AEAF4 /* Animation.h in Headers */,
 				0DC42A8519ED94330049C151 /* Rotation.h in Headers */,
 				0DC42A7D19ECC0050049C151 /* Renderer.h in Headers */,
 				0DC42A6719ECA4E90049C151 /* wrap.hpp in Headers */,
@@ -1259,6 +1266,7 @@
 				0DC42A8C19EDBAF40049C151 /* World.cpp in Sources */,
 				0DD1190619F42F58003D0BF4 /* RenderSurfaceTask.cpp in Sources */,
 				0D11B44719F17AF800C2EFD3 /* Keyboard.cpp in Sources */,
+				0DD34C7319F54EB4009AEAF4 /* Animation.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

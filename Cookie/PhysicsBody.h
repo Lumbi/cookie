@@ -41,8 +41,6 @@ namespace Cookie
         void set_node(Cookie::Node* const);
         const Cookie::Vector& velocity() const;
         void set_velocity(Cookie::Vector);
-        const Cookie::Vector& acceleration() const;
-        void set_acceleration(Cookie::Vector); //?
         
         Cookie::Bool ignores_gravity() const;
         void set_ignores_gravity(Cookie::Bool);
@@ -53,7 +51,6 @@ namespace Cookie
         Cookie::Float restitution_;
         Cookie::Node* node_;
         Cookie::Vector velocity_;
-        Cookie::Vector acceleration_;
         Cookie::Bool ignores_gravity_;
     };
 }
