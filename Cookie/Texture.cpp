@@ -32,10 +32,7 @@ Cookie::Bool Cookie::Texture::open(std::string path, const Cookie::Renderer* ren
         // Pink pixels will be transparent
         SDL_SetColorKey(loaded_surface, SDL_TRUE, SDL_MapRGB(loaded_surface->format, 0xFF, 0, 0xFF ));
         new_texture = SDL_CreateTextureFromSurface(renderer->sdl_renderer(), loaded_surface);
-//        SDL_LockTexture(new_texture, NULL, &pixels_, &pitch_);
-//        memcpy(pixels_, loaded_surface->pixels, loaded_surface->pitch * loaded_surface->h);
-//        SDL_UnlockTexture(new_texture);
-        
+
         width_ = loaded_surface->w;
         height_ = loaded_surface->h;
     

@@ -62,8 +62,6 @@ namespace Cookie
         
     private:
         SDL_Texture* sdl_texture_;
-//        void* pixels_;
-//        int pitch_;
         Cookie::Int width_;
         Cookie::Int height_;
     };

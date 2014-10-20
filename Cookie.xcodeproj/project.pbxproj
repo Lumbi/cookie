@@ -219,6 +219,8 @@
 		0DD34C7019F4A71C009AEAF4 /* TextureBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DD34C6E19F4A71C009AEAF4 /* TextureBlock.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0DD34C7319F54EB4009AEAF4 /* Animation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DD34C7119F54EB4009AEAF4 /* Animation.cpp */; };
 		0DD34C7419F54EB4009AEAF4 /* Animation.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DD34C7219F54EB4009AEAF4 /* Animation.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0DD34C7819F57204009AEAF4 /* AnimBlock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DD34C7619F57204009AEAF4 /* AnimBlock.cpp */; };
+		0DD34C7919F57204009AEAF4 /* AnimBlock.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DD34C7719F57204009AEAF4 /* AnimBlock.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -540,6 +542,8 @@
 		0DD34C6E19F4A71C009AEAF4 /* TextureBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureBlock.h; sourceTree = "<group>"; };
 		0DD34C7119F54EB4009AEAF4 /* Animation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Animation.cpp; sourceTree = "<group>"; };
 		0DD34C7219F54EB4009AEAF4 /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation.h; sourceTree = "<group>"; };
+		0DD34C7619F57204009AEAF4 /* AnimBlock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnimBlock.cpp; sourceTree = "<group>"; };
+		0DD34C7719F57204009AEAF4 /* AnimBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimBlock.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -612,6 +616,8 @@
 				0D11B45319F1993500C2EFD3 /* JumpBlock.h */,
 				0DD34C6D19F4A71C009AEAF4 /* TextureBlock.cpp */,
 				0DD34C6E19F4A71C009AEAF4 /* TextureBlock.h */,
+				0DD34C7619F57204009AEAF4 /* AnimBlock.cpp */,
+				0DD34C7719F57204009AEAF4 /* AnimBlock.h */,
 			);
 			name = Blocks;
 			sourceTree = "<group>";
@@ -1052,6 +1058,7 @@
 				0DC42A1319ECA4E90049C151 /* type_vec2.hpp in Headers */,
 				0DC429FB19ECA4E90049C151 /* intrinsic_exponential.hpp in Headers */,
 				0DC42A5019ECA4E90049C151 /* perpendicular.hpp in Headers */,
+				0DD34C7919F57204009AEAF4 /* AnimBlock.h in Headers */,
 				0DC42AB619EF3AEE0049C151 /* Vector.h in Headers */,
 				0DC42A4019ECA4E90049C151 /* log_base.hpp in Headers */,
 				0DC42A4C19ECA4E90049C151 /* normalize_dot.hpp in Headers */,
@@ -1262,6 +1269,7 @@
 				0D11B45419F1993500C2EFD3 /* JumpBlock.cpp in Sources */,
 				0DD34C6F19F4A71C009AEAF4 /* TextureBlock.cpp in Sources */,
 				0DD118FE19F42C53003D0BF4 /* RenderTextureTask.cpp in Sources */,
+				0DD34C7819F57204009AEAF4 /* AnimBlock.cpp in Sources */,
 				0DC42A8419ED94330049C151 /* Rotation.cpp in Sources */,
 				0DC42A8C19EDBAF40049C151 /* World.cpp in Sources */,
 				0DD1190619F42F58003D0BF4 /* RenderSurfaceTask.cpp in Sources */,

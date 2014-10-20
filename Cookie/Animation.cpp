@@ -48,6 +48,7 @@ void Cookie::Animation::update(Cookie::Int time_elapsed)
     
     if(playing_ && time_since_last_frame >= time_per_frame(fps_))
     {
+        time_since_last_frame = 0;
         switch (loop_) {
             case NO_LOOP:
                 if(current_frame_ < frame_count_-1)
@@ -120,7 +121,12 @@ void Cookie::Animation::render(Cookie::Renderer* renderer,
                                Cookie::Float angle,
                                const Cookie::Point* center)
 {
-    
+    Cookie::Point offset;
+    offset.x = static_cast<int>((start_frame_+current_frame_)*frame_.w) % static_cast<int>(sheet_->width());
+    offset.y = static_cast<int>((start_frame_+current_frame_)*frame_.w) / static_cast<int>(sheet_->width());
+    Cookie::Rect src = frame_ + offset;
+    Cookie::Rect dst = frame_+pos;
+    sheet_->render(renderer, &src, &dst, flip, angle, center);
 }
 
 #pragma mark - Accessors & Mutators

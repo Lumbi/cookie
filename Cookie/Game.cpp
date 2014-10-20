@@ -14,6 +14,7 @@
 #include "JumpBlock.h"
 #include "RectBody.h"
 #include "Texture.h"
+#include "Animation.h"
 
 Cookie::Game::Game()
 {
@@ -118,6 +119,7 @@ void Cookie::Game::begin()
     world_->set_name(std::string("World"));
     test->set_name(std::string("test"));
     platform->set_name(std::string("platform"));
+    
 #pragma mark -
     
     loop();
