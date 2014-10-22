@@ -192,6 +192,14 @@
 		0DC42AC319F00DC40049C151 /* Physics.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DC42AC119F00DC40049C151 /* Physics.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0DC42ACA19F016790049C151 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DC42AC819F016790049C151 /* Camera.cpp */; };
 		0DC42ACB19F016790049C151 /* Camera.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DC42AC919F016790049C151 /* Camera.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0DC8036C19F6CE1500ED669B /* AudioFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DC8036A19F6CE1500ED669B /* AudioFilter.cpp */; };
+		0DC8036D19F6CE1500ED669B /* AudioFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DC8036B19F6CE1500ED669B /* AudioFilter.h */; };
+		0DC8037019F6CEB000ED669B /* AudioMixFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DC8036E19F6CEB000ED669B /* AudioMixFilter.cpp */; };
+		0DC8037119F6CEB000ED669B /* AudioMixFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DC8036F19F6CEB000ED669B /* AudioMixFilter.h */; };
+		0DC8037419F6D2BC00ED669B /* AudioVolumeFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DC8037219F6D2BC00ED669B /* AudioVolumeFilter.cpp */; };
+		0DC8037519F6D2BC00ED669B /* AudioVolumeFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DC8037319F6D2BC00ED669B /* AudioVolumeFilter.h */; };
+		0DC8037819F74D5900ED669B /* AudioPipeline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DC8037619F74D5900ED669B /* AudioPipeline.cpp */; };
+		0DC8037919F74D5900ED669B /* AudioPipeline.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DC8037719F74D5900ED669B /* AudioPipeline.h */; };
 		0DCD507719EB687700EF27F7 /* Cookie.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DCD507619EB687700EF27F7 /* Cookie.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0DCD507919EB687700EF27F7 /* CookiePriv.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DCD507819EB687700EF27F7 /* CookiePriv.h */; };
 		0DCD508319EB691C00EF27F7 /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DCD508119EB691C00EF27F7 /* Node.cpp */; };
@@ -223,9 +231,9 @@
 		0DD34C7F19F574C8009AEAF4 /* RenderAnimTask.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DD34C7D19F574C8009AEAF4 /* RenderAnimTask.h */; };
 		0DD34C8419F5AC76009AEAF4 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DD34C8319F5AC76009AEAF4 /* OpenAL.framework */; };
 		0DD34C8919F5AE41009AEAF4 /* Audio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DD34C8719F5AE41009AEAF4 /* Audio.cpp */; };
-		0DD34C8A19F5AE41009AEAF4 /* Audio.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DD34C8819F5AE41009AEAF4 /* Audio.h */; };
+		0DD34C8A19F5AE41009AEAF4 /* Audio.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DD34C8819F5AE41009AEAF4 /* Audio.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0DD34C8D19F5AE4B009AEAF4 /* Sound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DD34C8B19F5AE4B009AEAF4 /* Sound.cpp */; };
-		0DD34C8E19F5AE4B009AEAF4 /* Sound.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DD34C8C19F5AE4B009AEAF4 /* Sound.h */; };
+		0DD34C8E19F5AE4B009AEAF4 /* Sound.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DD34C8C19F5AE4B009AEAF4 /* Sound.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -519,6 +527,14 @@
 		0DC42AC119F00DC40049C151 /* Physics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Physics.h; sourceTree = "<group>"; };
 		0DC42AC819F016790049C151 /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 		0DC42AC919F016790049C151 /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
+		0DC8036A19F6CE1500ED669B /* AudioFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioFilter.cpp; sourceTree = "<group>"; };
+		0DC8036B19F6CE1500ED669B /* AudioFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioFilter.h; sourceTree = "<group>"; };
+		0DC8036E19F6CEB000ED669B /* AudioMixFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioMixFilter.cpp; sourceTree = "<group>"; };
+		0DC8036F19F6CEB000ED669B /* AudioMixFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioMixFilter.h; sourceTree = "<group>"; };
+		0DC8037219F6D2BC00ED669B /* AudioVolumeFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioVolumeFilter.cpp; sourceTree = "<group>"; };
+		0DC8037319F6D2BC00ED669B /* AudioVolumeFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioVolumeFilter.h; sourceTree = "<group>"; };
+		0DC8037619F74D5900ED669B /* AudioPipeline.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioPipeline.cpp; sourceTree = "<group>"; };
+		0DC8037719F74D5900ED669B /* AudioPipeline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPipeline.h; sourceTree = "<group>"; };
 		0DCD507319EB687700EF27F7 /* libCookie.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCookie.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0DCD507619EB687700EF27F7 /* Cookie.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cookie.h; sourceTree = "<group>"; };
 		0DCD507819EB687700EF27F7 /* CookiePriv.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CookiePriv.h; sourceTree = "<group>"; };
@@ -971,6 +987,21 @@
 			name = Physics;
 			sourceTree = "<group>";
 		};
+		0DC8036519F6CB2900ED669B /* Pipeline */ = {
+			isa = PBXGroup;
+			children = (
+				0DC8037619F74D5900ED669B /* AudioPipeline.cpp */,
+				0DC8037719F74D5900ED669B /* AudioPipeline.h */,
+				0DC8036A19F6CE1500ED669B /* AudioFilter.cpp */,
+				0DC8036B19F6CE1500ED669B /* AudioFilter.h */,
+				0DC8036E19F6CEB000ED669B /* AudioMixFilter.cpp */,
+				0DC8036F19F6CEB000ED669B /* AudioMixFilter.h */,
+				0DC8037219F6D2BC00ED669B /* AudioVolumeFilter.cpp */,
+				0DC8037319F6D2BC00ED669B /* AudioVolumeFilter.h */,
+			);
+			name = Pipeline;
+			sourceTree = "<group>";
+		};
 		0DCD506A19EB687700EF27F7 = {
 			isa = PBXGroup;
 			children = (
@@ -1012,6 +1043,7 @@
 		0DD34C8219F5A8ED009AEAF4 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				0DC8036519F6CB2900ED669B /* Pipeline */,
 				0DD34C8719F5AE41009AEAF4 /* Audio.cpp */,
 				0DD34C8819F5AE41009AEAF4 /* Audio.h */,
 				0DD34C8B19F5AE4B009AEAF4 /* Sound.cpp */,
@@ -1055,6 +1087,7 @@
 				0DD1190719F42F58003D0BF4 /* RenderSurfaceTask.h in Headers */,
 				0DC42A1619ECA4E90049C151 /* exponential.hpp in Headers */,
 				0DC42A7319ECA4E90049C151 /* packing.hpp in Headers */,
+				0DC8037119F6CEB000ED669B /* AudioMixFilter.h in Headers */,
 				0DCD509A19EB78F000EF27F7 /* Bool.h in Headers */,
 				0DD34C7019F4A71C009AEAF4 /* TextureBlock.h in Headers */,
 				0DC42A2019ECA4E90049C151 /* matrix_transform.hpp in Headers */,
@@ -1152,10 +1185,12 @@
 				0DC42A0419ECA4E90049C151 /* type_gentype.hpp in Headers */,
 				0DC42A5419ECA4E90049C151 /* random.hpp in Headers */,
 				0DC429EA19ECA4E90049C151 /* _noise.hpp in Headers */,
+				0DC8037919F74D5900ED669B /* AudioPipeline.h in Headers */,
 				0DC42A4119ECA4E90049C151 /* matrix_cross_product.hpp in Headers */,
 				0DC42AA619EEBE610049C151 /* RenderTask.h in Headers */,
 				0DC429F519ECA4E90049C151 /* func_packing.hpp in Headers */,
 				0DC42AA219EE2C140049C151 /* SDL_Conversion.h in Headers */,
+				0DC8036D19F6CE1500ED669B /* AudioFilter.h in Headers */,
 				0DC42A5919ECA4E90049C151 /* scalar_relational.hpp in Headers */,
 				0DC429F419ECA4E90049C151 /* func_noise.hpp in Headers */,
 				0DC42A5719ECA4E90049C151 /* rotate_normalized_axis.hpp in Headers */,
@@ -1165,6 +1200,7 @@
 				0DC429E719ECA4E90049C151 /* _features.hpp in Headers */,
 				0D0DF7EA19EC73DC0054980E /* Block.h in Headers */,
 				0DC42A1F19ECA4E90049C151 /* matrix_inverse.hpp in Headers */,
+				0DC8037519F6D2BC00ED669B /* AudioVolumeFilter.h in Headers */,
 				0DC42A6919ECA4E90049C151 /* mat2x2.hpp in Headers */,
 				0DC42A3519ECA4E90049C151 /* extented_min_max.hpp in Headers */,
 				0DC42A3E19ECA4E90049C151 /* intersect.hpp in Headers */,
@@ -1269,6 +1305,8 @@
 			files = (
 				0D11B44319F17AE700C2EFD3 /* InputMethod.cpp in Sources */,
 				0DC429F819ECA4E90049C151 /* glm.cpp in Sources */,
+				0DC8037819F74D5900ED669B /* AudioPipeline.cpp in Sources */,
+				0DC8037019F6CEB000ED669B /* AudioMixFilter.cpp in Sources */,
 				0DC42AC219F00DC40049C151 /* Physics.cpp in Sources */,
 				0DC42ACA19F016790049C151 /* Camera.cpp in Sources */,
 				0DC42A8019ECC1170049C151 /* Texture.cpp in Sources */,
@@ -1276,6 +1314,7 @@
 				0DD34C7E19F574C8009AEAF4 /* RenderAnimTask.cpp in Sources */,
 				0DCD508719EB6ACA00EF27F7 /* Point.cpp in Sources */,
 				0DCD509119EB724E00EF27F7 /* Int.cpp in Sources */,
+				0DC8036C19F6CE1500ED669B /* AudioFilter.cpp in Sources */,
 				0DCD509919EB78F000EF27F7 /* Bool.cpp in Sources */,
 				0DC42A7C19ECC0050049C151 /* Renderer.cpp in Sources */,
 				0D0DF98419EC79CA0054980E /* Matrix.cpp in Sources */,
@@ -1286,6 +1325,7 @@
 				0DC42A8819EDB8960049C151 /* Color.cpp in Sources */,
 				0DC42AB519EF3AEE0049C151 /* Vector.cpp in Sources */,
 				0DCD509519EB75A300EF27F7 /* Game.cpp in Sources */,
+				0DC8037419F6D2BC00ED669B /* AudioVolumeFilter.cpp in Sources */,
 				0DC429EE19ECA4E90049C151 /* dummy.cpp in Sources */,
 				0D0DF7E919EC73DC0054980E /* Block.cpp in Sources */,
 				0DCD508319EB691C00EF27F7 /* Node.cpp in Sources */,

@@ -10,6 +10,7 @@
 #define __Cookie__Sound__
 
 #include <stdio.h>
+#include <SDL2/SDL.h>
 #include <string>
 #include "Bool.h"
 #include "Int.h"
@@ -41,6 +42,8 @@ namespace Cookie
         
     private:
         Cookie::Audio* audio_;
+        Uint8* buffer_;
+        Uint32 buffer_lenght_;
         Cookie::Float volume_;
     };
 }

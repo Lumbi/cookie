@@ -16,6 +16,7 @@
 #include "World.h"
 #include "Renderer.h"
 #include "Keyboard.h"
+#include "Audio.h"
 
 namespace Cookie {
     class Game
@@ -43,6 +44,7 @@ namespace Cookie {
         Cookie::Int last_frame_tick;
         Cookie::Rect window_size_;
         Cookie::Renderer* renderer_;
+        Cookie::Audio* audio_;
         Cookie::Keyboard keyboard_;
         
         SDL_Window* window_;

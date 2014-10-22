@@ -10,6 +10,7 @@
 #define __Cookie__Audio__
 
 #include <stdio.h>
+#include <SDL2/SDL.h>
 #include "Sound.h"
 
 namespace Cookie
@@ -19,7 +20,11 @@ namespace Cookie
     public:
         Audio();
         virtual ~Audio();
+        
+        void init();
+        
     private:
+        SDL_AudioDeviceID device_;
     };
 }
 

@@ -25,6 +25,7 @@ Cookie::Game::Game()
     surface_ = NULL;
     world_ = new Cookie::World();
     renderer_ = NULL;
+    audio_ = new Cookie::Audio();
 }
 
 void Cookie::Game::set_fps(Cookie::Float fps)
@@ -78,6 +79,8 @@ void Cookie::Game::begin()
     renderer_ = new Renderer(window_);
     renderer_->set_camera(world_->camera());
     world_->camera()->set_viewport({0,0,window_size_.w, window_size_.h});
+    
+    audio_->init();
     
 #pragma mark - TEST
     Node* test = new Node();
