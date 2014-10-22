@@ -11,9 +11,18 @@
 #include <cmath>
 #include "AudioPipeline.h"
 
-void audio_pipeline_callback(Uint8* data, Uint32 len)
+Uint8* channel1_buffer;
+Uint32 channel1_buffer_len;
+Uint32 offset = 0;
+
+void audio_pipeline_callback(const Uint8* const data, Uint32 len)
 {
-    printf("I'm rich %d \n", len);
+//    printf("I'm rich %d \n", len);
+//    for(int i = 0; i < 16; ++i) { printf("%d,",data[i]); } printf("\n");
+    delete channel1_buffer;
+    channel1_buffer = new Uint8[len];
+    SDL_memcpy(channel1_buffer, data, len);
+    channel1_buffer_len = len;
 }
 
 Cookie::AudioPipeline* audio_pipeline_ = NULL;
@@ -25,10 +34,6 @@ inline T* memcat(T* combined, T* buff1, int len1, T* buff2, int len2)
     memcpy(combined + len1, buff2, len2);
     return combined;
 }
-
-Uint8* channel1_buffer;
-Uint32 channel1_buffer_len;
-Uint32 offset = 0;
 
 void audio_callback(void *udata, Uint8 *stream, int len)
 {
@@ -46,7 +51,8 @@ void audio_callback(void *udata, Uint8 *stream, int len)
             {
                 offset = 0;
             }
-            SDL_MixAudioFormat(stream, channel1_buffer + offset, AUDIO_F32, len, SDL_MIX_MAXVOLUME);
+            SDL_memcpy(stream, channel1_buffer + offset, len);
+//            SDL_MixAudioFormat(stream, channel1_buffer + offset, AUDIO_F32, len, SDL_MIX_MAXVOLUME);
             offset += len;
 //            SDL_memcpy(stream, channel1_buffer, len);
         }
@@ -66,6 +72,8 @@ Cookie::Audio::~Audio()
     delete channel1_buffer;
     delete audio_pipeline_;
 }
+
+Uint8* temp_wav_buffer = NULL;
 
 void Cookie::Audio::init()
 {
@@ -88,7 +96,7 @@ void Cookie::Audio::init()
         
         audio_pipeline_ = new Cookie::AudioPipeline(have, audio_pipeline_callback);
         
-//        SDL_PauseAudioDevice(device_, 0);
+        SDL_PauseAudioDevice(device_, 0);
         
         SDL_AudioSpec wav_spec;
         Uint32 wav_length;
@@ -106,13 +114,16 @@ void Cookie::Audio::init()
             SDL_memcpy(cvt.buf, wav_buffer, wav_length);
             SDL_ConvertAudio(&cvt);
             
-            audio_pipeline_->push(cvt.buf, 1024);
+//            for(int i = 0; i < 16; ++i) { printf("%d,",cvt.buf[i]); } printf("\n");
+            temp_wav_buffer = cvt.buf;
+            audio_pipeline_->push(temp_wav_buffer, cvt.len * cvt.len_mult);
+//            audio_pipeline_->set_volume(0.5f);
             audio_pipeline_->flush();
             
-            delete channel1_buffer;
-            channel1_buffer = new Uint8[cvt.len * cvt.len_mult];
-            SDL_memcpy(channel1_buffer, cvt.buf, cvt.len * cvt.len_mult);
-            channel1_buffer_len = cvt.len * cvt.len_mult;
+//            delete channel1_buffer;
+//            channel1_buffer = new Uint8[cvt.len * cvt.len_mult];
+//            SDL_memcpy(channel1_buffer, cvt.buf, cvt.len * cvt.len_mult);
+//            channel1_buffer_len = cvt.len * cvt.len_mult;
             SDL_FreeWAV(wav_buffer);
         }
     }

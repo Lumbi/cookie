@@ -12,11 +12,11 @@
 
 #include <stdio.h>
 #include <vector>
-#include "AudioVolumeFilter.h"
+#include "AudioFilter.h"
 
 namespace Cookie
 {
-    class AudioMixFilter  : public AudioVolumeFilter
+    class AudioMixFilter  : public AudioFilter
     {
     public:
         AudioMixFilter(SDL_AudioSpec audio_spec);

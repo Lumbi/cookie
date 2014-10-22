@@ -24,6 +24,8 @@ namespace Cookie
     protected:
         SDL_AudioSpec audio_spec_;
         Cookie::AudioFilter* out_;
+        SDL_ThreadFunction* t_;
+        void * test;
     };
 }
 

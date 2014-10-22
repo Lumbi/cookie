@@ -20,15 +20,15 @@ Cookie::AudioVolumeFilter::~AudioVolumeFilter()
 
 void Cookie::AudioVolumeFilter::process(const Uint8* const buf, Uint32 len)
 {
-    printf("AudioVolumeFilter\n");
-    Uint8* temp = new Uint8[len];
+#warning this relies on the fact that len doesn't change
+    static Uint8* temp = new Uint8[len];
     for(int i = 0; i < len; ++i)
     {
 #warning DANGER! No clamping! Big-endianness? does it matter? so many questions ;)
-        temp[i] = volume_ * buf[i];
+//        temp[i] = volume_ * buf[i];
+        temp[i] = buf[i];
     }
     out_->process(temp, len);
-    delete temp;
 }
 
 void Cookie::AudioVolumeFilter::set_volume(Cookie::Float volume)

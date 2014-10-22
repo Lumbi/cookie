@@ -8,6 +8,30 @@
 
 #include "AudioPipeline.h"
 
+SDL_Thread* audio_pipeline_thread;
+int Cookie::audio_pipeline_thread_func (void * data)
+{
+    auto audio_pipeline = static_cast<Cookie::AudioPipeline*>(data);
+    
+    while (audio_pipeline != NULL)
+    {
+        if(!audio_pipeline->audio_buffers_.empty())
+        {
+            const Cookie::AudioBuffer& buffer = audio_pipeline->audio_buffers_.front();
+            switch (buffer.channel) {
+                case 1:
+                    audio_pipeline->channel1_->process(buffer.data, buffer.len);
+                    break;
+                default:
+                    audio_pipeline->mixer_->flush();
+                    break;
+            }
+            audio_pipeline->audio_buffers_.pop_front();
+        }
+    }
+    return 0;
+}
+
 Cookie::AudioPipeline::AudioPipeline(SDL_AudioSpec audio_spec,
                                      Cookie::AudioPipelineCallback callback) : Cookie::AudioFilter(audio_spec)
 {
@@ -15,14 +39,20 @@ Cookie::AudioPipeline::AudioPipeline(SDL_AudioSpec audio_spec,
     
     channel1_ = new Cookie::AudioVolumeFilter(audio_spec);
     mixer_ = new Cookie::AudioMixFilter(audio_spec);
+    master_volume_ = new Cookie::AudioVolumeFilter(audio_spec);
     
     channel1_->set_output(mixer_);
     
-    mixer_->set_output(this);
+    mixer_->set_output(master_volume_);
+    master_volume_->set_output(this);
+    
+    audio_pipeline_thread = SDL_CreateThread(audio_pipeline_thread_func, "CookieAudioPipelineThread", this);
 }
 
 Cookie::AudioPipeline::~AudioPipeline()
 {
+    SDL_DetachThread(audio_pipeline_thread);
+    
     delete channel1_;
     delete mixer_;
 }
@@ -38,28 +68,28 @@ void Cookie::AudioPipeline::push(Uint8* data, Uint32 len, Cookie::Int channel)
         channel = 1;
     }
     
-    switch (channel) {
-        case 1:
-            channel1_->process(data, len);
-            break;
-        default:
-            break;
-    }
+    Cookie::AudioBuffer buffer;
+    buffer.data = data;
+    buffer.len = len;
+    buffer.channel = channel;
+    
+    audio_buffers_.push_back(buffer);
     
     last_channel = channel;
 }
 
 void Cookie::AudioPipeline::flush()
 {
-    mixer_->flush();
+    Cookie::AudioBuffer buffer;
+    buffer.data = NULL;
+    buffer.len = 0;
+    buffer.channel = -1;
+    audio_buffers_.push_back(buffer);
 }
 
 void Cookie::AudioPipeline::process(const Uint8* const data, Uint32 len)
 {
-    Uint8* cpy = new Uint8[len];
-    SDL_memcpy(cpy, data, len);
-    callback_(cpy, len);
-    delete cpy;
+    callback_(data, len);
 }
 
 void Cookie::AudioPipeline::set_volume(Cookie::Float vol, Cookie::Int channel)
@@ -69,7 +99,7 @@ void Cookie::AudioPipeline::set_volume(Cookie::Float vol, Cookie::Int channel)
             channel1_->set_volume(vol);
             break;
         default:
-            mixer_->set_volume(vol);
+            master_volume_->set_volume(vol);
             break;
     }
 }
