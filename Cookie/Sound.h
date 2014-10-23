@@ -15,22 +15,24 @@
 #include "Bool.h"
 #include "Int.h"
 #include "Float.h"
+#include "Audio.h"
 
 namespace Cookie
 {
-    class Audio;
-    
     class Sound
     {
+        friend class Audio;
     public:
         Sound(Cookie::Audio* audio);
         virtual ~Sound();
         
         Cookie::Bool open(std::string path);
         
-        void play(Cookie::Int repeat = 1);
+        void play(Cookie::Int loop = 1);
         void pause();
         void stop();
+        
+        Cookie::Bool is_playing() const;
         
         void set_volume(Cookie::Float volume_);
         void fade_volume(Cookie::Float volume_, Cookie::Int time);
@@ -39,11 +41,15 @@ namespace Cookie
         
     private:
         void free();
+        friend int audio_queue_thread_func (void *);
         
     private:
         Cookie::Audio* audio_;
+        Cookie::Bool is_playing_;
         Uint8* buffer_;
-        Uint32 buffer_lenght_;
+        Uint32 buffer_length_;
+        Uint32 buffer_pos_;
+        Cookie::Int loop_;
         Cookie::Float volume_;
     };
 }

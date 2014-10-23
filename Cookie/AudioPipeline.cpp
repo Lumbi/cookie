@@ -80,16 +80,22 @@ void Cookie::AudioPipeline::push(Uint8* data, Uint32 len, Cookie::Int channel)
 
 void Cookie::AudioPipeline::flush()
 {
-    Cookie::AudioBuffer buffer;
-    buffer.data = NULL;
-    buffer.len = 0;
-    buffer.channel = -1;
-    audio_buffers_.push_back(buffer);
+    if(!audio_buffers_.empty())
+    {
+        Cookie::AudioBuffer buffer;
+        buffer.data = NULL;
+        buffer.len = 0;
+        buffer.channel = -1;
+        audio_buffers_.push_back(buffer);
+    }
 }
 
 void Cookie::AudioPipeline::process(const Uint8* const data, Uint32 len)
 {
-    callback_(data, len);
+    if(len != 0)
+    {
+        callback_(data, len);
+    }
 }
 
 void Cookie::AudioPipeline::set_volume(Cookie::Float vol, Cookie::Int channel)

@@ -11,10 +11,13 @@
 
 #include <stdio.h>
 #include <SDL2/SDL.h>
-#include "Sound.h"
+#include <vector>
 
 namespace Cookie
 {
+    static const Uint32 kAudioBufferLength = 32768;
+    
+    class Sound;
     class Audio
     {
     public:
@@ -23,8 +26,14 @@ namespace Cookie
         
         void init();
         
+        void queue(Cookie::Sound*);
+        
     private:
-        SDL_AudioDeviceID device_;
+        friend int audio_queue_thread_func (void *);
+        
+    private:
+        std::vector<Cookie::Sound*> sound_queue_;
+
     };
 }
 

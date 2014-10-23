@@ -82,6 +82,8 @@ void Cookie::Game::begin()
     
     audio_->init();
     
+    SDL_Delay(1000);
+    
 #pragma mark - TEST
     Node* test = new Node();
     test->translate_by(0, -200);

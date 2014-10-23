@@ -69,38 +69,46 @@ Cookie::AudioMixFilter::~AudioMixFilter()
 
 void Cookie::AudioMixFilter::process(const Uint8* const buf, Uint32 len)
 {
-    if(acc_buffer_ == NULL)
+    if(len != 0)
     {
-        acc_buffer_ = new Uint8[len];
-        SDL_memset(acc_buffer_, 0, len);
-        acc_len_ = len;
-    }else if(acc_len_ < len){
-        Uint8* acc_buffer_temp_ = new Uint8[len];
-        SDL_memcpy(acc_buffer_temp_, acc_buffer_, acc_len_);
-        SDL_memset(acc_buffer_temp_ + acc_len_, 0, len - acc_len_);
-        delete acc_buffer_;
-        acc_buffer_ = acc_buffer_temp_;
-        acc_len_ = len;
-    }
-//    printf("mixing:\n");
-//    for(int i = 0; i < 16; ++i) { printf("%d,",buf[i]); } printf("\n");
-//    printf("against:\n");
-//    for(int i = 0; i < 16; ++i) { printf("%d,",acc_buffer_[i]); } printf("\n");
-    for(int i = 0; i < acc_len_; ++i)
-    {
-        if(i < len)
+        if(acc_buffer_ == NULL)
         {
-#warning DANGER! no clamping in sight!
-            acc_buffer_[i] = mix_samples(acc_buffer_[i], buf[i], audio_spec_.format);
+            acc_buffer_ = new Uint8[len];
+            SDL_memset(acc_buffer_, 0, len);
+            acc_len_ = len;
+        }else if(acc_len_ < len){
+            Uint8* acc_buffer_temp_ = new Uint8[len];
+            SDL_memcpy(acc_buffer_temp_, acc_buffer_, acc_len_);
+            SDL_memset(acc_buffer_temp_ + acc_len_, 0, len - acc_len_);
+            delete acc_buffer_;
+            acc_buffer_ = acc_buffer_temp_;
+            acc_len_ = len;
         }
+        printf("mixing:\n");
+        for(int i = 0; i < 16; ++i) { printf("%d,",buf[i]); } printf("\n");
+        printf("against:\n");
+        for(int i = 0; i < 16; ++i) { printf("%d,",acc_buffer_[i]); } printf("\n");
+        for(int i = 0; i < acc_len_; ++i)
+        {
+            if(i < len)
+            {
+                acc_buffer_[i] = mix_samples(acc_buffer_[i], buf[i], audio_spec_.format);
+            }
+        }
+        //    for(int i = 0; i < 16; ++i) { printf("%d,",acc_buffer_[i]); } printf("\n");
     }
-    for(int i = 0; i < 16; ++i) { printf("%d,",acc_buffer_[i]); } printf("\n");
 }
 
 void Cookie::AudioMixFilter::flush()
 {
-    out_->process(acc_buffer_, acc_len_);
-    delete acc_buffer_;
-    acc_buffer_ = NULL;
-    acc_len_ = 0;
+    if(acc_len_ != 0)
+    {
+        out_->process(acc_buffer_, acc_len_);
+        delete acc_buffer_;
+        acc_buffer_ = NULL;
+        acc_len_ = 0;
+    }else{
+        out_->process(NULL, 0);
+    }
+    
 }
