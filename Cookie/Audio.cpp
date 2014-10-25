@@ -103,17 +103,10 @@ void Cookie::Audio::init()
             test_sound->buffer_pos_ = 0;
             
             test_sound->is_playing_ = true;
-            test_sound->loop_ = 5;
+            test_sound->loop_ = 2;
             
             queue(test_sound);
             
-            //            for(int i = 0; i < 16; ++i) { printf("%d,",cvt.buf[i]); } printf("\n");
-            //            audio_pipeline_->set_volume(0.5f);
-            
-            //            delete channel1_buffer;
-            //            channel1_buffer = new Uint8[cvt.len * cvt.len_mult];
-            //            SDL_memcpy(channel1_buffer, cvt.buf, cvt.len * cvt.len_mult);
-            //            channel1_buffer_len = cvt.len * cvt.len_mult;
             SDL_FreeWAV(wav_buffer);
         }
     }
@@ -142,9 +135,7 @@ int Cookie::audio_queue_thread_func (void * udata)
     std::vector<Cookie::Sound*> sounds_to_remove;
     while (1) {
         Cookie::Sound* sound = NULL;
-//        printf("2 sem wait...\n");
         SDL_SemWait(audio_queue_semaphore);
-//        printf("2 sem get!\n");
         if(!audio->sound_queue_.empty())
         {
             for(auto it = audio->sound_queue_.begin(); it != audio->sound_queue_.end(); ++it)
@@ -167,18 +158,22 @@ int Cookie::audio_queue_thread_func (void * udata)
                     }
                 }
             }
+            audio_pipeline_->flush();
             for(auto it = sounds_to_remove.begin(); it != sounds_to_remove.end(); ++it)
             {
-#error UNSAFE, THREADING PROBLEM *it IS NULL
-                if(*it != NULL)
-                {
-                    audio->sound_queue_.erase(it);
-                }
+#warning UNSAFE, THREADING PROBLEM *it IS NULL
+                audio->sound_queue_.erase(std::find(audio->sound_queue_.begin(), audio->sound_queue_.end(), *it));
             }
-            sounds_to_remove.clear();
+//            sounds_to_remove.clear();
         }
         SDL_SemPost(audio_queue_semaphore);
-//        printf("2 sem released!\n");
+        
+//        static const Uint32 MAX_QUEUE_LEN = kAudioBufferLength*2;
+//        while(SDL_GetQueuedAudioSize(device) > MAX_QUEUE_LEN)
+//        {
+//            
+//        }
+        SDL_Delay(50);
     }
 }
 
@@ -186,18 +181,12 @@ int Cookie::audio_queue_thread_func (void * udata)
 
 void audio_pipeline_callback(const Uint8* const data, Uint32 len)
 {
-    printf("Pipeline callback len=%d \n", len);
+//    printf("Pipeline callback len=%d \n", len);
     SDL_assert(len != 0);
     
-    for(int i = 0; i < 16; ++i) { printf("%d,",data[i]); } printf("\n");
+//    for(int i = 0; i < 16; ++i) { printf("%d,",data[i]); } printf("\n");
     
-//    static const Uint32 MAX_QUEUE_LEN = UINT32_MAX / 2;
-//    while(SDL_GetQueuedAudioSize(device) > MAX_QUEUE_LEN)
-//    {
-//        SDL_Delay(10);
-//    }
     SDL_QueueAudio(device, data, len);
-    audio_pipeline_->flush();
 }
 
 #pragma mark - Audio Device Callback
@@ -209,33 +198,3 @@ inline T* memcat(T* combined, T* buff1, int len1, T* buff2, int len2)
     memcpy(combined + len1, buff2, len2);
     return combined;
 }
-
-//void audio_callback(void *udata, Uint8 *stream, int len)
-//{
-//    static Cookie::Audio* audio = static_cast<Cookie::Audio*>(udata);
-//    SDL_memset(stream, 0, len);
-//    
-//    if(channel1_buffer_len > 0)
-//    {
-//        if(len > channel1_buffer_len)
-//        {
-////            SDL_MixAudioFormat(stream, channel1_buffer + offset, AUDIO_F32, channel1_buffer_len, SDL_MIX_MAXVOLUME / 2);
-////            SDL_memcpy(stream, channel1_buffer, channel1_buffer_len);
-//        }else{
-//            if(offset > channel1_buffer_len + len)
-//            {
-//                offset = 0;
-//            }
-//            SDL_memcpy(stream, channel1_buffer + offset, len);
-////            SDL_MixAudioFormat(stream, channel1_buffer + offset, AUDIO_F32, len, SDL_MIX_MAXVOLUME);
-//            offset += len;
-////            SDL_memcpy(stream, channel1_buffer, len);
-//        }
-//    }
-//    
-//    
-//}
-
-
-
-

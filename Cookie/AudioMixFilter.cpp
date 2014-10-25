@@ -84,10 +84,10 @@ void Cookie::AudioMixFilter::process(const Uint8* const buf, Uint32 len)
             acc_buffer_ = acc_buffer_temp_;
             acc_len_ = len;
         }
-        printf("mixing:\n");
-        for(int i = 0; i < 16; ++i) { printf("%d,",buf[i]); } printf("\n");
-        printf("against:\n");
-        for(int i = 0; i < 16; ++i) { printf("%d,",acc_buffer_[i]); } printf("\n");
+//        printf("mixing:\n");
+//        for(int i = 0; i < 16; ++i) { printf("%d,",buf[i]); } printf("\n");
+//        printf("against:\n");
+//        for(int i = 0; i < 16; ++i) { printf("%d,",acc_buffer_[i]); } printf("\n");
         for(int i = 0; i < acc_len_; ++i)
         {
             if(i < len)
