@@ -16,6 +16,7 @@
 
 #warning TESTING
 Cookie::Sound* test_sound;
+Cookie::Sound* test_sound2;
 
 SDL_AudioDeviceID device;
 
@@ -40,9 +41,6 @@ void audio_callback(void *udata, Uint8 *stream, int len);
 
 Cookie::Audio::Audio()
 {
-    audio_queue_semaphore = SDL_CreateSemaphore(1);
-    audio_device_buffer_semaphore = SDL_CreateSemaphore(1);
-    audio_queue_thread = SDL_CreateThread(Cookie::audio_queue_thread_func, "CookieAudioQueueThread", this);
 }
 
 Cookie::Audio::~Audio()
@@ -61,7 +59,7 @@ Cookie::Audio::~Audio()
 
 void Cookie::Audio::init()
 {
-    SDL_AudioSpec want, have;
+    SDL_AudioSpec want;
     
     SDL_zero(want);
     want.freq = 48000;
@@ -70,46 +68,41 @@ void Cookie::Audio::init()
     want.samples = 4096;
     want.userdata = this;
     
-    device = SDL_OpenAudioDevice(NULL, 0, &want, &have, SDL_AUDIO_ALLOW_FORMAT_CHANGE);
+    device = SDL_OpenAudioDevice(NULL, 0, &want, &device_audio_spec_, SDL_AUDIO_ALLOW_FORMAT_CHANGE);
     if (device == 0) {
         printf("Failed to open audio: %s\n", SDL_GetError());
     } else {
-        if (have.format != want.format)
+        if (device_audio_spec_.format != want.format)
             printf("We didn't get Float32 audio format.\n");
         
-        audio_pipeline_ = new Cookie::AudioPipeline(have, audio_pipeline_callback);
+        audio_pipeline_ = new Cookie::AudioPipeline(device_audio_spec_, audio_pipeline_callback);
         
         SDL_PauseAudioDevice(device, 0);
+
+        audio_queue_semaphore = SDL_CreateSemaphore(1);
+        audio_device_buffer_semaphore = SDL_CreateSemaphore(1);
+        audio_queue_thread = SDL_CreateThread(Cookie::audio_queue_thread_func, "CookieAudioQueueThread", this);
         
-        SDL_AudioSpec wav_spec;
-        Uint32 wav_length;
-        Uint8 *wav_buffer;
+        test_sound = new Cookie::Sound(this);
+        test_sound->open(std::string("death01.wav"));
+        test_sound->loop_ = 3;
+        test_sound->is_playing_ = true;
+        test_sound->volume_ = 0.5f;
         
-        if (SDL_LoadWAV("death01.wav", &wav_spec, &wav_buffer, &wav_length) == NULL) {
-            fprintf(stderr, "Could not open test.wav: %s\n", SDL_GetError());
-        } else {
-            
-            SDL_AudioCVT cvt;
-            SDL_BuildAudioCVT(&cvt, wav_spec.format, wav_spec.channels, wav_spec.freq,
-                              have.format, have.channels, have.freq);
-            cvt.len = wav_length;
-            cvt.buf = (Uint8 *) SDL_malloc(cvt.len * cvt.len_mult);
-            SDL_memcpy(cvt.buf, wav_buffer, wav_length);
-            SDL_ConvertAudio(&cvt);
-            
-            test_sound = new Cookie::Sound(this);
-            test_sound->buffer_ = cvt.buf;
-            test_sound->buffer_length_ = cvt.len * cvt.len_mult;
-            test_sound->buffer_pos_ = 0;
-            
-            test_sound->is_playing_ = true;
-            test_sound->loop_ = 2;
-            
-            queue(test_sound);
-            
-            SDL_FreeWAV(wav_buffer);
-        }
+        test_sound2 = new Cookie::Sound(this);
+        test_sound2->open(std::string("game_start.wav"));
+        test_sound2->is_playing_ = true;
+        test_sound2->loop_ = 10;
+        test_sound2->volume_ = 0.5f;
+        
+        queue(test_sound);
+        queue(test_sound2);
     }
+}
+
+SDL_AudioSpec Cookie::Audio::get_audio_spec() const
+{
+    return device_audio_spec_;
 }
 
 #pragma mark - Audio Queueing
@@ -133,7 +126,7 @@ int Cookie::audio_queue_thread_func (void * udata)
 {
     auto audio = static_cast<Cookie::Audio*>(udata);
     std::vector<Cookie::Sound*> sounds_to_remove;
-    while (1) {
+    while (audio != NULL) {
         Cookie::Sound* sound = NULL;
         SDL_SemWait(audio_queue_semaphore);
         if(!audio->sound_queue_.empty())
@@ -143,8 +136,11 @@ int Cookie::audio_queue_thread_func (void * udata)
                 sound = dynamic_cast<Cookie::Sound*>(*it);
                 if(sound != NULL && sound->is_playing())
                 {
-                    Uint32 len = std::min(sound->buffer_length_-sound->buffer_pos_, kAudioBufferLength);
-                    audio_pipeline_->push(sound->buffer_+sound->buffer_pos_, len);
+                    Uint32 len = std::min(sound->buffer_length_-sound->buffer_pos_,
+                                          (Uint32)audio->device_audio_spec_.samples);
+                    Cookie::Int channel = sound->channel_ != 0 ? sound->channel_ : audio_pipeline_->get_next_channel();
+                    audio_pipeline_->set_volume(sound->volume_, channel);
+                    audio_pipeline_->push(sound->buffer_+sound->buffer_pos_, len, channel);
                     sound->buffer_pos_ += len;
                     if(sound->buffer_pos_ >= sound->buffer_length_)
                     {
@@ -161,20 +157,17 @@ int Cookie::audio_queue_thread_func (void * udata)
             audio_pipeline_->flush();
             for(auto it = sounds_to_remove.begin(); it != sounds_to_remove.end(); ++it)
             {
-#warning UNSAFE, THREADING PROBLEM *it IS NULL
                 audio->sound_queue_.erase(std::find(audio->sound_queue_.begin(), audio->sound_queue_.end(), *it));
             }
-//            sounds_to_remove.clear();
+            sounds_to_remove.clear();
         }
         SDL_SemPost(audio_queue_semaphore);
         
-//        static const Uint32 MAX_QUEUE_LEN = kAudioBufferLength*2;
-//        while(SDL_GetQueuedAudioSize(device) > MAX_QUEUE_LEN)
-//        {
-//            
-//        }
-        SDL_Delay(50);
+        Uint32 wait = audio->device_audio_spec_.samples /
+        (double)audio->device_audio_spec_.freq * 100; //No idea why 100 works
+        SDL_Delay(wait);
     }
+    return 0;
 }
 
 #pragma mark - Audio Pipeline Callback

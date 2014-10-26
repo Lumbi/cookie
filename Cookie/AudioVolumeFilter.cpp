@@ -7,6 +7,7 @@
 //
 
 #include "AudioVolumeFilter.h"
+#include <SDL2/SDL.h>
 
 Cookie::AudioVolumeFilter::AudioVolumeFilter(SDL_AudioSpec audio_spec,
                                              Cookie::Float volume) : Cookie::AudioFilter(audio_spec)
@@ -24,12 +25,8 @@ void Cookie::AudioVolumeFilter::process(const Uint8* const buf, Uint32 len)
     if(len != 0)
     {
         static Uint8* temp = new Uint8[len];
-        for(int i = 0; i < len; ++i)
-        {
-#warning DANGER! No clamping! Big-endianness? does it matter? so many questions ;)
-            //        temp[i] = volume_ * buf[i];
-            temp[i] = buf[i];
-        }
+        SDL_memset(temp, 0, len);
+        SDL_MixAudioFormat(temp, buf, audio_spec_.format, len, (int)(SDL_MIX_MAXVOLUME * volume_));
         out_->process(temp, len);
     }else{
         out_->process(NULL, len);

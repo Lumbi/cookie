@@ -36,6 +36,7 @@ namespace Cookie
         
         void push(Uint8* data, Uint32 len, Cookie::Int channel = 0);
         void flush();
+        Cookie::Int get_next_channel();
         
         void set_volume(Cookie::Float vol, Cookie::Int channel = 0);
 

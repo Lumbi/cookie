@@ -46,6 +46,7 @@ namespace Cookie
     private:
         Cookie::Audio* audio_;
         Cookie::Bool is_playing_;
+        Cookie::Int channel_;
         Uint8* buffer_;
         Uint32 buffer_length_;
         Uint32 buffer_pos_;

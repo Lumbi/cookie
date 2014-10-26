@@ -8,30 +8,6 @@
 
 #include "AudioPipeline.h"
 
-SDL_Thread* audio_pipeline_thread;
-int Cookie::audio_pipeline_thread_func (void * data)
-{
-    auto audio_pipeline = static_cast<Cookie::AudioPipeline*>(data);
-    
-    while (audio_pipeline != NULL)
-    {
-        if(!audio_pipeline->audio_buffers_.empty())
-        {
-            const Cookie::AudioBuffer& buffer = audio_pipeline->audio_buffers_.front();
-            switch (buffer.channel) {
-                case 1:
-                    audio_pipeline->channel1_->process(buffer.data, buffer.len);
-                    break;
-                default:
-                    audio_pipeline->mixer_->flush();
-                    break;
-            }
-            audio_pipeline->audio_buffers_.pop_front();
-        }
-    }
-    return 0;
-}
-
 Cookie::AudioPipeline::AudioPipeline(SDL_AudioSpec audio_spec,
                                      Cookie::AudioPipelineCallback callback) : Cookie::AudioFilter(audio_spec)
 {
@@ -45,14 +21,10 @@ Cookie::AudioPipeline::AudioPipeline(SDL_AudioSpec audio_spec,
     
     mixer_->set_output(master_volume_);
     master_volume_->set_output(this);
-    
-//    audio_pipeline_thread = SDL_CreateThread(audio_pipeline_thread_func, "CookieAudioPipelineThread", this);
 }
 
 Cookie::AudioPipeline::~AudioPipeline()
 {
-//    SDL_DetachThread(audio_pipeline_thread);
-    
     delete channel1_;
     delete mixer_;
 }
@@ -96,6 +68,14 @@ void Cookie::AudioPipeline::flush()
     }
     
     this->mixer_->flush();
+}
+
+Cookie::Int Cookie::AudioPipeline::get_next_channel()
+{
+    static const int channel_count = 1;
+    static int next_channel = 0;
+#warning TODO
+    return 1;
 }
 
 void Cookie::AudioPipeline::process(const Uint8* const data, Uint32 len)

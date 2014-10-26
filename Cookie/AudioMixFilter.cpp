@@ -7,6 +7,7 @@
 //
 
 #include "AudioMixFilter.h"
+#include <SDL2/SDL.h>
 #include <cmath>
 
 //#define SDL_AUDIO_MASK_BITSIZE       (0xFF)
@@ -84,17 +85,23 @@ void Cookie::AudioMixFilter::process(const Uint8* const buf, Uint32 len)
             acc_buffer_ = acc_buffer_temp_;
             acc_len_ = len;
         }
+        
 //        printf("mixing:\n");
 //        for(int i = 0; i < 16; ++i) { printf("%d,",buf[i]); } printf("\n");
 //        printf("against:\n");
 //        for(int i = 0; i < 16; ++i) { printf("%d,",acc_buffer_[i]); } printf("\n");
-        for(int i = 0; i < acc_len_; ++i)
-        {
-            if(i < len)
-            {
-                acc_buffer_[i] = mix_samples(acc_buffer_[i], buf[i], audio_spec_.format);
-            }
-        }
+        
+        SDL_MixAudioFormat(acc_buffer_, buf, audio_spec_.format, len, SDL_MIX_MAXVOLUME);
+        
+//        for(int i = 0; i < acc_len_; ++i)
+//        {
+//            if(i < len)
+//            {
+//                acc_buffer_[i] = mix_samples(acc_buffer_[i], buf[i], audio_spec_.format);
+//            }else{
+//                break;
+//            }
+//        }
         //    for(int i = 0; i < 16; ++i) { printf("%d,",acc_buffer_[i]); } printf("\n");
     }
 }

@@ -27,11 +27,13 @@ namespace Cookie
         void init();
         
         void queue(Cookie::Sound*);
+        SDL_AudioSpec get_audio_spec() const;
         
     private:
         friend int audio_queue_thread_func (void *);
         
     private:
+        SDL_AudioSpec device_audio_spec_;
         std::vector<Cookie::Sound*> sound_queue_;
 
     };
