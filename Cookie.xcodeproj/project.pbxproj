@@ -21,6 +21,8 @@
 		0D1A2D8819F1EDDE00BF0333 /* PhysicsBody.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D1A2D8619F1EDDE00BF0333 /* PhysicsBody.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0D1A2D9019F204BC00BF0333 /* RectBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D1A2D8E19F204BC00BF0333 /* RectBody.cpp */; };
 		0D1A2D9119F204BC00BF0333 /* RectBody.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D1A2D8F19F204BC00BF0333 /* RectBody.h */; };
+		0D5D004219FE985A00904845 /* CircleBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D5D004019FE985A00904845 /* CircleBody.cpp */; };
+		0D5D004319FE985A00904845 /* CircleBody.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D5D004119FE985A00904845 /* CircleBody.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0DC429E619ECA4E90049C151 /* common.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0DC428E819ECA4E80049C151 /* common.hpp */; };
 		0DC429E719ECA4E90049C151 /* _features.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0DC428EA19ECA4E80049C151 /* _features.hpp */; };
 		0DC429E819ECA4E90049C151 /* _fixes.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 0DC428EB19ECA4E80049C151 /* _fixes.hpp */; };
@@ -251,6 +253,8 @@
 		0D1A2D8619F1EDDE00BF0333 /* PhysicsBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhysicsBody.h; sourceTree = "<group>"; };
 		0D1A2D8E19F204BC00BF0333 /* RectBody.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RectBody.cpp; sourceTree = "<group>"; };
 		0D1A2D8F19F204BC00BF0333 /* RectBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectBody.h; sourceTree = "<group>"; };
+		0D5D004019FE985A00904845 /* CircleBody.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CircleBody.cpp; sourceTree = "<group>"; };
+		0D5D004119FE985A00904845 /* CircleBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleBody.h; sourceTree = "<group>"; };
 		0DC428E719ECA4E80049C151 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 		0DC428E819ECA4E80049C151 /* common.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = common.hpp; sourceTree = "<group>"; };
 		0DC428EA19ECA4E80049C151 /* _features.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = _features.hpp; sourceTree = "<group>"; };
@@ -983,6 +987,8 @@
 				0D1A2D8619F1EDDE00BF0333 /* PhysicsBody.h */,
 				0D1A2D8E19F204BC00BF0333 /* RectBody.cpp */,
 				0D1A2D8F19F204BC00BF0333 /* RectBody.h */,
+				0D5D004019FE985A00904845 /* CircleBody.cpp */,
+				0D5D004119FE985A00904845 /* CircleBody.h */,
 			);
 			name = Physics;
 			sourceTree = "<group>";
@@ -1177,6 +1183,7 @@
 				0D11B44819F17AF800C2EFD3 /* Keyboard.h in Headers */,
 				0DCD507919EB687700EF27F7 /* CookiePriv.h in Headers */,
 				0DC42A9119EE19FB0049C151 /* Long.h in Headers */,
+				0D5D004319FE985A00904845 /* CircleBody.h in Headers */,
 				0DC42A2619ECA4E90049C151 /* type_precision.hpp in Headers */,
 				0DC42A6D19ECA4E90049C151 /* mat3x3.hpp in Headers */,
 				0DC42A9A19EE224D0049C151 /* DrawBlock.h in Headers */,
@@ -1340,6 +1347,7 @@
 				0DC42A8419ED94330049C151 /* Rotation.cpp in Sources */,
 				0DC42A8C19EDBAF40049C151 /* World.cpp in Sources */,
 				0DD1190619F42F58003D0BF4 /* RenderSurfaceTask.cpp in Sources */,
+				0D5D004219FE985A00904845 /* CircleBody.cpp in Sources */,
 				0D11B44719F17AF800C2EFD3 /* Keyboard.cpp in Sources */,
 				0DD34C7319F54EB4009AEAF4 /* Animation.cpp in Sources */,
 				0DD34C8D19F5AE4B009AEAF4 /* Sound.cpp in Sources */,

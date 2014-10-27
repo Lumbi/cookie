@@ -10,6 +10,7 @@
 #include "Game.h"
 #include <cmath>
 #include "RectBody.h"
+#include "CircleBody.h"
 
 #pragma mark - Forward Declaration
 
@@ -81,70 +82,101 @@ void Cookie::Physics::update(Cookie::Game& game)
 
             if(nodeAPtr != nodeBPtr)
             {
-                //check collision
-                if(nodeAPtr->physics_body()->body_type() == RECTANGLE_BODY &&
-                   nodeBPtr->physics_body()->body_type() == RECTANGLE_BODY)
+                Cookie::PhysicsBodyType bodyAType = nodeAPtr->physics_body()->body_type();
+                Cookie::PhysicsBodyType bodyBType = nodeBPtr->physics_body()->body_type();
+                if(bodyAType == RECTANGLE_BODY)
                 {
-                    RectBody* nodeABody = static_cast<RectBody*>(nodeAPtr->physics_body());
-                    RectBody* nodeBBody = static_cast<RectBody*>(nodeBPtr->physics_body());
-                    
-                    Cookie::Rect rectA = nodeABody->rectangle().centered_rect() + nodeAPtr->position_world();
-                    Cookie::Rect rectB = nodeBBody->rectangle().centered_rect() + nodeBPtr->position_world();
-                    
-                    if(rectA.intersects(rectB))
+                    if(bodyBType == RECTANGLE_BODY)
                     {
-                        Cookie::Vector p;
-                        if(nodeABody->velocity().length_squared() >
-                           nodeBBody->velocity().length_squared())
-                        {
-                            p = rectA.penetration(rectB);
-                            (*nodeA)->translate_by(p.x, p.y);
-                        }else{
-                            p = rectB.penetration(rectA);
-                            (*nodeB)->translate_by(p.x, p.y);
-                        }
-                        
-                        const Cookie::Float massA = nodeABody->mass();
-                        const Cookie::Float massB = nodeBBody->mass();
-                        const Cookie::Vector velA = nodeABody->velocity();
-                        const Cookie::Vector velB = nodeBBody->velocity();
-                        
-                        // Resolve Collision
-                        if(p.x == 0) //Collision is along the X axis
-                        {
-                            if(nodeABody->dynamic())
-                            {
-                                Cookie::Vector newVelA = velA;
-                                newVelA.y = (nodeABody->restitution()*newVelA.y*(massA-massB) + 2*massB*velB.y)
-                                / (massA+massB);
-                                if(fabsf(newVelA.y) < 5) newVelA.y = 0;
-                                nodeABody->set_velocity(newVelA);
-                            }
-                            if(nodeBBody->dynamic())
-                            {
-                                Cookie::Vector newVelB = velB;
-                                newVelB.y = (newVelB.y*(massB-massA) + 2*massA*velA.y) / (massB+massA);
-                                if(fabsf(newVelB.y) < 5) newVelB.y = 0;
-                                nodeBBody->set_velocity(newVelB);
-                            }
-                        }else{ //Collision is along the Y axis
-                            if(nodeABody->dynamic())
-                            {
-                                Cookie::Vector newVelA = velA;
-                                newVelA.x = (nodeABody->restitution()*newVelA.x*(massA-massB) + 2*massB*velB.x)
-                                / (massA+massB);
-                                nodeABody->set_velocity(newVelA);
-                            }
-                            if(nodeBBody->dynamic())
-                            {
-                                Cookie::Vector newVelB = velB;
-                                newVelB.x = (newVelB.x*(massB-massA) + 2*massA*velA.x) / (massB+massA);
-                                nodeBBody->set_velocity(newVelB);
-                            }
-                        }
+                        resolve_collision(
+                                          *(static_cast<Cookie::RectBody*>(nodeAPtr->physics_body())),
+                                          *(static_cast<Cookie::RectBody*>(nodeBPtr->physics_body()))
+                                          );
+                    }else if(bodyAType == CIRCLE_BODY)
+                    {
+                        resolve_collision(
+                                          *(static_cast<Cookie::RectBody*>(nodeAPtr->physics_body())),
+                                          *(static_cast<Cookie::CircleBody*>(nodeBPtr->physics_body()))
+                                          );
+                    }
+                }else if (nodeAPtr->physics_body()->body_type() == CIRCLE_BODY)
+                {
+                    if(bodyAType == CIRCLE_BODY)
+                    {
+                        resolve_collision(
+                                          *(static_cast<Cookie::CircleBody*>(nodeAPtr->physics_body())),
+                                          *(static_cast<Cookie::CircleBody*>(nodeBPtr->physics_body()))
+                                          );
                     }
                 }
             }
         }
     }
+}
+
+void Cookie::Physics::resolve_collision(Cookie::RectBody& bodyA, Cookie::RectBody& bodyB)
+{
+    Cookie::Rect rectA = bodyA.rectangle().centered_rect() + bodyA.node()->position_world();
+    Cookie::Rect rectB = bodyB.rectangle().centered_rect() + bodyB.node()->position_world();
+    
+    if(rectA.intersects(rectB))
+    {
+        Cookie::Vector p;
+        if(bodyA.velocity().length_squared() >
+           bodyB.velocity().length_squared())
+        {
+            p = rectA.penetration(rectB);
+            bodyA.node()->translate_by(p.x, p.y);
+        }else{
+            p = rectB.penetration(rectA);
+            bodyB.node()->translate_by(p.x, p.y);
+        }
+        
+        const Cookie::Float massA = bodyA.mass();
+        const Cookie::Float massB = bodyB.mass();
+        const Cookie::Vector velA = bodyA.velocity();
+        const Cookie::Vector velB = bodyB.velocity();
+        
+        // Resolve Collision
+        if(p.x == 0) //Collision is along the X axis
+        {
+            if(bodyA.dynamic())
+            {
+                Cookie::Vector newVelA = velA;
+                newVelA.y = (bodyA.restitution()*newVelA.y*(massA-massB) + 2*massB*velB.y)
+                / (massA+massB);
+                if(fabsf(newVelA.y) < 5) newVelA.y = 0;
+                bodyA.set_velocity(newVelA);
+            }
+            if(bodyB.dynamic())
+            {
+                Cookie::Vector newVelB = velB;
+                newVelB.y = (newVelB.y*(massB-massA) + 2*massA*velA.y) / (massB+massA);
+                if(fabsf(newVelB.y) < 5) newVelB.y = 0;
+                bodyB.set_velocity(newVelB);
+            }
+        }else{ //Collision is along the Y axis
+            if(bodyA.dynamic())
+            {
+                Cookie::Vector newVelA = velA;
+                newVelA.x = (bodyA.restitution()*newVelA.x*(massA-massB) + 2*massB*velB.x)
+                / (massA+massB);
+                bodyA.set_velocity(newVelA);
+            }
+            if(bodyB.dynamic())
+            {
+                Cookie::Vector newVelB = velB;
+                newVelB.x = (newVelB.x*(massB-massA) + 2*massA*velA.x) / (massB+massA);
+                bodyB.set_velocity(newVelB);
+            }
+        }
+    }
+}
+
+void Cookie::Physics::resolve_collision(Cookie::RectBody& bodyA, Cookie::CircleBody& bodyB)
+{
+}
+
+void Cookie::Physics::resolve_collision(Cookie::CircleBody& bodyA, Cookie::CircleBody& bodyB)
+{
 }

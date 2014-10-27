@@ -11,10 +11,15 @@
 
 #include <stdio.h>
 #include "Vector.h"
+#include "Node.h"
 
 namespace Cookie
 {
     class Game;
+    
+    class RectBody;
+    class CircleBody;
+    
     class Physics
     {
     public:
@@ -22,6 +27,11 @@ namespace Cookie
         void set_gravity(Cookie::Vector);
         
         void update(Cookie::Game& game);
+        
+    private:
+        void resolve_collision(Cookie::RectBody& bodyA, Cookie::RectBody& bodyB);
+        void resolve_collision(Cookie::RectBody& bodyA, Cookie::CircleBody& bodyB);
+        void resolve_collision(Cookie::CircleBody& bodyA, Cookie::CircleBody& bodyB);
         
     private:
         Cookie::Vector gravity_;
