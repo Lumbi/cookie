@@ -10,53 +10,6 @@
 #include <SDL2/SDL.h>
 #include <cmath>
 
-//#define SDL_AUDIO_MASK_BITSIZE       (0xFF)
-//#define SDL_AUDIO_MASK_DATATYPE      (1<<8)
-//#define SDL_AUDIO_MASK_ENDIAN        (1<<12)
-//#define SDL_AUDIO_MASK_SIGNED        (1<<15)
-//#define SDL_AUDIO_BITSIZE(x)         (x & SDL_AUDIO_MASK_BITSIZE)
-//#define SDL_AUDIO_ISFLOAT(x)         (x & SDL_AUDIO_MASK_DATATYPE)
-//#define SDL_AUDIO_ISBIGENDIAN(x)     (x & SDL_AUDIO_MASK_ENDIAN)
-//#define SDL_AUDIO_ISSIGNED(x)        (x & SDL_AUDIO_MASK_SIGNED)
-//#define SDL_AUDIO_ISINT(x)           (!SDL_AUDIO_ISFLOAT(x))
-//#define SDL_AUDIO_ISLITTLEENDIAN(x)  (!SDL_AUDIO_ISBIGENDIAN(x))
-//#define SDL_AUDIO_ISUNSIGNED(x)      (!SDL_AUDIO_ISSIGNED(x))
-
-template<typename T>
-T clamp(const T& value, T min, T max)
-{
-    if(value < min)
-    {
-        return min;
-    }else if(value > max)
-    {
-        return max;
-    }
-    return value;
-}
-
-#warning TODO find max & min values for audio format?
-
-inline Uint8 mix_samples(Uint8 a, Uint8 b, const SDL_AudioFormat& f) {
-//    static Uint8 max = UINT8_MAX;
-//    static Uint8 min = 1;
-
-    return std::min(a+b, UINT8_MAX);
-    
-//    return
-//    // If both samples are negative, mixed signal must have an amplitude between the lesser of A and B, and the minimum permissible negative amplitude
-//    a < 0 && b < 0 ?
-//    (a + b) - ((a * b)/min) :
-//    
-//    // If both samples are positive, mixed signal must have an amplitude between the greater of A and B, and the maximum permissible positive amplitude
-//    ( a > 0 && b > 0 ?
-//     (a + b) - ((a * b)/max)
-//     
-//     // If samples are on opposite sides of the 0-crossing, mixed signal should reflect that samples cancel each other out somewhat
-//     :
-//     a + b);
-}
-
 Cookie::AudioMixFilter::AudioMixFilter(SDL_AudioSpec audio_spec) : Cookie::AudioFilter(audio_spec)
 {
     acc_buffer_ = NULL;

@@ -7,20 +7,17 @@
 //
 
 #include "Point.h"
-#include <glm/glm.hpp>
-#include <glm/gtx/matrix_transform_2d.hpp>
 
 Cookie::Point Cookie::Point::rotate_by(Cookie::Float degrees) const
 {
-    auto rot = glm::rotate(glm::mat3x3(),(float)degrees);
-    auto result = rot * glm::vec3(x,y,1);
-    return { result[0] , result[1] };
+#warning TODO: implement rotation
+    return { 0, 0 };
 }
 
 Cookie::Point Cookie::Point::rotate_to(Cookie::Float degrees) const
 {
-    float angle = glm::degrees(glm::atan(y, x));
-    return rotate_by(degrees-angle);
+    #warning TODO: implement rotation
+    return { 0,0 };
 }
 
 Cookie::Point& Cookie::Point::operator+=(const Cookie::Point& rhs)

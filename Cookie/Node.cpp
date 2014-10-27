@@ -49,7 +49,8 @@ Cookie::Point Cookie::Node::position_world() const
     if(parent_ != NULL)
     {
         pos_world = parent_->position_world();
-        pos_world = pos_world + position_.rotate_by(parent_->rotation_);
+#warning TODO: take care of rotation here
+        pos_world = pos_world + position_;
     }
     return pos_world;
 }
