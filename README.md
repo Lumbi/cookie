@@ -15,16 +15,17 @@ Done:
 - AABB collisions
 - Input - Keyboard
 - Audio
+- Circle-to-Rect / Circle-to-Circle collisions
 
 Todo:
 
-- Circle-to-Rect / Circle-to-Circle collisions
 - Collision callbacks
 - Signal/Slots
 - Input - Game controllers
 - Scene transition support
 - Tile-based scene support
 - Audio fading
+- Circle-to-Rect collision resolution
 - I/O & Persistency
 - Android/iOS support
 - Optimizations
