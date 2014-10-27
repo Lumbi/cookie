@@ -7,3 +7,27 @@
 //
 
 #include "CircleBody.h"
+
+Cookie::CircleBody::CircleBody()
+{
+}
+
+Cookie::CircleBody::~CircleBody()
+{
+    
+}
+
+Cookie::Circle Cookie::CircleBody::circle() const
+{
+    return circle_;
+}
+
+void Cookie::CircleBody::set_circle(Cookie::Circle circle)
+{
+    circle_ = circle;
+}
+
+void Cookie::CircleBody::set_radius(Cookie::Float radius)
+{
+    circle_.radius = radius;
+}

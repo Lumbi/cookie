@@ -12,11 +12,24 @@
 
 #include <stdio.h>
 #include "PhysicsBody.h"
+#include "Circle.h"
 
 namespace Cookie
 {
     class CircleBody : public PhysicsBody
     {
+    public:
+        CircleBody();
+        ~CircleBody();
+        PhysicsBodyType body_type() const {return CIRCLE_BODY; };
+        
+        Cookie::Circle circle() const;
+        void set_circle(Cookie::Circle);
+        
+        void set_radius(Cookie::Float);
+        
+    private:
+        Cookie::Circle circle_;
     };
     
 }

@@ -94,3 +94,8 @@ Cookie::Vector Cookie::operator*(const Cookie::Float& lhs, const Cookie::Vector&
 {
     return { lhs * rhs.x, lhs * rhs.y };
 }
+
+Cookie::Vector Cookie::operator/(const Cookie::Vector& lhs, const Cookie::Float& rhs)
+{
+    return { lhs.x / rhs, lhs.y / rhs };
+}

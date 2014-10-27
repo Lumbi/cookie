@@ -145,14 +145,13 @@ void Cookie::Physics::resolve_collision(Cookie::RectBody& bodyA, Cookie::RectBod
                 Cookie::Vector newVelA = velA;
                 newVelA.y = (bodyA.restitution()*newVelA.y*(massA-massB) + 2*massB*velB.y)
                 / (massA+massB);
-                if(fabsf(newVelA.y) < 5) newVelA.y = 0;
                 bodyA.set_velocity(newVelA);
             }
             if(bodyB.dynamic())
             {
                 Cookie::Vector newVelB = velB;
-                newVelB.y = (newVelB.y*(massB-massA) + 2*massA*velA.y) / (massB+massA);
-                if(fabsf(newVelB.y) < 5) newVelB.y = 0;
+                newVelB.y = (bodyB.restitution()*newVelB.y*(massB-massA) + 2*massA*velA.y)
+                / (massB+massA);
                 bodyB.set_velocity(newVelB);
             }
         }else{ //Collision is along the Y axis
@@ -166,7 +165,8 @@ void Cookie::Physics::resolve_collision(Cookie::RectBody& bodyA, Cookie::RectBod
             if(bodyB.dynamic())
             {
                 Cookie::Vector newVelB = velB;
-                newVelB.x = (newVelB.x*(massB-massA) + 2*massA*velA.x) / (massB+massA);
+                newVelB.x = (bodyB.restitution()*newVelB.x*(massB-massA) + 2*massA*velA.x)
+                / (massB+massA);
                 bodyB.set_velocity(newVelB);
             }
         }
@@ -179,4 +179,43 @@ void Cookie::Physics::resolve_collision(Cookie::RectBody& bodyA, Cookie::CircleB
 
 void Cookie::Physics::resolve_collision(Cookie::CircleBody& bodyA, Cookie::CircleBody& bodyB)
 {
+    Cookie::Circle circleA = bodyA.circle() + bodyA.node()->position_world();
+    Cookie::Circle circleB = bodyB.circle() + bodyB.node()->position_world();
+    if(circleA.intersects(circleB))
+    {
+        Cookie::Vector p;
+        if(bodyA.velocity().length_squared() >
+           bodyB.velocity().length_squared())
+        {
+            p = circleA.penetration(circleB);
+            bodyA.node()->translate_by(p.x, p.y);
+        }else{
+            p = circleB.penetration(circleA);
+            bodyB.node()->translate_by(p.x, p.y);
+        }
+        
+        const Cookie::Float massA = bodyA.mass();
+        const Cookie::Float massB = bodyB.mass();
+        const Cookie::Vector velA = bodyA.velocity();
+        const Cookie::Vector velB = bodyB.velocity();
+        
+        if(bodyA.dynamic())
+        {
+            Cookie::Vector newVel;
+            newVel.x = (bodyA.restitution()*velA.x*(massA-massB) + 2*massB*velB.x)
+            / (massA+massB);
+            newVel.y = (bodyA.restitution()*velA.x*(massA-massB) + 2*massB*velB.x)
+            / (massA+massB);
+            bodyA.set_velocity(newVel);
+        }
+        if(bodyB.dynamic())
+        {
+            Cookie::Vector newVel;
+            newVel.x = (bodyB.restitution()*velB.x*(massB-massA) + 2*massA*velA.x)
+            / (massA+massB);
+            newVel.y = (bodyB.restitution()*velB.x*(massB-massA) + 2*massA*velA.x)
+            / (massA+massB);
+            bodyA.set_velocity(newVel);
+        }
+    }
 }

@@ -15,6 +15,7 @@
 #include "RectBody.h"
 #include "Texture.h"
 #include "AnimBlock.h"
+#include "CircleBody.h"
 
 Cookie::Game::Game()
 {
@@ -108,10 +109,16 @@ void Cookie::Game::begin()
     rect_body->set_rectangle(anim->frame());
 //    rect_body->set_rectangle({0,0,static_cast<Float>(texture->width()), static_cast<Float>(texture->height())});
     rect_body->set_dynamic(true);
-    
     rect_body->set_mass(10);
-    rect_body->set_restitution(0);
+    rect_body->set_restitution(0.2);
     test->set_physics_body(rect_body);
+    
+//    CircleBody* circle_body = new CircleBody();
+//    circle_body->set_radius(anim->frame().w/2.0f);
+//    circle_body->set_dynamic(true);
+//    circle_body->set_mass(10);
+//    circle_body->set_restitution(0);
+//    test->set_physics_body(circle_body);
     
     Node* platform = new Node();
     platform->translate_by(0, 200);
@@ -126,6 +133,11 @@ void Cookie::Game::begin()
     plat_body->set_rectangle({0,0,static_cast<Float>(plat_sprite->width()),static_cast<Float>(plat_sprite->height())});
     plat_body->set_mass(100);
     platform->set_physics_body(plat_body);
+    
+//    CircleBody* plat_body = new CircleBody();
+//    plat_body->set_radius(100);
+//    plat_body->set_mass(10);
+//    platform->set_physics_body(plat_body);
     
     world_->add_child(test);
     world_->add_child(platform);

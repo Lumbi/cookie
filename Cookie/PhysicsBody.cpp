@@ -8,6 +8,7 @@
 
 #include "PhysicsBody.h"
 #include "Node.h"
+#include <cmath>
 
 #pragma mark - Constructors
 
@@ -80,6 +81,8 @@ const Cookie::Vector& Cookie::PhysicsBody::velocity() const
 
 void Cookie::PhysicsBody::set_velocity(Cookie::Vector velocity)
 {
+    if(fabsf(velocity.y) < 5) velocity.y = 0;
+    if(fabsf(velocity.y) < 5) velocity.y = 0;
     velocity_ = velocity;
 }
 

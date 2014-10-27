@@ -21,6 +21,8 @@
 		0D1A2D9119F204BC00BF0333 /* RectBody.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D1A2D8F19F204BC00BF0333 /* RectBody.h */; };
 		0D5D004219FE985A00904845 /* CircleBody.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D5D004019FE985A00904845 /* CircleBody.cpp */; };
 		0D5D004319FE985A00904845 /* CircleBody.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D5D004119FE985A00904845 /* CircleBody.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0D5D004619FEB0D900904845 /* Circle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D5D004419FEB0D900904845 /* Circle.cpp */; };
+		0D5D004719FEB0D900904845 /* Circle.h in Headers */ = {isa = PBXBuildFile; fileRef = 0D5D004519FEB0D900904845 /* Circle.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0DC42A7C19ECC0050049C151 /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DC42A7A19ECC0050049C151 /* Renderer.cpp */; };
 		0DC42A7D19ECC0050049C151 /* Renderer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DC42A7B19ECC0050049C151 /* Renderer.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0DC42A8019ECC1170049C151 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DC42A7E19ECC1170049C151 /* Texture.cpp */; };
@@ -103,6 +105,8 @@
 		0D1A2D8F19F204BC00BF0333 /* RectBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RectBody.h; sourceTree = "<group>"; };
 		0D5D004019FE985A00904845 /* CircleBody.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CircleBody.cpp; sourceTree = "<group>"; };
 		0D5D004119FE985A00904845 /* CircleBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleBody.h; sourceTree = "<group>"; };
+		0D5D004419FEB0D900904845 /* Circle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Circle.cpp; sourceTree = "<group>"; };
+		0D5D004519FEB0D900904845 /* Circle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Circle.h; sourceTree = "<group>"; };
 		0DC42A7A19ECC0050049C151 /* Renderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Renderer.cpp; sourceTree = "<group>"; };
 		0DC42A7B19ECC0050049C151 /* Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
 		0DC42A7E19ECC1170049C151 /* Texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Texture.cpp; sourceTree = "<group>"; };
@@ -197,6 +201,8 @@
 				0DC42AA019EE2C140049C151 /* SDL_Conversion.h */,
 				0DC42AB319EF3AED0049C151 /* Vector.cpp */,
 				0DC42AB419EF3AED0049C151 /* Vector.h */,
+				0D5D004419FEB0D900904845 /* Circle.cpp */,
+				0D5D004519FEB0D900904845 /* Circle.h */,
 			);
 			name = Geometry;
 			sourceTree = "<group>";
@@ -396,6 +402,7 @@
 				0DD34C8A19F5AE41009AEAF4 /* Audio.h in Headers */,
 				0D11B44819F17AF800C2EFD3 /* Keyboard.h in Headers */,
 				0DCD507919EB687700EF27F7 /* CookiePriv.h in Headers */,
+				0D5D004719FEB0D900904845 /* Circle.h in Headers */,
 				0DC42A9119EE19FB0049C151 /* Long.h in Headers */,
 				0D5D004319FE985A00904845 /* CircleBody.h in Headers */,
 				0DC42A9A19EE224D0049C151 /* DrawBlock.h in Headers */,
@@ -480,6 +487,7 @@
 				0DC42ACA19F016790049C151 /* Camera.cpp in Sources */,
 				0DC42A8019ECC1170049C151 /* Texture.cpp in Sources */,
 				0DCD509D19EB799C00EF27F7 /* Float.cpp in Sources */,
+				0D5D004619FEB0D900904845 /* Circle.cpp in Sources */,
 				0DD34C7E19F574C8009AEAF4 /* RenderAnimTask.cpp in Sources */,
 				0DCD508719EB6ACA00EF27F7 /* Point.cpp in Sources */,
 				0DCD509119EB724E00EF27F7 /* Int.cpp in Sources */,

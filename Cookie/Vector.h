@@ -40,6 +40,7 @@ namespace Cookie
     Cookie::Vector operator-(const Cookie::Vector& lhs, const Cookie::Vector& rhs);
     Cookie::Vector operator*(const Cookie::Vector& lhs, const Cookie::Float& rhs);
     Cookie::Vector operator*(const Cookie::Float& lhs, const Cookie::Vector& rhs);
+    Cookie::Vector operator/(const Cookie::Vector& lhs, const Cookie::Float& rhs);
 }
 
 #endif /* defined(__Cookie__Vector__) */
