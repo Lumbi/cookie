@@ -1,4 +1,5 @@
-Cookie (under dev!)
+
+Cookie 2D Game Framework (under dev!)
 ======
 
 This is a very modest 2D game framework built on top of SDL (http://www.libsdl.org/).
@@ -13,16 +14,17 @@ Done:
 - Basic physics
 - AABB collisions
 - Input - Keyboard
+- Audio
 
 Todo:
 
-- Audio
-- Signal/Slots
-- Input - Game controllers
 - Circle-to-Rect / Circle-to-Circle collisions
 - Collision callbacks
+- Signal/Slots
+- Input - Game controllers
 - Scene transition support
 - Tile-based scene support
+- Audio fading
 - I/O & Persistency
 - Android/iOS support
 - Optimizations
