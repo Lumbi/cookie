@@ -17,6 +17,8 @@
 
 namespace Cookie
 {
+    typedef struct Rect Rect;
+    
     typedef struct Circle
     {
         Cookie::Point center;
@@ -26,6 +28,7 @@ namespace Cookie
         
         Cookie::Bool intersects(const Cookie::Circle&) const;
         Cookie::Vector penetration(const Cookie::Circle&) const;
+        Cookie::Vector penetration(const Cookie::Rect&) const;
         
     }Circle;
     

@@ -10,11 +10,11 @@
 
 Cookie::CircleBody::CircleBody()
 {
+    circle_ = {{0,0},0};
 }
 
 Cookie::CircleBody::~CircleBody()
 {
-    
 }
 
 Cookie::Circle Cookie::CircleBody::circle() const

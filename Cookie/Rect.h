@@ -19,6 +19,8 @@
 
 namespace Cookie
 {
+    typedef struct Circle Circle;
+    
     typedef struct Rect
     {
         Cookie::Float x;
@@ -29,7 +31,9 @@ namespace Cookie
         Cookie::Rect& operator+=(const Cookie::Point& rhs);
         
         Cookie::Bool intersects(const Cookie::Rect&) const;
+        Cookie::Bool intersects(const Cookie::Circle&) const;
         Cookie::Vector penetration(const Cookie::Rect&) const;
+        Cookie::Vector penetration(const Cookie::Circle&) const;
         Cookie::Rect centered_rect() const;
         
     } Rect;

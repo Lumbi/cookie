@@ -105,20 +105,20 @@ void Cookie::Game::begin()
     JumpBlock* mov_block = new JumpBlock();
     test->add_block(mov_block);
     
-    RectBody* rect_body = new RectBody();
-    rect_body->set_rectangle(anim->frame());
-//    rect_body->set_rectangle({0,0,static_cast<Float>(texture->width()), static_cast<Float>(texture->height())});
-    rect_body->set_dynamic(true);
-    rect_body->set_mass(10);
-    rect_body->set_restitution(0.2);
-    test->set_physics_body(rect_body);
+//    RectBody* rect_body = new RectBody();
+//    rect_body->set_rectangle(anim->frame());
+////    rect_body->set_rectangle({0,0,static_cast<Float>(texture->width()), static_cast<Float>(texture->height())});
+//    rect_body->set_dynamic(true);
+//    rect_body->set_mass(10);
+//    rect_body->set_restitution(0.2);
+//    test->set_physics_body(rect_body);
     
-//    CircleBody* circle_body = new CircleBody();
-//    circle_body->set_radius(anim->frame().w/2.0f);
-//    circle_body->set_dynamic(true);
-//    circle_body->set_mass(10);
-//    circle_body->set_restitution(0);
-//    test->set_physics_body(circle_body);
+    CircleBody* circle_body = new CircleBody();
+    circle_body->set_radius(anim->frame().h/2.0f);
+    circle_body->set_dynamic(true);
+    circle_body->set_mass(10);
+    circle_body->set_restitution(0);
+    test->set_physics_body(circle_body);
     
     Node* platform = new Node();
     platform->translate_by(0, 200);

@@ -99,13 +99,19 @@ void Cookie::Physics::update(Cookie::Game& game)
                                           *(static_cast<Cookie::CircleBody*>(nodeBPtr->physics_body()))
                                           );
                     }
-                }else if (nodeAPtr->physics_body()->body_type() == CIRCLE_BODY)
+                }else if (bodyAType == CIRCLE_BODY)
                 {
-                    if(bodyAType == CIRCLE_BODY)
+                    if(bodyBType == CIRCLE_BODY)
                     {
                         resolve_collision(
                                           *(static_cast<Cookie::CircleBody*>(nodeAPtr->physics_body())),
                                           *(static_cast<Cookie::CircleBody*>(nodeBPtr->physics_body()))
+                                          );
+                    }else if(bodyBType == RECTANGLE_BODY)
+                    {
+                        resolve_collision(
+                                          *(static_cast<Cookie::RectBody*>(nodeBPtr->physics_body())),
+                                          *(static_cast<Cookie::CircleBody*>(nodeAPtr->physics_body()))
                                           );
                     }
                 }
@@ -175,6 +181,23 @@ void Cookie::Physics::resolve_collision(Cookie::RectBody& bodyA, Cookie::RectBod
 
 void Cookie::Physics::resolve_collision(Cookie::RectBody& bodyA, Cookie::CircleBody& bodyB)
 {
+    Cookie::Rect rect = bodyA.rectangle().centered_rect() + bodyA.node()->position_world();
+    Cookie::Circle circle = bodyB.circle() + bodyB.node()->position_world();
+    
+    if(rect.intersects(circle))
+    {
+        Cookie::Vector p;
+        if(bodyA.velocity().length_squared() >
+           bodyB.velocity().length_squared())
+        {
+            p = rect.penetration(circle);
+            bodyA.node()->translate_by(p.x, p.y);
+        }else{
+            p = circle.penetration(rect);
+            bodyB.node()->translate_by(p.x, p.y);
+        }
+#warning TODO: physics resolution here
+    }
 }
 
 void Cookie::Physics::resolve_collision(Cookie::CircleBody& bodyA, Cookie::CircleBody& bodyB)
