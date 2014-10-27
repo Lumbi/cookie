@@ -52,6 +52,7 @@ namespace Cookie
         Uint32 buffer_pos_;
         Cookie::Int loop_;
         Cookie::Float volume_;
+        SDL_mutex* sound_mutex_;
     };
 }
 

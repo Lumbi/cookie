@@ -16,7 +16,8 @@
 namespace Cookie
 {
     static const Uint32 kAudioBufferLength = 32768;
-    
+ 
+    class AudioPipeline;
     class Sound;
     class Audio
     {
@@ -31,11 +32,13 @@ namespace Cookie
         
     private:
         friend int audio_queue_thread_func (void *);
+        friend void audio_pipeline_callback(const Uint8* const data, Uint32 len, void* userdata);
         
     private:
+        Cookie::AudioPipeline* audio_pipeline_;
         SDL_AudioSpec device_audio_spec_;
         std::vector<Cookie::Sound*> sound_queue_;
-
+        SDL_AudioDeviceID device_;
     };
 }
 

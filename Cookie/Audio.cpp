@@ -18,24 +18,12 @@
 Cookie::Sound* test_sound;
 Cookie::Sound* test_sound2;
 
-SDL_AudioDeviceID device;
-
-static SDL_semaphore* audio_device_buffer_semaphore = NULL;
-
-Uint8** audio_device_buffers = NULL;
-Uint32 audio_device_buffer_len;
-Uint8* audio_device_write_buffer = NULL;
-Uint8* audio_device_read_buffer = NULL;
-
-static SDL_semaphore* audio_queue_semaphore = NULL;
-
+SDL_semaphore* audio_queue_semaphore;
 SDL_Thread* audio_queue_thread = NULL;
+
 int Cookie::audio_queue_thread_func (void * udata);
 
-Cookie::AudioPipeline* audio_pipeline_ = NULL;
-void audio_pipeline_callback(const Uint8* const data, Uint32 len);
-
-void audio_callback(void *udata, Uint8 *stream, int len);
+void Cookie::audio_pipeline_callback(const Uint8* const data, Uint32 len, void* userdata);
 
 #pragma mark - Ctr & Dstrc
 
@@ -45,16 +33,12 @@ Cookie::Audio::Audio()
 
 Cookie::Audio::~Audio()
 {
-    SDL_CloseAudioDevice(device);
+    SDL_CloseAudioDevice(device_);
     SDL_DetachThread(audio_queue_thread);
     
-    for(int i = 0; i < audio_device_buffer_len; ++i)
-    {
-        delete audio_device_buffers[i];
-    }
     delete audio_pipeline_;
+    
     SDL_DestroySemaphore(audio_queue_semaphore);
-    SDL_DestroySemaphore(audio_device_buffer_semaphore);
 }
 
 void Cookie::Audio::init()
@@ -68,35 +52,30 @@ void Cookie::Audio::init()
     want.samples = 4096;
     want.userdata = this;
     
-    device = SDL_OpenAudioDevice(NULL, 0, &want, &device_audio_spec_, SDL_AUDIO_ALLOW_FORMAT_CHANGE);
-    if (device == 0) {
+    device_ = SDL_OpenAudioDevice(NULL, 0, &want, &device_audio_spec_, SDL_AUDIO_ALLOW_FORMAT_CHANGE);
+    if (device_ == 0) {
         printf("Failed to open audio: %s\n", SDL_GetError());
     } else {
         if (device_audio_spec_.format != want.format)
             printf("We didn't get Float32 audio format.\n");
         
         audio_pipeline_ = new Cookie::AudioPipeline(device_audio_spec_, audio_pipeline_callback);
+        audio_pipeline_->userdata = this;
         
-        SDL_PauseAudioDevice(device, 0);
+        SDL_PauseAudioDevice(device_, 0);
 
         audio_queue_semaphore = SDL_CreateSemaphore(1);
-        audio_device_buffer_semaphore = SDL_CreateSemaphore(1);
         audio_queue_thread = SDL_CreateThread(Cookie::audio_queue_thread_func, "CookieAudioQueueThread", this);
         
         test_sound = new Cookie::Sound(this);
         test_sound->open(std::string("death01.wav"));
-        test_sound->loop_ = 3;
-        test_sound->is_playing_ = true;
         test_sound->volume_ = 0.5f;
+        test_sound->play(3);
         
         test_sound2 = new Cookie::Sound(this);
-        test_sound2->open(std::string("game_start.wav"));
-        test_sound2->is_playing_ = true;
-        test_sound2->loop_ = 10;
+        test_sound2->open(std::string("song.wav"));
         test_sound2->volume_ = 0.5f;
-        
-        queue(test_sound);
-        queue(test_sound2);
+        test_sound2->play(10);
     }
 }
 
@@ -110,16 +89,13 @@ SDL_AudioSpec Cookie::Audio::get_audio_spec() const
 void Cookie::Audio::queue(Cookie::Sound* sound)
 {
     SDL_assert(sound->is_playing() && sound->loop_ > 0);
-//    printf("1 sem wait...\n");
     SDL_SemWait(audio_queue_semaphore);
-//    printf("1 sem get!\n");
     auto found = std::find(sound_queue_.begin(), sound_queue_.end(), sound);
     if(found == sound_queue_.end())
     {
         sound_queue_.push_back(sound);
     }
     SDL_SemPost(audio_queue_semaphore);
-//    printf("1 sem released!\n");
 }
 
 int Cookie::audio_queue_thread_func (void * udata)
@@ -134,13 +110,17 @@ int Cookie::audio_queue_thread_func (void * udata)
             for(auto it = audio->sound_queue_.begin(); it != audio->sound_queue_.end(); ++it)
             {
                 sound = dynamic_cast<Cookie::Sound*>(*it);
+                SDL_LockMutex(sound->sound_mutex_);
                 if(sound != NULL && sound->is_playing())
                 {
                     Uint32 len = std::min(sound->buffer_length_-sound->buffer_pos_,
                                           (Uint32)audio->device_audio_spec_.samples);
-                    Cookie::Int channel = sound->channel_ != 0 ? sound->channel_ : audio_pipeline_->get_next_channel();
-                    audio_pipeline_->set_volume(sound->volume_, channel);
-                    audio_pipeline_->push(sound->buffer_+sound->buffer_pos_, len, channel);
+                    Cookie::Int channel = sound->channel_ > 0 ?
+                    sound->channel_ :
+                    audio->audio_pipeline_->get_next_channel();
+                    
+                    audio->audio_pipeline_->set_volume(sound->volume_, channel);
+                    audio->audio_pipeline_->push(sound->buffer_+sound->buffer_pos_, len, channel);
                     sound->buffer_pos_ += len;
                     if(sound->buffer_pos_ >= sound->buffer_length_)
                     {
@@ -148,13 +128,16 @@ int Cookie::audio_queue_thread_func (void * udata)
                         sound->loop_--;
                         if(sound->loop_ <= 0)
                         {
+                            SDL_UnlockMutex(sound->sound_mutex_);
                             sound->stop();
+                            SDL_LockMutex(sound->sound_mutex_);
                             sounds_to_remove.push_back(sound);
                         }
                     }
                 }
+                SDL_UnlockMutex(sound->sound_mutex_);
             }
-            audio_pipeline_->flush();
+            audio->audio_pipeline_->flush();
             for(auto it = sounds_to_remove.begin(); it != sounds_to_remove.end(); ++it)
             {
                 audio->sound_queue_.erase(std::find(audio->sound_queue_.begin(), audio->sound_queue_.end(), *it));
@@ -172,22 +155,14 @@ int Cookie::audio_queue_thread_func (void * udata)
 
 #pragma mark - Audio Pipeline Callback
 
-void audio_pipeline_callback(const Uint8* const data, Uint32 len)
+void Cookie::audio_pipeline_callback(const Uint8* const data, Uint32 len, void* userdata)
 {
+    static Cookie::Audio* audio = static_cast<Cookie::Audio*>(userdata);
+    
 //    printf("Pipeline callback len=%d \n", len);
     SDL_assert(len != 0);
     
 //    for(int i = 0; i < 16; ++i) { printf("%d,",data[i]); } printf("\n");
     
-    SDL_QueueAudio(device, data, len);
-}
-
-#pragma mark - Audio Device Callback
-
-template<typename T>
-inline T* memcat(T* combined, T* buff1, int len1, T* buff2, int len2)
-{
-    memcpy(combined, buff1, len1);
-    memcpy(combined + len1, buff2, len2);
-    return combined;
+    SDL_QueueAudio(audio->device_, data, len);
 }

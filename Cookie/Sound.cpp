@@ -14,6 +14,15 @@ Cookie::Sound::Sound(Cookie::Audio* audio)
     volume_ = 1.0f;
     buffer_length_ = 0;
     buffer_pos_ = 0;
+    is_playing_ = false;
+    channel_ = 0;
+    sound_mutex_ = SDL_CreateMutex();
+}
+
+Cookie::Sound::~Sound()
+{
+    delete buffer_;
+    SDL_DestroyMutex(sound_mutex_);
 }
 
 Cookie::Bool Cookie::Sound::open(std::string path)
@@ -35,8 +44,13 @@ Cookie::Bool Cookie::Sound::open(std::string path)
         SDL_memcpy(cvt.buf, wav_buffer, wav_length);
         SDL_ConvertAudio(&cvt);
         
-        buffer_ = cvt.buf;
+        SDL_LockMutex(sound_mutex_);
+        
+        buffer_ = new Uint8[cvt.len * cvt.len_mult];
+        SDL_memcpy(buffer_, cvt.buf, cvt.len * cvt.len_mult);
         buffer_length_ = cvt.len * cvt.len_mult;
+        
+        SDL_UnlockMutex(sound_mutex_);
         
         SDL_FreeWAV(wav_buffer);
         return true;
@@ -44,24 +58,36 @@ Cookie::Bool Cookie::Sound::open(std::string path)
     return false;
 }
 
-Cookie::Sound::~Sound()
-{
-    
-}
-
 void Cookie::Sound::play(Cookie::Int loop)
 {
+    SDL_assert(loop > 0);
     
+    SDL_LockMutex(sound_mutex_);
+    if(!is_playing_){
+        is_playing_ = true;
+        loop_ = loop;
+        audio_->queue(this);
+    }
+    SDL_UnlockMutex(sound_mutex_);
+}
+
+void Cookie::Sound::pause()
+{
+    SDL_LockMutex(sound_mutex_);
+    is_playing_ = false;
+    SDL_UnlockMutex(sound_mutex_);
+}
+
+void Cookie::Sound::stop()
+{
+    SDL_LockMutex(sound_mutex_);
+    is_playing_ = false;
+    buffer_pos_ = 0;
+    loop_ = 0;
+    SDL_UnlockMutex(sound_mutex_);
 }
 
 Cookie::Bool Cookie::Sound::is_playing() const
 {
     return is_playing_;
-}
-
-void Cookie::Sound::stop()
-{
-    is_playing_ = false;
-    buffer_pos_ = 0;
-    loop_ = 0;
 }

@@ -10,6 +10,7 @@
 #define __Cookie__AudioPipeline__
 
 #include <stdio.h>
+#include <vector>
 #include <queue>
 #include "AudioFilter.h"
 #include "AudioVolumeFilter.h"
@@ -26,7 +27,7 @@ namespace Cookie
         Cookie::Int channel;
     } AudioBuffer;
     
-    typedef void (*AudioPipelineCallback)(const Uint8* const data, Uint32 len);
+    typedef void (*AudioPipelineCallback)(const Uint8* const data, Uint32 len, void* userdata);
     
     class AudioPipeline : private AudioFilter
     {
@@ -44,13 +45,15 @@ namespace Cookie
         
     private:
         virtual void process(const Uint8* const data, Uint32 len);
-
+        
+    public:
+        void* userdata;
         
     private:
         Cookie::AudioPipelineCallback callback_;
-        Cookie::AudioVolumeFilter* channel1_;
         Cookie::AudioMixFilter* mixer_;
         Cookie::AudioVolumeFilter* master_volume_;
+        std::vector<Cookie::AudioVolumeFilter*> channels_;
         std::deque<Cookie::AudioBuffer> audio_buffers_;
     };
 }

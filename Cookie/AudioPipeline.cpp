@@ -8,38 +8,42 @@
 
 #include "AudioPipeline.h"
 
+const int kChannelsSize = 6;
+
 Cookie::AudioPipeline::AudioPipeline(SDL_AudioSpec audio_spec,
                                      Cookie::AudioPipelineCallback callback) : Cookie::AudioFilter(audio_spec)
 {
     callback_ = callback;
     
-    channel1_ = new Cookie::AudioVolumeFilter(audio_spec);
     mixer_ = new Cookie::AudioMixFilter(audio_spec);
     master_volume_ = new Cookie::AudioVolumeFilter(audio_spec);
     
-    channel1_->set_output(mixer_);
-    
+    for(int i = 0; i < kChannelsSize; ++i)
+    {
+        Cookie::AudioVolumeFilter* channel;
+        channel = new Cookie::AudioVolumeFilter(audio_spec);
+        channel->set_output(mixer_);
+        channels_.push_back(channel);
+    }
+
     mixer_->set_output(master_volume_);
     master_volume_->set_output(this);
 }
 
 Cookie::AudioPipeline::~AudioPipeline()
 {
-    delete channel1_;
+    for(auto it = channels_.begin(); it != channels_.end(); ++it)
+    {
+        delete *it;
+    }
     delete mixer_;
 }
 
 void Cookie::AudioPipeline::push(Uint8* data, Uint32 len, Cookie::Int channel)
 {
-    static Cookie::Int last_channel = 0;
-    static const Cookie::Int channel_size = 1;
-    
-#warning TODO Support more channels
-    
-    if(channel == 0)
+    if(channel < 0 || channel > kChannelsSize)
     {
-        //        channel = (last_channel+1) % channel_size;
-        channel = 1;
+        channel = get_next_channel();
     }
     
     Cookie::AudioBuffer buffer;
@@ -48,8 +52,6 @@ void Cookie::AudioPipeline::push(Uint8* data, Uint32 len, Cookie::Int channel)
     buffer.channel = channel;
     
     audio_buffers_.push_back(buffer);
-    
-    last_channel = channel;
 }
 
 void Cookie::AudioPipeline::flush()
@@ -57,12 +59,9 @@ void Cookie::AudioPipeline::flush()
     while (!this->audio_buffers_.empty())
     {
         const Cookie::AudioBuffer& buffer = this->audio_buffers_.front();
-        switch (buffer.channel) {
-            case 1:
-                this->channel1_->process(buffer.data, buffer.len);
-                break;
-            default:
-                break;
+        if(buffer.channel > 0 && buffer.channel <= kChannelsSize)
+        {
+            channels_[buffer.channel-1]->process(buffer.data, buffer.len);
         }
         this->audio_buffers_.pop_front();
     }
@@ -72,28 +71,24 @@ void Cookie::AudioPipeline::flush()
 
 Cookie::Int Cookie::AudioPipeline::get_next_channel()
 {
-    static const int channel_count = 1;
     static int next_channel = 0;
-#warning TODO
-    return 1;
+    ++next_channel;
+    return next_channel % (kChannelsSize-1) + 1;
 }
 
 void Cookie::AudioPipeline::process(const Uint8* const data, Uint32 len)
 {
     if(len != 0)
     {
-        callback_(data, len);
+        callback_(data, len, userdata);
     }
 }
 
 void Cookie::AudioPipeline::set_volume(Cookie::Float vol, Cookie::Int channel)
 {
-    switch (channel) {
-        case 1:
-            channel1_->set_volume(vol);
-            break;
-        default:
-            master_volume_->set_volume(vol);
-            break;
+    if(channel > 0 && channel <= kChannelsSize){
+        channels_[channel-1]->set_volume(vol);
+    }else{
+        master_volume_->set_volume(vol);
     }
 }
