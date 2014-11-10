@@ -16,6 +16,17 @@
 
 void get_all_nodes_with_physics_body(std::vector<Cookie::Node*>& vector, Cookie::Node* node);
 
+#pragma mark - Ctor & Dtor
+
+Cookie::Physics::Physics()
+{
+    
+}
+
+Cookie::Physics::~Physics()
+{
+}
+
 #pragma mark - Accessors & Mutators
 
 const Cookie::Vector& Cookie::Physics::gravity() const
@@ -77,50 +88,63 @@ void Cookie::Physics::update(Cookie::Game& game)
     {
         for(auto nodeB = nodes.begin(); nodeB != nodes.end(); ++nodeB)
         {
-            Cookie::Node* nodeAPtr = *nodeA;
-            Cookie::Node* nodeBPtr = *nodeB;
-
-            if(nodeAPtr != nodeBPtr)
+            if(resolve_collision(*nodeA, *nodeB))
             {
-                Cookie::PhysicsBodyType bodyAType = nodeAPtr->physics_body()->body_type();
-                Cookie::PhysicsBodyType bodyBType = nodeBPtr->physics_body()->body_type();
-                if(bodyAType == RECTANGLE_BODY)
-                {
-                    if(bodyBType == RECTANGLE_BODY)
-                    {
-                        resolve_collision(
-                                          *(static_cast<Cookie::RectBody*>(nodeAPtr->physics_body())),
-                                          *(static_cast<Cookie::RectBody*>(nodeBPtr->physics_body()))
-                                          );
-                    }else if(bodyAType == CIRCLE_BODY)
-                    {
-                        resolve_collision(
-                                          *(static_cast<Cookie::RectBody*>(nodeAPtr->physics_body())),
-                                          *(static_cast<Cookie::CircleBody*>(nodeBPtr->physics_body()))
-                                          );
-                    }
-                }else if (bodyAType == CIRCLE_BODY)
-                {
-                    if(bodyBType == CIRCLE_BODY)
-                    {
-                        resolve_collision(
-                                          *(static_cast<Cookie::CircleBody*>(nodeAPtr->physics_body())),
-                                          *(static_cast<Cookie::CircleBody*>(nodeBPtr->physics_body()))
-                                          );
-                    }else if(bodyBType == RECTANGLE_BODY)
-                    {
-                        resolve_collision(
-                                          *(static_cast<Cookie::RectBody*>(nodeBPtr->physics_body())),
-                                          *(static_cast<Cookie::CircleBody*>(nodeAPtr->physics_body()))
-                                          );
-                    }
-                }
+                push_collision((*nodeA)->physics_body(), (*nodeB)->physics_body());
             }
         }
     }
+    notify_collision_handlers();
 }
 
-void Cookie::Physics::resolve_collision(Cookie::RectBody& bodyA, Cookie::RectBody& bodyB)
+Cookie::Bool Cookie::Physics::resolve_collision(Cookie::Node* nodeAPtr, Cookie::Node* nodeBPtr)
+{
+    Cookie::Bool collision_detected = false;
+    if(nodeAPtr != nodeBPtr)
+    {
+        Cookie::PhysicsBodyType bodyAType = nodeAPtr->physics_body()->body_type();
+        Cookie::PhysicsBodyType bodyBType = nodeBPtr->physics_body()->body_type();
+        if(bodyAType == RECTANGLE_BODY)
+        {
+            if(bodyBType == RECTANGLE_BODY)
+            {
+                collision_detected =
+                resolve_collision(
+                                  *(static_cast<Cookie::RectBody*>(nodeAPtr->physics_body())),
+                                  *(static_cast<Cookie::RectBody*>(nodeBPtr->physics_body()))
+                                  );
+            }else if(bodyAType == CIRCLE_BODY)
+            {
+                collision_detected =
+                resolve_collision(
+                                  *(static_cast<Cookie::RectBody*>(nodeAPtr->physics_body())),
+                                  *(static_cast<Cookie::CircleBody*>(nodeBPtr->physics_body()))
+                                  );
+            }
+        }else if (bodyAType == CIRCLE_BODY)
+        {
+            if(bodyBType == CIRCLE_BODY)
+            {
+                collision_detected =
+                resolve_collision(
+                                  *(static_cast<Cookie::CircleBody*>(nodeAPtr->physics_body())),
+                                  *(static_cast<Cookie::CircleBody*>(nodeBPtr->physics_body()))
+                                  );
+            }else if(bodyBType == RECTANGLE_BODY)
+            {
+                collision_detected =
+                resolve_collision(
+                                  *(static_cast<Cookie::RectBody*>(nodeBPtr->physics_body())),
+                                  *(static_cast<Cookie::CircleBody*>(nodeAPtr->physics_body()))
+                                  );
+            }
+        }
+        return collision_detected;
+    }
+    return false;
+}
+
+Cookie::Bool Cookie::Physics::resolve_collision(Cookie::RectBody& bodyA, Cookie::RectBody& bodyB)
 {
     Cookie::Rect rectA = bodyA.rectangle().centered_rect() + bodyA.node()->position_world();
     Cookie::Rect rectB = bodyB.rectangle().centered_rect() + bodyB.node()->position_world();
@@ -176,10 +200,12 @@ void Cookie::Physics::resolve_collision(Cookie::RectBody& bodyA, Cookie::RectBod
                 bodyB.set_velocity(newVelB);
             }
         }
+        return true;
     }
+    return false;
 }
 
-void Cookie::Physics::resolve_collision(Cookie::RectBody& bodyA, Cookie::CircleBody& bodyB)
+Cookie::Bool Cookie::Physics::resolve_collision(Cookie::RectBody& bodyA, Cookie::CircleBody& bodyB)
 {
     Cookie::Rect rect = bodyA.rectangle().centered_rect() + bodyA.node()->position_world();
     Cookie::Circle circle = bodyB.circle() + bodyB.node()->position_world();
@@ -197,10 +223,12 @@ void Cookie::Physics::resolve_collision(Cookie::RectBody& bodyA, Cookie::CircleB
             bodyB.node()->translate_by(p.x, p.y);
         }
 #warning TODO: physics resolution here
+        return true;
     }
+    return false;
 }
 
-void Cookie::Physics::resolve_collision(Cookie::CircleBody& bodyA, Cookie::CircleBody& bodyB)
+Cookie::Bool Cookie::Physics::resolve_collision(Cookie::CircleBody& bodyA, Cookie::CircleBody& bodyB)
 {
     Cookie::Circle circleA = bodyA.circle() + bodyA.node()->position_world();
     Cookie::Circle circleB = bodyB.circle() + bodyB.node()->position_world();
@@ -240,5 +268,44 @@ void Cookie::Physics::resolve_collision(Cookie::CircleBody& bodyA, Cookie::Circl
             / (massA+massB);
             bodyA.set_velocity(newVel);
         }
+        return true;
+    }
+    return false;
+}
+
+#pragma mark - Collision Handlers
+
+void Cookie::Physics::add_collision_handler(Cookie::CollisionHandler* const ch)
+{
+    collision_handlers_.push_back(ch);
+}
+
+void Cookie::Physics::remove_collision_handler(const Cookie::CollisionHandler* const ch)
+{
+    auto found = std::find(collision_handlers_.begin(), collision_handlers_.end(), ch);
+    if(found != collision_handlers_.end())
+    {
+        collision_handlers_.erase(found);
+    }
+}
+
+void Cookie::Physics::push_collision(Cookie::PhysicsBody* a, Cookie::PhysicsBody* b)
+{
+    Cookie::Collision c;
+    c.bodyA = a;
+    c.bodyB = b;
+    collisions_.push_back(c);
+}
+
+void Cookie::Physics::notify_collision_handlers()
+{
+    while(!collisions_.empty())
+    {
+        Cookie::Collision c = collisions_.front();
+        for(auto it = collision_handlers_.begin(); it != collision_handlers_.end(); ++it)
+        {
+            (*it)->handleCollision(c);
+        }
+        collisions_.erase(collisions_.begin());
     }
 }

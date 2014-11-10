@@ -7,6 +7,7 @@
 //
 
 #include "World.h"
+#include "Physics.h"
 
 Cookie::World::World()
 {

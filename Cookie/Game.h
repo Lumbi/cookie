@@ -13,12 +13,14 @@
 #include <SDL2/SDL.h>
 #include "Float.h"
 #include "Rect.h"
-#include "World.h"
+#include "Physics.h"
 #include "Renderer.h"
 #include "Keyboard.h"
 #include "Audio.h"
+#include "World.h"
 
-namespace Cookie {
+namespace Cookie
+{
     class Game
     {
     public:

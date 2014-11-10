@@ -14,10 +14,6 @@
 
 #pragma mark - Forward Declarations
 
-#warning TESTING
-Cookie::Sound* test_sound;
-Cookie::Sound* test_sound2;
-
 SDL_semaphore* audio_queue_semaphore;
 SDL_Thread* audio_queue_thread = NULL;
 
@@ -67,15 +63,15 @@ void Cookie::Audio::init()
         audio_queue_semaphore = SDL_CreateSemaphore(1);
         audio_queue_thread = SDL_CreateThread(Cookie::audio_queue_thread_func, "CookieAudioQueueThread", this);
         
-        test_sound = new Cookie::Sound(this);
-        test_sound->open(std::string("death01.wav"));
-        test_sound->volume_ = 0.5f;
-        test_sound->play(3);
-        
-        test_sound2 = new Cookie::Sound(this);
-        test_sound2->open(std::string("song.wav"));
-        test_sound2->volume_ = 0.5f;
-        test_sound2->play(10);
+//        test_sound = new Cookie::Sound(this);
+//        test_sound->open(std::string("death01.wav"));
+//        test_sound->volume_ = 0.5f;
+//        test_sound->play(3);
+//        
+//        test_sound2 = new Cookie::Sound(this);
+//        test_sound2->open(std::string("song.wav"));
+//        test_sound2->volume_ = 0.5f;
+//        test_sound2->play(10);
     }
 }
 

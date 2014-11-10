@@ -38,8 +38,6 @@ namespace Cookie
         
     } Rect;
     
-    const Cookie::Rect kNullRect = { INT_MIN,INT_MIN,INT_MIN,INT_MIN };
-    
     bool operator==(const Cookie::Rect& lhs, const Cookie::Rect& rhs);
     bool operator!=(const Cookie::Rect& lhs, const Cookie::Rect& rhs);
     

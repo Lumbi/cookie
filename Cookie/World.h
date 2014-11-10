@@ -12,10 +12,11 @@
 #include <stdio.h>
 #include "Node.h"
 #include "Camera.h"
-#include "Physics.h"
 
 namespace Cookie
 {
+    class Physics;
+    
     class World : public Node
     {
     public:

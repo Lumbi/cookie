@@ -15,9 +15,6 @@
 namespace Cookie
 {
     Cookie::Float wrap_degrees(Cookie::Float degrees);
-    
-    const Cookie::Float kHalfCircle = 180;
-    const Cookie::Float kQuarterCircle = 90;
 }
 
 #endif /* defined(__Cookie__Rotation__) */

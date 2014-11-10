@@ -21,11 +21,11 @@ Todo:
 
 - Collision callbacks
 - Signal/Slots
-- Input - Game controllers
 - Scene transition support
 - Tile-based scene support
 - Audio fading
 - Circle-to-Rect collision resolution
+- Input - Game controllers
 - I/O & Persistency
 - Android/iOS support
 - Optimizations
